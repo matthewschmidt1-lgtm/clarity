@@ -1,5 +1,8 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/app", "destination": "/app.html" }
+  ],
   "headers": [
     { "source": "**/*.@(css|js|svg|png|woff2)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] },
     { "source": "**", "headers": [
