@@ -14,6 +14,30 @@
   const giveYou = hope => { const h = lower(toYou(hope)); return /^to\s+/.test(h) ? `let you ${h.replace(/^to\s+/, "")}` : `give you ${h}`; };
   const wantTo = hope => { const h = lower(toYou(hope)); return /^to\s+/.test(h) ? `want ${h}` : `want ${h}`; };
 
+  /* Voice. The status quo is referred to by what it is in the person's life, never by quoting a label. */
+  const domain = q => { q = (q || "").toLowerCase();
+    if (/job|work|career|role|offer|company|boss|promotion|startup|quit|resign|retire/.test(q)) return "job";
+    if (/relationship|partner|marriage|marry|divorce|spouse|boyfriend|girlfriend|break ?up|husband|wife/.test(q)) return "relationship";
+    if (/move|relocat|city|country|abroad|apartment|house|home|rent|buy/.test(q)) return "place";
+    if (/school|degree|study|program|course|mba|phd|university|college/.test(q)) return "path";
+    if (/business|start|launch|freelance|found/.test(q)) return "work";
+    return "situation"; };
+  const isStatusQuo = l => /^(stay|keep|don't|do not|remain|not |where i am|as things are)/i.test((l || "").trim());
+  /* "your current job" / "where you live now" / "this relationship" … */
+  const here = s => {
+    if (!isStatusQuo(s.options.b.label)) return null;
+    return { job: "your current job", relationship: "this relationship", place: "where you live now", path: "where you are now", work: "your current work", situation: "your current situation" }[domain(s.question)];
+  };
+  const hereRef = s => here(s) || quote(label(s, "b"));          // subject of a sentence
+  const stayVerb = s => { const d = domain(s.question); return here(s) ? ({ job: "stay", relationship: "stay", place: "stay", path: "stay where you are", work: "keep what you have", situation: "keep things as they are" })[d] : `choose ${quote(label(s, "b"))}`; };
+  const goVerb = s => lower(label(s, "a"));
+  /* "without leaving" / "without moving" / "without it" */
+  const without = s => { const d = domain(s.question), q = (s.question || "").toLowerCase();
+    if (!here(s)) return "either way";
+    if (d === "job" || d === "relationship") return "without leaving";
+    if (d === "place" && /move|relocat/.test(q)) return "without moving";
+    return "where you are"; };
+
   /* 1. Sort the factors the person named into known, assumed, unknown. */
   const label = (s, id) => toYou(s.options[id].label);
   function structure(s) {
@@ -37,7 +61,7 @@
     const L = id => label(s, id);
     const out = [];
     if ((s.stillWant === "no" || s.stillWant === "unsure") && s.hope && s.hope.trim() && !s.hopeRuledOut) {
-      out.push({ kind: "hope", impact: s.stillWant === "no" ? "high" : "medium", question: `Can ${quote(L("b"))} actually ${giveYou(s.hope)}?`, statement: `whether ${quote(L("b"))} can actually ${giveYou(s.hope)}` });
+      out.push({ kind: "hope", impact: s.stillWant === "no" ? "high" : "medium", question: `Can ${hereRef(s)} actually ${giveYou(s.hope)}?`, statement: `whether ${hereRef(s)} can actually ${giveYou(s.hope)}` });
     }
     uncertain(s).forEach((f, i) => {
       const fl = f.label.toLowerCase();
@@ -75,13 +99,21 @@
     };
   }
 
-  /* 5b. The Discovery line, shown the moment the person answers "would you still want to?" */
+  /* 5b. The voice at the second question: name the tension, ask once, then notice. */
+  function tension(s) {
+    if (!s.hope || !s.hope.trim()) return null;
+    return `You want to ${goVerb(s)}. What you've described is what you hope it changes. One way to test that:`;
+  }
+  function stillWantQuestion(s) {
+    const h = here(s);
+    return h ? `If ${h} gave you what you want, would you still ${goVerb(s)}?` : `If ${quote(label(s, "b"))} gave you what you want, would you still ${goVerb(s)}?`;
+  }
   function discovery(s) {
-    const A = label(s, "a"), B = label(s, "b");
     if (!s.stillWant || !s.hope) return null;
-    if (s.stillWant === "no") return `Then you may not be deciding whether to ${lower(A)}. You may be deciding whether you can get what you need without it.`;
-    if (s.stillWant === "unsure") return `Worth noticing. You're not sure ${quote(A)} is the only way to get that.`;
-    return `Then this really is about ${quote(A)}. Let's find what it depends on.`;
+    const h = here(s);
+    if (s.stillWant === "no") return h ? `Maybe the question isn't whether to ${goVerb(s)}. It's whether you can get what you want ${without(s)}.` : `Maybe the question isn't which one. It's whether you can get what you want either way.`;
+    if (s.stillWant === "unsure") return `You want to ${goVerb(s)}. But you're not sure it's the only way to get what you want. That's worth knowing.`;
+    return `Then it's the change you want, not only what it brings.`;
   }
 
   /* 6. The report. Decision → real question → Pivot → evidence → tradeoff → next. */
@@ -93,14 +125,14 @@
 
     let reframe = null;
     if (s.stillWant === "no" && s.hope) {
-      reframe = [`You don't just want to ${lower(A)}. You ${wantTo(s.hope)}.`, s.hopeRuledOut ? `You've already said ${quote(B)} can't give you that. So this really is about ${quote(A)}.` : `If ${quote(B)} could give you that, you'd choose it.`];
+      reframe = [`You don't just want to ${goVerb(s)}. You ${wantTo(s.hope)}.`, s.hopeRuledOut ? `You've said ${hereRef(s)} can't give you that. So this is about the change itself.` : `If ${hereRef(s)} could give you that, you'd ${stayVerb(s)}.`];
     } else if (s.stillWant === "unsure" && s.hope) {
-      reframe = [`You ${wantTo(s.hope)}, and you're not sure ${quote(A)} is the only way to get it.`, s.hopeRuledOut ? `You've since said ${quote(B)} can't give you that.` : `Worth settling before anything else.`];
+      reframe = [`You ${wantTo(s.hope)}. You're not sure ${goVerb(s) === lower(A) ? "this" : quote(A)} is the only way to get it.`, s.hopeRuledOut ? `You've since said ${hereRef(s)} can't give you that.` : `That comes before anything else.`];
     }
 
-    let pivotNote;
-    if (pv.kind === "hope") pivotNote = pv.secondary ? `If it can, you don't need to ${lower(A)}. If it can't, the next question is ${pv.secondary.statement}.` : `If it can, you don't need to ${lower(A)}. If it can't, the case for it gets much stronger.`;
-    else if (pv.kind === "factor") pivotNote = lean ? `If that's true, ${quote(L(lean))} has a strong case. If it isn't, the decision changes.` : `That's the question that changes the decision.`;
+    let pivotNote, observation = null;
+    if (pv.kind === "hope") { observation = `You know what you want. You don't know whether you can get it ${without(s)}.`; pivotNote = pv.secondary ? `If it can, you don't need to ${goVerb(s)}. If it can't, the next question is ${pv.secondary.statement}.` : `If it can, you don't need to ${goVerb(s)}. If it can't, the case for it gets much stronger.`; }
+    else if (pv.kind === "factor") { observation = pv.f.winner === "unknown" ? `The options aren't the uncertainty. ${pv.f.label} is.` : `${quote(L(pv.f.winner))} isn't the uncertainty. ${pv.f.label} is.`; pivotNote = lean ? `If that's true, ${quote(L(lean))} has a strong case. If it isn't, the decision changes.` : `That's the question that changes the decision.`; }
     else if (pv.kind === "robust") pivotNote = `You may be more decided than you feel.`;
     else pivotNote = `You have enough to decide. This comes down to what you prefer.`;
 
@@ -132,8 +164,8 @@
     if (pv.kind === "none") settled = { title: "You already know enough.", body: "There's no unknown left that would materially change this decision. What's left is preference, and that's yours." };
     else if (pv.kind === "robust") settled = { title: "You already know enough.", body: `Nothing you're unsure about would change your mind. You may be more decided than you feel.` };
 
-    return { reframe, structure: st, pivot: pv, pivotNote, settled, pairs, tradeoffLine, next, wait, how, lean, hard: s.hard };
+    return { reframe, structure: st, pivot: pv, pivotNote, observation, settled, pairs, tradeoffLine, next, wait, how, lean, hard: s.hard };
   }
 
-  window.Engine = { lower, toYou, structure, uncertain, candidates, pivot, discovery, model, report };
+  window.Engine = { lower, toYou, structure, uncertain, candidates, pivot, tension, stillWantQuestion, discovery, model, report };
 })();

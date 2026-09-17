@@ -16,7 +16,8 @@
     lines.push(`Clarity: What's on your mind?`, `  You: ${s.question}   [${L("a")} / ${L("b")}]`);
     lines.push(`Clarity: What's making this hard?`, `  You: ${s.hard}`);
     lines.push(`Clarity: What are you hoping changes if you ${Engine.lower(L("a"))}?`, `  You: ${s.hope}`);
-    lines.push(`Clarity: If ${Engine.lower(L("b"))} gave you exactly that tomorrow, would you still want to ${Engine.lower(L("a"))}?`, `  You: ${s.stillWant}`);
+    const tn = Engine.tension(s); if (tn) lines.push(`Clarity: ${tn}`);
+    lines.push(`Clarity: ${Engine.stillWantQuestion(s)}`, `  You: ${s.stillWant}`);
     const d = Engine.discovery(s); if (d) lines.push(`Clarity: ${d}`);
     lines.push(`Clarity: What does this decision come down to? (up to four, most important first)`, `  You: ${s.factors.map(f => f.label).join(", ")}`);
     lines.push(`Clarity: For each one, which is stronger? (${L("a")} / ${L("b")} / don't know)`);
@@ -28,7 +29,7 @@
     lines.push(`Clarity: Could you find that out before deciding?`, `  You: ${s.findOut}`, `Clarity: If it didn't work out, how hard would it be to undo?`, `  You: ${s.reversibility}`);
     lines.push(``, `--- The report the person received ---`, `Here's what this depends on.`, `${s.question}`, `${L("a")} · ${L("b")}`);
     if (r.reframe) lines.push(`What you're really asking: ${r.reframe.join(" ")}`);
-    lines.push(r.settled ? `Where you are: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.pivot.question} ${r.pivotNote}`);
+    lines.push(r.settled ? `Where you are: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.observation ? r.observation + " " : ""}${r.pivot.question} ${r.pivotNote}`);
     lines.push(`Known: ${r.structure.known.map(x => x.text).join(" ") || "Nothing you named."}`, `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "Nothing you named."}`, `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "Nothing you named."}`);
     lines.push(`The tradeoff: ${r.pairs.map(x => `${x.factor}: ${x.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`);
     lines.push(`${r.settled ? "What's left" : "Find out this first"}: ${r.next}${r.how ? " " + r.how : ""}${r.wait ? " " + r.wait : ""}${r.settled ? "" : " You don't have to solve everything. Just this."}`);

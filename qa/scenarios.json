@@ -45,7 +45,9 @@
         "unknown": 1,
         "pivot_kind": "hope",
         "secondary_factor": "Career growth",
-        "reframe": true
+        "reframe": true,
+        "pivot_contains": "Can your current job actually give you less stress and a manager who respects you?",
+        "discovery_contains": "Maybe the question isn't whether to take the new job."
       }
     },
     {
@@ -401,7 +403,7 @@
       },
       "expect": {
         "pivot_kind": "hope",
-        "pivot_contains": "let you build something that's actually yours",
+        "pivot_contains": "Can your current job actually let you build something that's actually yours?",
         "no_text": [
           "give you to",
           " my ",
@@ -445,7 +447,8 @@
         "no_text": [
           "near my parents"
         ],
-        "text_contains": "near your parents"
+        "text_contains": "near your parents",
+        "pivot_contains": "Can where you live now actually let you stop feeling guilty?"
       }
     },
     {
@@ -513,7 +516,7 @@
       },
       "expect": {
         "pivot_kind": "hope",
-        "pivot_contains": "let you feel trusted"
+        "pivot_contains": "Can your current job actually let you feel trusted?"
       }
     },
     {

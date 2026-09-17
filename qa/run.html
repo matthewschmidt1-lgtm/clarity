@@ -7,6 +7,7 @@
   const mk = sc => { const o = Content.inferOptions(sc.question); return Object.assign({ options: { a: { label: o.a }, b: { label: o.b } }, hard: "", hope: "", stillWant: null, factors: [], lean: null, findOut: null, reversibility: null }, JSON.parse(JSON.stringify(sc))); };
   const setPath = (obj, path, v) => { const ks = path.split("."); let o = obj; ks.slice(0, -1).forEach(k => { o = o[k]; }); o[ks[ks.length - 1]] = v; };
   const flat = r => JSON.stringify(r);
+  const isStay = s => /^(stay|keep|don't|do not|remain)/i.test(s.options.b.label);
   const results = [];
   for (const sc of data.scenarios) {
     const s = mk(sc.session), e = sc.expect, m = Engine.model(s), r = Engine.report(s), all = flat(r);
@@ -25,6 +26,10 @@
     if (e.no_text) e.no_text.forEach(t => chk(`writing: never says "${t}"`, !all.includes(t), t));
     if (e.text_contains) chk(`writing: says "${e.text_contains}"`, all.includes(e.text_contains), "");
     if (r.how) chk("next step: concrete method given", r.how.length > 10, r.how);
+    if (e.discovery_contains) chk("voice: discovery line", (Engine.discovery(s) || "").includes(e.discovery_contains), Engine.discovery(s));
+    // voice: no quoted label as the subject of the hypothetical, no AI filler
+    chk("voice: no AI filler", !/(let's (explore|dive|unpack)|it sounds like|i hear you|great insight|here's something interesting|what you're really saying)/i.test(all + " " + (Engine.tension(s) || "") + " " + Engine.stillWantQuestion(s) + " " + (Engine.discovery(s) || "")), "");
+    chk("voice: hypothetical doesn't quote a label as subject", !/^If “/.test(Engine.stillWantQuestion(s)) || !isStay(s), Engine.stillWantQuestion(s));
     if ("tradeoff_pairs" in e) chk("tradeoff: pairs", r.pairs.length === e.tradeoff_pairs, r.pairs.length);
     // chain: the next action resolves the Pivot when it can be found out
     if (r.pivot.statement && (s.findOut === "soon" || s.findOut === "while")) chk("chain: next action resolves the Pivot", r.next === r.pivot.question, r.next);
@@ -35,7 +40,7 @@
     else chk("pivot: report shows it", !r.settled, r.settled);
     // discovery line matches the stillWant answer
     const d = Engine.discovery(s);
-    if (s.stillWant === "no") chk("discovery: reframes on no", /may not be deciding/.test(d), d);
+    if (s.stillWant === "no") chk("discovery: reframes on no", /Maybe the question isn't/.test(d), d);
     // epistemic boundary: never claims completeness or certainty about the real world
     chk("boundary: no claim of completeness", !/\b(everything that matters|the real crux|this is the pivot|the only thing that matters|you have considered everything)\b/i.test(all), "");
     chk("boundary: hedged verbs on the pivot", !/\b(definitely|certainly|without doubt)\b/i.test(all), "");

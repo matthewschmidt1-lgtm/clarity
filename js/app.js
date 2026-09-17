@@ -73,7 +73,7 @@
     const a = h("input", { class: "input", type: "text", value: A(), maxlength: 60, "aria-label": "Option A" });
     const b = h("input", { class: "input", type: "text", value: B(), maxlength: 60, "aria-label": "Option B" });
     const toneLine = h("p", { class: "hint" });
-    const setTone = () => { toneLine.textContent = C.tone(S.question) === "heavy" ? "This sounds like one where the facts and your feelings are pulling in different directions. We'll take it slowly." : "We won't tell you what to do. We'll find what this depends on."; };
+    const setTone = () => { toneLine.textContent = C.tone(S.question) === "heavy" ? "The facts and your feelings may be pulling in different directions here. We'll take it slowly." : "Clarity won't tell you what to do. It finds what this depends on."; };
     setTone();
     q.addEventListener("input", () => { S.question = q.value; if (!S.optionsEdited) { const o = C.inferOptions(S.question); S.options.a.label = o.a; S.options.b.label = o.b; a.value = o.a; b.value = o.b; } setTone(); });
     a.addEventListener("input", () => { S.options.a.label = a.value; S.optionsEdited = true; });
@@ -109,11 +109,22 @@
       disc.appendChild(h("p", { class: "prompt small" }, line));
     }
     renderDiscovery();
+    const test = h("div", { class: "test" });
+    function renderTest() {
+      test.innerHTML = "";
+      const t = E.tension(S);
+      if (!t) return;
+      test.appendChild(h("div", { class: "rule" }));
+      test.appendChild(who());
+      test.appendChild(h("p", { class: "hint", style: "color:var(--ink)" }, t));
+      test.appendChild(prompt(esc(E.stillWantQuestion(S))));
+      test.appendChild(choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], S.stillWant, v => { S.stillWant = v; S.hopeRuledOut = false; save(); renderDiscovery(); }));
+    }
+    ta.addEventListener("input", renderTest);
+    renderTest();
     return [
       who(), prompt(`What are you hoping changes if you <em>${esc(lower(A()))}</em>?`), ta,
-      h("div", { class: "rule" }),
-      who(), prompt(`If <em>${esc(lower(B()))}</em> gave you exactly that tomorrow, would you still want to ${esc(lower(A()))}?`),
-      choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], S.stillWant, v => { S.stillWant = v; S.hopeRuledOut = false; save(); renderDiscovery(); }),
+      test,
       disc,
       actions(() => S.hope.trim().length > 1 && S.stillWant, "Say what you're hoping for, and whether you'd still go.")
     ];
@@ -239,7 +250,7 @@
       r.reframe ? h("div", { class: "row" }, h("span", { class: "k" }, "What you're really asking"), h("p", { class: "v big" }, r.reframe[0]), h("p", { class: "v", style: "margin-top:6px" }, r.reframe[1])) : null,
       r.settled
         ? h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "Where you are"), h("p", { class: "v", style: "margin-bottom:6px" }, "Based on what you've told me:"), h("span", { class: "v big" }, r.settled.title), h("p", { class: "v", style: "margin-top:6px" }, r.settled.body))
-        : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), h("p", { class: "v", style: "margin-bottom:6px" }, "Based on what you've told me, this appears to hinge on:"), h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
+        : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), r.observation ? h("p", { class: "v", style: "margin-bottom:6px" }, r.observation) : null, h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
       h("div", { class: "row" }, h("span", { class: "k" }, "Right now"),
         h("dl", { class: "now" },
           h("dt", {}, "Known"), h("dd", {}, r.structure.known.length ? r.structure.known.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")),
@@ -282,7 +293,7 @@
     renderCheck();
     return [
       who(), prompt("Here's what this depends on."),
-      hint("Based on what you've told me. If something important isn't here, you can add it below."),
+      hint("Based on what you've told me. If something important isn't here, add it below."),
       report, check,
       h("div", { class: "report-actions" },
         h("button", { class: "btn btn-ghost", type: "button", onclick: () => navigator.clipboard.writeText(text()).then(() => say("Copied."), () => say("Couldn't copy.")) }, "Copy"),
