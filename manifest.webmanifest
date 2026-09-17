@@ -1,0 +1,1 @@
+{ "name": "Clarity", "short_name": "Clarity", "description": "See what you already know.", "start_url": "/", "display": "standalone", "background_color": "#F3EFE6", "theme_color": "#1E6B47", "icons": [{ "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }] }
