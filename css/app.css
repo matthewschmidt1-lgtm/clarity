@@ -152,3 +152,8 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px va
 .pick button:hover { opacity: 1; }
 .report .closing { margin-top: 26px; font-family: var(--display); font-weight: 500; font-size: 1.35rem; letter-spacing: -0.02em; }
 .report .quiet { color: var(--fog); }
+
+.now { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 6px 0 0; }
+.now dt { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--fog); padding-top: 3px; }
+.now dd { margin: 0; display: grid; gap: 4px; }
+@media (max-width: 480px) { .now { grid-template-columns: 1fr; gap: 2px 0; } .now dd { margin-bottom: 8px; } }

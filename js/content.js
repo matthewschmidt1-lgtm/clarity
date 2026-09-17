@@ -39,6 +39,11 @@ window.Content = {
         const m = a.match(/^(.+\s(?:to|in|at|for|with|on)\s)(\S+)$/i);
         if (m) b = m[1] + b;
       }
+      // "buy the blue shirt or the black shirt" → carry the verb across
+      if (a && b && /^(the|a|an|my|our|this|that)\b/i.test(b)) {
+        const m = a.match(/^(\S+)\s+(the|a|an|my|our|this|that)\b/i);
+        if (m) b = m[1] + " " + b;
+      }
       if (a && b) return { a: cap(a), b: cap(b) };
       if (a) t = a;
     }

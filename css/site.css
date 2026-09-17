@@ -417,3 +417,8 @@ body::before {
 .how li b { color: var(--ink); font-weight: 600; display: block; }
 .report .closing { margin-top: 26px; font-family: var(--display); font-weight: 500; font-size: 1.3rem; letter-spacing: -0.02em; }
 .final .after { color: color-mix(in srgb, var(--paper) 70%, transparent); }
+.now { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 6px 0 0; }
+.now dt { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--fog); padding-top: 3px; }
+.now dd { margin: 0; }
+.report .quiet { color: var(--fog); }
+@media (max-width: 480px) { .now { grid-template-columns: 1fr; gap: 2px 0; } .now dd { margin-bottom: 8px; } }

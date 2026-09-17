@@ -1,0 +1,432 @@
+{
+  "scenarios": [
+    {
+      "id": "job-growth-hope",
+      "note": "The walkthrough. Person would stay if their current job gave them what they want, so the Pivot is the hope, not the factor.",
+      "session": {
+        "question": "Should I take the new job?",
+        "hope": "less stress and a manager who respects me",
+        "stillWant": "no",
+        "hard": "Leaving people I like for a company I don't know.",
+        "factors": [
+          {
+            "id": "growth",
+            "label": "Career growth",
+            "winner": "a",
+            "basis": "assume",
+            "flips": true
+          },
+          {
+            "id": "environment",
+            "label": "Day-to-day environment",
+            "winner": "unknown",
+            "basis": null,
+            "flips": false
+          },
+          {
+            "id": "security",
+            "label": "Financial security",
+            "winner": "b",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "a",
+        "findOut": "soon",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "options": [
+          "Take the new job",
+          "Stay where I am"
+        ],
+        "known": 1,
+        "assumed": 1,
+        "unknown": 1,
+        "pivot_kind": "hope",
+        "secondary_factor": "Career growth",
+        "reframe": true
+      }
+    },
+    {
+      "id": "job-growth-plain",
+      "note": "Same facts, but they'd still want the job. The Pivot is the assumption that flips the lean.",
+      "session": {
+        "question": "Should I take the new job?",
+        "hope": "more money",
+        "stillWant": "yes",
+        "factors": [
+          {
+            "id": "growth",
+            "label": "Career growth",
+            "winner": "a",
+            "basis": "assume",
+            "flips": true
+          },
+          {
+            "id": "environment",
+            "label": "Day-to-day environment",
+            "winner": "unknown",
+            "basis": null,
+            "flips": false
+          },
+          {
+            "id": "security",
+            "label": "Financial security",
+            "winner": "b",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "a",
+        "findOut": "soon",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "known": 1,
+        "assumed": 1,
+        "unknown": 1,
+        "pivot_kind": "factor",
+        "pivot_factor": "Career growth",
+        "reframe": false
+      }
+    },
+    {
+      "id": "anti-pivot-shirts",
+      "note": "Everything is known. Clarity must not manufacture a Pivot.",
+      "session": {
+        "question": "Should I buy the blue shirt or the black shirt?",
+        "hope": "to look good",
+        "stillWant": "yes",
+        "factors": [
+          {
+            "id": "price",
+            "label": "Price",
+            "winner": "a",
+            "basis": "know",
+            "flips": null
+          },
+          {
+            "id": "fit",
+            "label": "Fit",
+            "winner": "b",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "torn",
+        "findOut": "none",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "options": [
+          "Buy the blue shirt",
+          "Buy the black shirt"
+        ],
+        "known": 2,
+        "assumed": 0,
+        "unknown": 0,
+        "pivot_kind": "none"
+      }
+    },
+    {
+      "id": "robust-lean",
+      "note": "Uncertainties exist but none would change the lean. Report should say so, not invent one.",
+      "session": {
+        "question": "Should I go back to school?",
+        "hope": "a career I'm proud of",
+        "stillWant": "yes",
+        "factors": [
+          {
+            "id": "income",
+            "label": "Income",
+            "winner": "b",
+            "basis": "assume",
+            "flips": false
+          },
+          {
+            "id": "meaning",
+            "label": "Meaning",
+            "winner": "a",
+            "basis": "know",
+            "flips": null
+          },
+          {
+            "id": "time",
+            "label": "Free time",
+            "winner": "unknown",
+            "basis": null,
+            "flips": false
+          }
+        ],
+        "lean": "a",
+        "findOut": "none",
+        "reversibility": "hard"
+      },
+      "expect": {
+        "known": 1,
+        "assumed": 1,
+        "unknown": 1,
+        "pivot_kind": "robust"
+      }
+    },
+    {
+      "id": "unknown-is-not-pivot",
+      "note": "Two uncertainties. The one ranked first would NOT flip; the second would. The Pivot must be the second.",
+      "session": {
+        "question": "Should I move to Austin?",
+        "hope": "a bigger life",
+        "stillWant": "yes",
+        "factors": [
+          {
+            "id": "environment",
+            "label": "Day-to-day environment",
+            "winner": "a",
+            "basis": "assume",
+            "flips": false
+          },
+          {
+            "id": "security",
+            "label": "Financial security",
+            "winner": "unknown",
+            "basis": null,
+            "flips": true
+          },
+          {
+            "id": "relationships",
+            "label": "Relationships",
+            "winner": "b",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "a",
+        "findOut": "soon",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "options": [
+          "Move to Austin",
+          "Stay here"
+        ],
+        "pivot_kind": "factor",
+        "pivot_factor": "Financial security"
+      }
+    },
+    {
+      "id": "many-unknowns-one-matters",
+      "note": "Four unknowns, only the third flips.",
+      "session": {
+        "question": "Should I start a business?",
+        "hope": "freedom",
+        "stillWant": "yes",
+        "factors": [
+          {
+            "id": "income",
+            "label": "Income",
+            "winner": "unknown",
+            "basis": null,
+            "flips": false
+          },
+          {
+            "id": "time",
+            "label": "Free time",
+            "winner": "unknown",
+            "basis": null,
+            "flips": false
+          },
+          {
+            "id": "security",
+            "label": "Financial security",
+            "winner": "unknown",
+            "basis": null,
+            "flips": true
+          },
+          {
+            "id": "health",
+            "label": "Health and energy",
+            "winner": "unknown",
+            "basis": null,
+            "flips": false
+          }
+        ],
+        "lean": "a",
+        "findOut": "while",
+        "reversibility": "hard"
+      },
+      "expect": {
+        "known": 0,
+        "assumed": 0,
+        "unknown": 4,
+        "pivot_kind": "factor",
+        "pivot_factor": "Financial security"
+      }
+    },
+    {
+      "id": "torn-first-unknown",
+      "note": "Honestly torn, so no flip answers exist. The Pivot is the most important uncertainty, whether assumed or unknown.",
+      "session": {
+        "question": "Should I stay or leave?",
+        "hope": "to feel at home",
+        "stillWant": "unsure",
+        "factors": [
+          {
+            "id": "relationships",
+            "label": "Relationships",
+            "winner": "a",
+            "basis": "assume",
+            "flips": null
+          },
+          {
+            "id": "growth",
+            "label": "Career growth",
+            "winner": "unknown",
+            "basis": null,
+            "flips": null
+          }
+        ],
+        "lean": "torn",
+        "findOut": "soon",
+        "reversibility": "hard"
+      },
+      "expect": {
+        "options": [
+          "Stay",
+          "Leave"
+        ],
+        "pivot_kind": "factor",
+        "pivot_factor": "Relationships",
+        "reframe": true
+      }
+    },
+    {
+      "id": "lean-b-assumed",
+      "note": "Leaning toward the second option on an assumption that would flip.",
+      "session": {
+        "question": "Should I buy the house?",
+        "hope": "stability",
+        "stillWant": "yes",
+        "factors": [
+          {
+            "id": "security",
+            "label": "Financial security",
+            "winner": "b",
+            "basis": "assume",
+            "flips": true
+          },
+          {
+            "id": "location",
+            "label": "Location",
+            "winner": "a",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "b",
+        "findOut": "soon",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "options": [
+          "Buy the house",
+          "Don't, for now"
+        ],
+        "pivot_kind": "factor",
+        "pivot_factor": "Financial security",
+        "pivot_mentions": "Don't, for now"
+      }
+    },
+    {
+      "id": "two-sided-question",
+      "note": "Both options come from the question itself.",
+      "session": {
+        "question": "Should I take the job or go back to school?",
+        "hope": "momentum",
+        "stillWant": "yes",
+        "factors": [
+          {
+            "id": "income",
+            "label": "Income",
+            "winner": "a",
+            "basis": "know",
+            "flips": null
+          },
+          {
+            "id": "learning",
+            "label": "Learning",
+            "winner": "b",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "torn",
+        "findOut": "none",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "options": [
+          "Take the job",
+          "Go back to school"
+        ],
+        "pivot_kind": "none",
+        "tradeoff_pairs": 2
+      }
+    }
+  ],
+  "mutations": [
+    {
+      "id": "flip-answer-changes-pivot",
+      "base": "job-growth-plain",
+      "set": {
+        "factors.0.flips": false
+      },
+      "expect": "pivot_changes",
+      "note": "If growth would no longer flip the lean, the Pivot must change (here: to robust)."
+    },
+    {
+      "id": "stillwant-no-promotes-hope",
+      "base": "job-growth-plain",
+      "set": {
+        "stillWant": "no"
+      },
+      "expect": "pivot_changes",
+      "note": "Saying they'd stay if they got what they want must move the Pivot to the hope."
+    },
+    {
+      "id": "known-fact-reversal-keeps-pivot",
+      "base": "job-growth-plain",
+      "set": {
+        "factors.2.winner": "a"
+      },
+      "expect": "pivot_same",
+      "note": "Reversing a known fact that doesn't flip the lean should not move the Pivot."
+    },
+    {
+      "id": "assumption-becomes-known",
+      "base": "job-growth-plain",
+      "set": {
+        "factors.0.basis": "know"
+      },
+      "expect": "pivot_changes",
+      "note": "Once growth is known, it is no longer uncertain, so it cannot be the Pivot."
+    },
+    {
+      "id": "removing-only-uncertainty-yields-none",
+      "base": "lean-b-assumed",
+      "set": {
+        "factors.0.basis": "know"
+      },
+      "expect": "pivot_kind:none",
+      "note": "With nothing uncertain left, no Pivot is produced."
+    },
+    {
+      "id": "torn-known-first-moves-pivot",
+      "base": "torn-first-unknown",
+      "set": {
+        "factors.0.basis": "know"
+      },
+      "expect": "pivot_factor:Career growth",
+      "note": "When torn, if the first-ranked factor becomes known, the Pivot moves to the next uncertainty."
+    }
+  ]
+}

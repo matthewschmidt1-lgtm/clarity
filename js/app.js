@@ -14,7 +14,7 @@
       else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
       else if (v !== null && v !== undefined && v !== false) n.setAttribute(k, v === true ? "" : v);
     }
-    kids.flat().forEach(k => { if (k === null || k === undefined || k === false) return; n.appendChild(typeof k === "string" ? document.createTextNode(k) : k); });
+    kids.flat(Infinity).forEach(k => { if (k === null || k === undefined || k === false) return; n.appendChild(typeof k === "string" ? document.createTextNode(k) : k); });
     return n;
   }
   const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -192,7 +192,7 @@
     const pv = E.pivot(S);
     const leanLabel = S.lean && S.lean !== "torn" ? S.options[S.lean].label : A();
     const block = [];
-    if (pv.f) {
+    if (pv.statement) {
       block.push(who(), prompt(`Could you find out ${esc(pv.statement)} <em>before</em> deciding?`),
         choices([["soon", "Yes, within a few weeks"], ["while", "Yes, but it would take a while"], ["doing", "Only by doing it"]], S.findOut, v => { S.findOut = v; save(); }));
     } else {
@@ -218,26 +218,30 @@
       S.feedback ? h("p", { class: "thanks" }, "Thank you. That's the only thing we measure.") :
         choices([["do", "Yes, I know what I need to do"], ["find", "Yes, I know what I need to find out"], ["struggle", "Yes, I understand what I'm actually struggling with"], ["not", "Not yet"]], null, v => { S.feedback = v; save(); feedback.replaceWith(steps[8]().find(n => n.classList && n.classList.contains("after"))); }));
     const report = h("article", { class: "report", "aria-label": "Your Clarity Report" },
-      h("p", { class: "k" }, "Your decision"),
-      h("h3", { style: "margin-top:6px" }, S.question.replace(/[.?!]+$/, "")),
+      h("h3", {}, S.question.replace(/[.?!]+$/, "") + "?"),
       h("p", { class: "v quiet", style: "margin-top:4px" }, `${L("a")} · ${L("b")}`),
-      r.reframe ? row("What you're really asking", r.reframe) : null,
-      h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), h("span", { class: "v big" }, r.pivot.text), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
-      row("What you know", items(r.structure.known)),
-      row("What you're assuming", items(r.structure.assumed)),
-      row("What you don't know", items(r.structure.unknown)),
-      row("The tradeoff", r.tradeoff),
-      row("What to find out next", h("div", {}, h("span", { class: "v big" }, r.next), r.wait ? h("p", { class: "v", style: "margin-top:8px" }, r.wait) : null)),
+      r.reframe ? h("div", { class: "row" }, h("span", { class: "k" }, "What you're really asking"), h("p", { class: "v big" }, r.reframe[0]), h("p", { class: "v", style: "margin-top:6px" }, r.reframe[1])) : null,
+      h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
+      h("div", { class: "row" }, h("span", { class: "k" }, "Right now"),
+        h("dl", { class: "now" },
+          h("dt", {}, "Known"), h("dd", {}, r.structure.known.length ? r.structure.known.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")),
+          h("dt", {}, "Assumed"), h("dd", {}, r.structure.assumed.length ? r.structure.assumed.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")),
+          h("dt", {}, "Unknown"), h("dd", {}, r.structure.unknown.length ? r.structure.unknown.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")))),
+      h("div", { class: "row" }, h("span", { class: "k" }, "The tradeoff"),
+        r.pairs.length ? h("dl", { class: "now" }, r.pairs.map(p => [h("dt", {}, p.factor), h("dd", {}, p.option)])) : null,
+        h("p", { class: "v", style: r.pairs.length ? "margin-top:8px" : "" }, r.tradeoffLine)),
+      h("div", { class: "row" }, h("span", { class: "k" }, "Find out this first"), h("span", { class: "v big" }, r.next), r.wait ? h("p", { class: "v", style: "margin-top:8px" }, r.wait) : null),
       h("p", { class: "closing" }, "Now you know what you're deciding.")
     );
     const text = () => [
       `CLARITY · ${S.question}`, `${L("a")} · ${L("b")}`, ``,
-      r.reframe ? `What you're really asking: ${r.reframe}\n` : null,
-      `THE PIVOT: ${r.pivot.text} ${r.pivotNote}`, ``,
-      `What you know: ${r.structure.known.map(x => x.text).join(" ") || "—"}`,
-      `What you're assuming: ${r.structure.assumed.map(x => x.text).join(" ") || "—"}`,
-      `What you don't know: ${r.structure.unknown.map(x => x.text).join(" ") || "—"}`, ``,
-      `The tradeoff: ${r.tradeoff}`, ``, `What to find out next: ${r.next}${r.wait ? " " + r.wait : ""}`, ``, `Now you know what you're deciding.`
+      r.reframe ? `What you're really asking: ${r.reframe.join(" ")}\n` : null,
+      `THE PIVOT: ${r.pivot.question} ${r.pivotNote}`, ``,
+      `Known: ${r.structure.known.map(x => x.text).join(" ") || "—"}`,
+      `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "—"}`,
+      `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "—"}`, ``,
+      `The tradeoff: ${r.pairs.map(p => `${p.factor}: ${p.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`, ``,
+      `Find out this first: ${r.next}${r.wait ? " " + r.wait : ""}`, ``, `Now you know what you're deciding.`
     ].filter(x => x !== null).join("\n");
     return [
       who(), prompt("Here's what this depends on."),

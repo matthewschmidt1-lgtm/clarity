@@ -52,6 +52,10 @@ Seven questions, one screen each, then the report. Each question narrows the pro
 
 Deterministic and small. `structure` sorts factors into known / assumed / unknown. `pivot` returns the first uncertain factor that flips the lean (or the most important unknown when the person is torn, or "robust" when nothing flips). `report` composes the reframe, the tradeoff, the next step and the "don't decide yet" line from those plus reversibility.
 
+## Testing the engine
+
+`qa/` is a unit-test suite for decisions: gold scenarios, anti-Pivot cases and mutation tests that run the real engine in headless Chrome. `sh qa/run.sh` with the local server running. The rubric and the principle under test (unknown ≠ Pivot) are in `qa/EVALUATION.md`.
+
 ## Stack
 
 Static HTML, CSS and vanilla JS. No build step, no framework, no bundler. One font from Google Fonts. Everything else inline. Brand strategy in `BRAND.md`.

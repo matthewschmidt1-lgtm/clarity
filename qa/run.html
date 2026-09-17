@@ -1,0 +1,53 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Clarity engine tests</title></head><body>
+<pre id="out"></pre>
+<script src="../js/content.js"></script><script src="../js/engine.js"></script>
+<script>
+(async () => {
+  const data = await (await fetch("scenarios.json")).json();
+  const mk = sc => { const o = Content.inferOptions(sc.question); return Object.assign({ options: { a: { label: o.a }, b: { label: o.b } }, hard: "", hope: "", stillWant: null, factors: [], lean: null, findOut: null, reversibility: null }, JSON.parse(JSON.stringify(sc))); };
+  const setPath = (obj, path, v) => { const ks = path.split("."); let o = obj; ks.slice(0, -1).forEach(k => { o = o[k]; }); o[ks[ks.length - 1]] = v; };
+  const flat = r => JSON.stringify(r);
+  const results = [];
+  for (const sc of data.scenarios) {
+    const s = mk(sc.session), e = sc.expect, m = Engine.model(s), r = Engine.report(s), all = flat(r);
+    const checks = [];
+    const chk = (name, ok, got) => checks.push({ name, ok: !!ok, got });
+    if (e.options) chk("decision: options inferred", m.decision.options[0] === e.options[0] && m.decision.options[1] === e.options[1], m.decision.options.join(" · "));
+    if ("known" in e) chk("classification: known", m.known.length === e.known, m.known.length);
+    if ("assumed" in e) chk("classification: assumed", m.assumed.length === e.assumed, m.assumed.length);
+    if ("unknown" in e) chk("classification: unknown", m.unknown.length === e.unknown, m.unknown.length);
+    if (e.pivot_kind) chk("pivot: kind", m.pivot.kind === e.pivot_kind, m.pivot.kind);
+    if (e.pivot_factor) chk("pivot: factor", m.pivot.factor === e.pivot_factor, m.pivot.factor);
+    if (e.secondary_factor) chk("pivot: secondary factor", r.pivot.secondary && r.pivot.secondary.f.label === e.secondary_factor, r.pivot.secondary && r.pivot.secondary.f.label);
+    if (e.pivot_mentions) chk("pivot: names the right option", r.pivot.question.includes(e.pivot_mentions), r.pivot.question);
+    if ("reframe" in e) chk("intent: reframe present", !!r.reframe === e.reframe, r.reframe ? r.reframe[0] : null);
+    if ("tradeoff_pairs" in e) chk("tradeoff: pairs", r.pairs.length === e.tradeoff_pairs, r.pairs.length);
+    // chain: the next action resolves the Pivot when it can be found out
+    if (r.pivot.statement && (s.findOut === "soon" || s.findOut === "while")) chk("chain: next action resolves the Pivot", r.next === r.pivot.question, r.next);
+    // no-pivot discipline
+    if (m.unknown.length + m.assumed.length === 0) chk("no-pivot: none manufactured", m.pivot.kind === "none", m.pivot.kind);
+    // agency: never tells them what to choose
+    chk("agency: no instruction to choose", !/you should (take|stay|leave|move|buy|choose)|we recommend|the right choice is/i.test(all), "");
+    // unsupported inference: every factor named in the report was named by the person
+    const names = s.factors.map(f => f.label.toLowerCase());
+    const mentioned = (all.match(/stronger on ([a-z\- ]+?)[\.\?\"]/g) || []).map(x => x.replace(/stronger on |[\.\?\"]/g, "").trim()).filter(x => !/you named/.test(x));
+    chk("fidelity: no invented factors", mentioned.every(x => names.includes(x)), mentioned.filter(x => !names.includes(x)).join(", "));
+    results.push({ id: sc.id, note: sc.note, checks, pivot: r.pivot.question, next: r.next });
+  }
+  const muts = [];
+  for (const mu of data.mutations) {
+    const base = data.scenarios.find(x => x.id === mu.base);
+    const s0 = mk(base.session), s1 = mk(base.session);
+    Object.entries(mu.set).forEach(([k, v]) => setPath(s1, k, v));
+    const p0 = Engine.model(s0).pivot, p1 = Engine.model(s1).pivot;
+    let ok;
+    if (mu.expect === "pivot_changes") ok = p0.question !== p1.question;
+    else if (mu.expect === "pivot_same") ok = p0.question === p1.question;
+    else if (mu.expect.startsWith("pivot_kind:")) ok = p1.kind === mu.expect.split(":")[1];
+    else if (mu.expect.startsWith("pivot_factor:")) ok = p1.factor === mu.expect.split(":")[1];
+    muts.push({ id: mu.id, note: mu.note, ok: !!ok, before: p0.question, after: p1.question });
+  }
+  document.getElementById("out").textContent = JSON.stringify({ results, muts }, null, 2);
+  document.body.dataset.done = "1";
+})();
+</script></body></html>

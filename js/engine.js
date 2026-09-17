@@ -1,94 +1,120 @@
 /* Clarity — decision engine.
    Deterministic. Its whole job: turn a tangled decision into what it depends on.
-   Input: a session (see app.js). Output: the Pivot, the structure, the next thing to learn. */
+   Unknown ≠ Pivot. The Pivot is the uncertainty that would actually change the choice. */
 (function () {
   const lower = t => {
     t = (t || "").trim().replace(/[.?!]+$/, "").replace(/^(i think|i believe|i assume|i'm assuming|i am assuming|i feel like|i guess|i suspect|probably|maybe|i'm pretty sure|i'm sure)\s+(that\s+)?/i, "");
     return t.charAt(0) === "I" && (t.charAt(1) === " " || t.charAt(1) === "'") ? t : t.charAt(0).toLowerCase() + t.slice(1);
   };
+  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
   const quote = t => `“${t}”`;
+  /* "you want less stress and a manager who respects me" → "…respects you" */
+  const toYou = t => t.replace(/\bme\b/g, "you").replace(/\bmy\b/g, "your").replace(/\bmyself\b/g, "yourself").replace(/\bI am\b/g, "you are").replace(/\bI'm\b/g, "you're").replace(/\bI\b/g, "you");
 
-  /* Sort the factors into what the person knows, assumes, and doesn't know. */
+  /* 1. Sort the factors the person named into known, assumed, unknown. */
   function structure(s) {
     const L = id => s.options[id].label;
     const known = [], assumed = [], unknown = [];
     s.factors.forEach(f => {
       if (!f.winner) return;
-      if (f.winner === "unknown") unknown.push({ f, text: `Which option is stronger on ${f.label.toLowerCase()}.` });
-      else if (f.basis === "know") known.push({ f, text: `${quote(L(f.winner))} is stronger on ${f.label.toLowerCase()}.` });
-      else assumed.push({ f, text: `${quote(L(f.winner))} is stronger on ${f.label.toLowerCase()}.` });
+      const fl = f.label.toLowerCase();
+      if (f.winner === "unknown") unknown.push({ f, text: `Which option is stronger on ${fl}.` });
+      else if (f.basis === "know") known.push({ f, text: `${quote(L(f.winner))} is stronger on ${fl}.` });
+      else assumed.push({ f, text: `${quote(L(f.winner))} is stronger on ${fl}.` });
     });
     return { known, assumed, unknown };
   }
 
-  /* The factors the person is unsure about, in the order they said they matter. */
-  function uncertain(s) {
-    return s.factors.filter(f => f.winner === "unknown" || (f.winner && f.basis === "assume"));
+  /* 2. The uncertainties, in the order the person said they matter. */
+  const uncertain = s => s.factors.filter(f => f.winner === "unknown" || (f.winner && f.basis === "assume"));
+
+  /* 3. Candidate pivots, ranked. Each carries a question a person could go and answer. */
+  function candidates(s) {
+    const L = id => s.options[id].label;
+    const out = [];
+    if (s.stillWant === "no" && s.hope && s.hope.trim()) {
+      out.push({ kind: "hope", impact: "high", question: `Can ${quote(L("b"))} actually give you ${lower(toYou(s.hope))}?`, statement: `whether ${quote(L("b"))} can actually give you ${lower(toYou(s.hope))}` });
+    }
+    uncertain(s).forEach((f, i) => {
+      const fl = f.label.toLowerCase();
+      const q = f.winner === "unknown" ? `Which option is actually stronger on ${fl}?` : `Is ${quote(L(f.winner))} really stronger on ${fl}?`;
+      const st = f.winner === "unknown" ? `which option is actually stronger on ${fl}` : `whether ${quote(L(f.winner))} really is stronger on ${fl}`;
+      const impact = f.flips === true ? "high" : f.flips === false ? "none" : (s.lean === "torn" || !s.lean) ? (i === 0 ? "high" : "medium") : "unknown";
+      out.push({ kind: "factor", f, impact, question: q, statement: st });
+    });
+    return out;
   }
 
-  /* The Pivot: the first uncertain factor that would change the lean. */
+  /* 4. The Pivot: the highest-impact candidate. Never manufactured. */
   function pivot(s) {
     const L = id => s.options[id].label;
-    const unc = uncertain(s);
-    const statement = f => f.winner === "unknown" ? `which option is stronger on ${f.label.toLowerCase()}` : `whether ${quote(L(f.winner))} really is stronger on ${f.label.toLowerCase()}`;
-    if (!unc.length) return { kind: "none", text: "Nothing you're unsure about would change your mind." };
-    if (s.lean === "torn" || !s.lean) {
-      const f = unc.find(x => x.winner === "unknown") || unc[0];
-      return { kind: "torn", f, statement: statement(f), text: cap(statement(f)) + "." };
-    }
-    const f = unc.find(x => x.flips === true);
-    if (f) return { kind: "flip", f, statement: statement(f), text: cap(statement(f)) + "." };
-    return { kind: "robust", text: `Nothing you're unsure about would change your mind. Your lean toward ${quote(L(s.lean))} holds.` };
+    const cands = candidates(s);
+    const hope = cands.find(c => c.kind === "hope");
+    const factorPivot = cands.find(c => c.kind === "factor" && c.impact === "high") || cands.find(c => c.kind === "factor" && c.impact === "medium");
+    if (hope) return { ...hope, secondary: factorPivot || null };
+    if (factorPivot) return factorPivot;
+    if (!uncertain(s).length) return { kind: "none", question: "There doesn't appear to be a decision-critical unknown.", statement: null };
+    return { kind: "robust", question: "Nothing you're unsure about would change your mind.", statement: null, lean: s.lean };
   }
-  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
 
+  /* 5. Structured model: what the evaluator inspects instead of prose. */
+  function model(s) {
+    const st = structure(s), pv = pivot(s);
+    return {
+      decision: { question: s.question, options: [s.options.a.label, s.options.b.label] },
+      desired_outcome: s.hope || null, still_want: s.stillWant, hard: s.hard || null,
+      factors: s.factors.map((f, i) => ({ name: f.label, rank: i + 1, advantage: f.winner === "unknown" ? null : f.winner, status: f.winner === "unknown" ? "unknown" : f.basis === "know" ? "known" : "assumed", would_flip: f.flips })),
+      lean: s.lean, candidate_pivots: candidates(s).map(c => ({ question: c.question, impact: c.impact })),
+      pivot: { kind: pv.kind, question: pv.question, factor: pv.f ? pv.f.label : null },
+      find_out: s.findOut, reversibility: s.reversibility,
+      known: st.known.map(x => x.text), assumed: st.assumed.map(x => x.text), unknown: st.unknown.map(x => x.text)
+    };
+  }
+
+  /* 6. The report. Decision → real question → Pivot → evidence → tradeoff → next. */
   function report(s) {
     const L = id => s.options[id].label;
     const st = structure(s), pv = pivot(s);
     const lean = s.lean && s.lean !== "torn" ? s.lean : null;
-    const other = lean ? (lean === "a" ? "b" : "a") : null;
-    const winsA = s.factors.filter(f => f.winner === "a").map(f => f.label.toLowerCase());
-    const winsB = s.factors.filter(f => f.winner === "b").map(f => f.label.toLowerCase());
-    const list = xs => xs.length > 1 ? xs.slice(0, -1).join(", ") + " and " + xs[xs.length - 1] : xs[0];
+    const A = L("a"), B = L("b");
 
-    // What you're really asking (the "Oh" from step two).
     let reframe = null;
     if (s.stillWant === "no" && s.hope) {
-      const hope = lower(s.hope);
-      reframe = `You want ${quote(hope)}. If ${quote(L("b"))} could give you that, you'd keep things as they are. So the real question isn't ${quote(L("a"))}. It's whether ${quote(L("b"))} can give you that.`;
+      const hope = lower(toYou(s.hope));
+      reframe = [`You don't just want to ${lower(A)}. You want ${hope}.`, `If ${quote(B)} could give you that, you'd choose it.`];
+    } else if (s.stillWant === "unsure" && s.hope) {
+      reframe = [`You want ${lower(toYou(s.hope))}, and you're not sure ${quote(A)} is the only way to get it.`, `Worth sitting with before anything else.`];
     }
 
-    // The tradeoff, one line.
-    let tradeoff;
-    if (winsA.length && winsB.length) tradeoff = `${quote(L("a"))} wins on ${list(winsA)}. ${quote(L("b"))} wins on ${list(winsB)}. That's the exchange.`;
-    else if (winsA.length) tradeoff = `On what matters to you, ${quote(L("a"))} wins every count you're sure of.`;
-    else if (winsB.length) tradeoff = `On what matters to you, ${quote(L("b"))} wins every count you're sure of.`;
-    else tradeoff = `You couldn't say which option is stronger on anything that matters. That isn't indecision. It's a decision made too early.`;
-
-    // The pivot, explained.
-    let pivotNote = null;
-    if (pv.kind === "flip") pivotNote = `If yes, ${quote(L(lean))} holds. If no, you're looking at a different decision.`;
-    else if (pv.kind === "torn") pivotNote = `Until you know this, being torn is the honest position.`;
+    let pivotNote;
+    if (pv.kind === "hope") pivotNote = pv.secondary ? `If it can, you don't need to ${lower(A)}. If it can't, the next question is ${pv.secondary.statement}.` : `If it can, you don't need to ${lower(A)}. If it can't, the case for it gets much stronger.`;
+    else if (pv.kind === "factor") pivotNote = lean ? `If that's true, ${quote(L(lean))} has a strong case. If it isn't, the decision changes.` : `That's the question that changes the decision.`;
     else if (pv.kind === "robust") pivotNote = `You may be more decided than you feel.`;
-    else pivotNote = `Everything you named, you already know. What's left isn't information.`;
+    else pivotNote = `You have enough to decide. This comes down to what you prefer.`;
 
-    // What to find out next, and whether to decide yet.
+    const pairs = s.factors.filter(f => f.winner && f.winner !== "unknown").map(f => ({ factor: f.label, option: L(f.winner) }));
+    const sideA = pairs.filter(p => p.option === A), sideB = pairs.filter(p => p.option === B);
+    let tradeoffLine = null;
+    if (sideA.length && sideB.length) tradeoffLine = `More ${sideA[0].factor.toLowerCase()} against more ${sideB[0].factor.toLowerCase()}. That's the exchange.`;
+    else if (pairs.length) tradeoffLine = `On everything you named, ${quote(pairs[0].option)} is stronger. The tradeoff isn't between the options; it's between what you're sure of and what you're not.`;
+    else tradeoffLine = `You couldn't say which option is stronger on anything you named. That isn't indecision. It's a decision made too early.`;
+
     let next, wait = null;
-    const rev = s.reversibility;
-    const leanLabel = lean ? L(lean) : L("a");
-    if (pv.f) {
-      if (s.findOut === "soon") { next = `Find out ${pv.statement}.`; wait = `You don't need to decide yet. You need to know this first.`; }
-      else if (s.findOut === "while") { next = `Find out ${pv.statement}. It will take time, so decide whether waiting costs you more than choosing without it.`; wait = `Not deciding yet is a real option here. Give it a date.`; }
-      else { next = `The only way to know ${pv.statement} is to try it.`; wait = rev === "hard" ? `That makes reversibility the real question, and you said ${quote(leanLabel)} would be hard to undo. Decisions that can't be tested and can't be reversed are worth taking slowly.` : `You said ${quote(leanLabel)} would be easy to undo. A choice you can test and reverse is a smaller decision than it feels.`; }
+    const rev = s.reversibility, leanLabel = lean ? L(lean) : A;
+    if (pv.statement) {
+      if (s.findOut === "soon") { next = pv.question; wait = `You don't need to decide yet. You need to know this first.`; }
+      else if (s.findOut === "while") { next = pv.question; wait = `This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date.`; }
+      else { next = `The only way to know is to try.`; wait = rev === "hard" ? `You said ${quote(leanLabel)} would be hard to undo. A choice you can't test in advance and can't reverse is worth taking slowly.` : `You said ${quote(leanLabel)} would be easy to undo. A choice you can test and reverse is a smaller decision than it feels.`; }
     } else if (pv.kind === "robust") {
-      next = `The next step isn't more thinking.`;
-      wait = rev === "hard" ? `${quote(leanLabel)} would be hard to undo, so take one more look at the assumptions before you move. But you already know which way you're facing.` : `${quote(leanLabel)} would be easy to undo, and nothing you're unsure of changes the picture.`;
+      next = `Not more thinking.`;
+      wait = rev === "hard" ? `${quote(leanLabel)} would be hard to undo, so take one more look at what you're assuming. But you already know which way you're facing.` : `${quote(leanLabel)} would be easy to undo, and nothing you're unsure of changes the picture.`;
     } else {
-      next = `Name one thing you'd want to be true before you'd feel settled. That's your real question.`;
+      next = `Nothing. You already have what you need.`;
+      wait = `Name the one thing you'd want to be true before you'd feel settled. If you can't, that's your answer.`;
     }
 
-    return { reframe, structure: st, pivot: pv, pivotNote, tradeoff, next, wait, lean, other, uncertain: uncertain(s).length, hard: s.hard };
+    return { reframe, structure: st, pivot: pv, pivotNote, pairs, tradeoffLine, next, wait, lean, hard: s.hard };
   }
 
-  window.Engine = { lower, structure, uncertain, pivot, report };
+  window.Engine = { lower, structure, uncertain, candidates, pivot, model, report };
 })();
