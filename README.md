@@ -5,7 +5,7 @@ A clearer way to think through life's important decisions.
 
 Clarity doesn't tell you what to do. It shows you what you're actually deciding: what you know, what you're assuming, what could happen, how much each outcome matters to you, what the answer is sensitive to, and the one thing you could learn that would most improve your decision.
 
-Live: https://clarity-production.up.railway.app (once deployed; see below)
+Live: https://clarity-production-957b.up.railway.app (once deployed; see below)
 
 ---
 
@@ -111,7 +111,7 @@ git remote add origin git@github.com:matthewschmidt1-lgtm/clarity.git
 git push -u origin main
 ```
 
-**Railway.** New project → Deploy from GitHub repo → pick `clarity`. `railway.json` tells Nixpacks to run `npx serve -s . -l $PORT`; `serve.json` adds clean URLs (`/app` works) and cache headers. Generate a domain under Settings → Networking. Every push to `main` redeploys. If the generated domain differs from `clarity-production.up.railway.app`, update the canonical/OG URLs in `index.html`, `robots.txt` and `sitemap.xml`.
+**Railway.** New project → Deploy from GitHub repo → pick `clarity`. `railway.json` tells Nixpacks to run `npx serve -s . -l $PORT`; `serve.json` adds clean URLs (`/app` works) and cache headers. Generate a domain under Settings → Networking. Every push to `main` redeploys. If the generated domain differs from `clarity-production-957b.up.railway.app`, update the canonical/OG URLs in `index.html`, `robots.txt` and `sitemap.xml`.
 
 ## Accessibility & performance
 
