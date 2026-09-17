@@ -48,7 +48,7 @@
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let w = 0, h = 0, dpr = 1, pts = [], progress = 0, target = 0, visible = true, raf = 0;
-    const N = opts.count || 260;
+    const N = Math.round((opts.count || 260) * (window.innerWidth < 720 ? 0.4 : 1));
     const rnd = (a, b) => a + Math.random() * (b - a);
     function css() {
       const s = getComputedStyle(document.documentElement);
@@ -74,7 +74,7 @@
       ctx.lineWidth = 1;
       for (let i = 0; i < pts.length; i++) {
         const q = pts[i];
-        const drift = REDUCED ? 0 : Math.sin(t * 0.0004 * q.sp + q.ph) * 10 * (1 - e);
+        const drift = REDUCED ? 0 : Math.sin(t * 0.0004 * q.sp + q.ph) * 10 * (1 - e) * (1 - e);
         const x = q.sx + (q.rx - q.sx) * e + drift, y = q.sy + (q.ry - q.sy) * e + drift * 0.6;
         q.x = x; q.y = y;
         ctx.beginPath(); ctx.arc(x, y, q.r * (1 - e * 0.45), 0, 6.283);
@@ -123,10 +123,4 @@
     location.href = "app.html?q=" + encodeURIComponent(c.dataset.q);
   }));
 
-  /* ---------- sample report: rotate examples ---------- */
-  const words = $$("[data-rotate]");
-  words.forEach(n => {
-    const list = n.dataset.rotate.split("|"); let i = 0;
-    setInterval(() => { i = (i + 1) % list.length; n.style.opacity = 0; setTimeout(() => { n.textContent = list[i]; n.style.opacity = 1; }, 350); }, 3200);
-  });
 })();

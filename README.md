@@ -32,18 +32,19 @@ The animation lives in `js/clover.js` (`Clover.mount(el).play()`), plays once on
 
 ## The experience, first second to final CTA
 
-| # | Section | Job | Interaction |
-|---|---|---|---|
-| 0 | Loader | The mark plays once (≈3 s), wordmark fades in, page reveals. Skipped on repeat visits and under reduced-motion. | |
-| 1 | Hero | Brand line, then *What's on your mind?*, one field, five example chips, one promise. No explanation, no feature grid, no "powered by AI". | Typing or a chip goes straight into the app with the question prefilled. Scrolling resolves the dots. |
-| 2 | Noise | *The world gives you more information. Clarity helps you make sense of it.* | The scattered field resolves into one line with one gold point as the section reaches centre. |
-| 3 | Ask before advise | Side-by-side dialogue: typical AI vs Clarity's "Maybe. But first: what are you hoping changes?" | Staggered reveal. |
-| 4 | Know. Weigh. See. | The method in three pillars; the left column is sticky while the pillars scroll. | |
-| 5 | The Clarity Lens | The vocabulary: Known, Assumed, Unknown, Tradeoff, Threshold, Next Question, and the Pivot card with rotating examples. | Hover lifts cards. |
-| 6 | The Report | A sample Clarity Report rendered like a printed document. The payoff. | |
-| 7 | Principles | Seven "Never" rules. Restraint as brand. | |
-| 8 | Calibration | It learns how *you* reason about your own future. | |
-| 9 | Final CTA | *What's on your mind?* on ink. Same input. | |
+| # | Section | Job |
+|---|---|---|
+| 0 | Loader | The mark plays once (≈3 s). Skipped on repeat visits and under reduced-motion. |
+| 1 | Hero | Brand line, *What's on your mind?*, one field, five example chips, one promise. On phones the dot field is hidden so nothing sits behind the questions. |
+| 2 | Noise | One headline, the field resolving into one line and one point, one paragraph. |
+| 3 | Ask before advise | A single four-line dialogue that demonstrates the second question. |
+| 4 | Know. Weigh. See. | Three pillars, one sentence each. Examples show on desktop only. |
+| 5 | A language for thinking | Known, Assumed, Unknown, the Pivot. |
+| 6 | The Clarity Report | A seven-row sample. |
+| 7 | We don't know yet | Seven rules. |
+| 8 | Final CTA | The same question and field. |
+
+Roughly 570 words on the whole page. Everything that only *described* the product was cut; what's left demonstrates it.
 
 ## The app (`app.html`)
 

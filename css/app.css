@@ -22,7 +22,7 @@
 .who::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--moss); }
 .prompt { font-family: var(--display); font-weight: 500; font-size: clamp(1.6rem, 3.2vw, 2.3rem); line-height: 1.12; letter-spacing: -0.03em; text-wrap: balance; }
 .prompt em { font-style: normal; color: var(--moss); }
-.hint { color: var(--fog); font-size: .98rem; max-width: 40em; text-wrap: pretty; }
+.hint { color: var(--ink-2); font-size: 1.05rem; max-width: 40em; text-wrap: pretty; }
 .hint b { color: var(--ink-2); font-weight: 500; }
 .you { font-family: var(--display); font-weight: 500; font-size: 1.1rem; color: var(--ink-2); padding: 12px 18px; border-left: 2px solid var(--gold); background: var(--gold-soft); border-radius: 0 12px 12px 0; }
 
@@ -66,14 +66,14 @@ textarea.input { min-height: 96px; resize: vertical; }
 .add { display: flex; gap: 8px; }
 .add .input { flex: 1; }
 .seeds { display: flex; flex-wrap: wrap; gap: 6px; }
-.tally { display: flex; gap: 16px; font-size: .85rem; color: var(--fog); }
+.tally { display: flex; gap: 16px; font-size: .95rem; color: var(--fog); }
 .tally b { color: var(--ink); font-weight: 500; }
 
 /* Weigh: sliders */
 .rows { display: grid; gap: 14px; }
 .row-s { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
 .row-s .lbl { font-weight: 500; }
-.row-s .sub { color: var(--fog); font-size: .85rem; }
+.row-s .sub { color: var(--fog); font-size: .92rem; }
 .row-s .val { font-family: var(--display); font-weight: 500; font-size: 1.2rem; min-width: 2ch; text-align: right; font-variant-numeric: tabular-nums; }
 .row-s input[type=range] { grid-column: 1 / -1; }
 .compare { display: grid; gap: 10px; }
@@ -91,7 +91,7 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 
 input[type=range]:hover::-webkit-slider-thumb { transform: scale(1.1); }
 input[type=range]:focus-visible { outline: none; }
 input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px var(--moss-soft), 0 0 0 1px var(--moss); }
-.range-ends { display: flex; justify-content: space-between; font-size: .78rem; color: var(--fog); }
+.range-ends { display: flex; justify-content: space-between; font-size: .85rem; color: var(--fog); }
 .b-thumb::-webkit-slider-thumb { background: var(--gold); }
 .b-thumb::-moz-range-thumb { background: var(--gold); }
 
