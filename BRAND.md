@@ -1,44 +1,57 @@
 # Clarity — brand strategy
 
-**Promise.** See what you already know.
-**Job.** Important decisions.
-**Enemy.** Noise.
-**Personality.** Calm intelligence.
-**Signature behaviour.** Asks before it advises.
+**Brand idea.** See what your decision depends on.
+**Emotional promise.** Turn mental noise into relief.
+**Functional promise.** Separate facts, assumptions and unknowns.
+**Differentiator.** Find the Pivot: the thing that could change your decision.
+**Enemy.** Premature certainty.
+**Brand behaviour.** Never decide for you.
+**Mental availability cue.** I'm stuck → Clarity.
 **Signature output.** The Pivot.
-**Emotional payoff.** "Now I see it."
-**Long-term payoff.** You need Clarity less each time.
+**Personality.** Calm. Intelligent. Humane. Precise.
+
+## The one sentence
+
+Clarity helps you see what your decision depends on. When you're stuck, it separates what you know from what you're assuming, finds what's uncertain, and identifies the one thing that could change your mind.
+
+Then: *Don't ask what you should do. Ask what your decision depends on.*
+
+## The competitive set
+
+Not decision tools. **Things people do when they're stuck.** Ask a friend ("what would you do?"), Google ("what should I do?"), a chatbot ("what do you think I should do?"), a pros-and-cons list, a journal. Clarity is the only one whose answer is a question: what does this actually depend on?
+
+## The cognitive journey the product and site both follow
+
+| Stage | The person's internal question | Clarity's job |
+|---|---|---|
+| Stuck | What should I do? | Recognise the problem |
+| Safe | Will you tell me what to do? | Establish agency |
+| Curious | Could there be a better question? | Ask intelligently |
+| Structured | What actually matters here? | Separate the variables |
+| Focused | Which uncertainty matters? | Prioritise |
+| Clear | What does this really depend on? | Find the Pivot |
+| Next | What now? | Name the next thing worth learning |
+
+The product's job in one sentence: move someone from an overwhelming question to one clear question they can actually answer.
 
 ## Markkula, applied
 
-| Principle | What it means here | Where you can see it |
-|---|---|---|
-| **Empathy** | Understand the person before analysing the decision. Emotional intensity changes the tone, never the engine. | First screen adapts its opening line to the weight of the question. Step two asks what they hope changes before anything else. |
-| **Focus** | One decision, one conversation, one next step. Own "important decisions", nothing wider. | Homepage is one question and one field. The app shows one prompt at a time. The report ends on one Next Question. |
-| **Impute** | People infer quality from presentation. The interface must itself feel clear. | One typeface, one accent, one gold. No dashboard, no graphs, no jargon. The mark demonstrates the promise: one leaf falls, the rest resolves. |
+| Principle | Here |
+|---|---|
+| **Empathy** | The second question is "What's making this hard?", not "list the pros and cons". Emotional weight changes the tone, never the engine. |
+| **Focus** | One visible system: what's known, what's assumed, what's unknown, the Pivot. Everything else (reversibility, horizons, regret, calibration) is an instrument underneath, used only when it changes the answer. |
+| **Impute** | One typeface, one accent, one question per screen, one primary action. Nothing on screen the person doesn't need. |
 
-## Kantar's Meaningful · Different · Salient, and where it falls short for Clarity
+## Kantar's MDS, and what it needs for a product like this
 
-MDS is a brand-equity framework: it measures how a brand is *perceived*, and it argues (correctly) that meaningful difference should come before chasing salience. It's the right starting point. Three gaps for a product like this:
+Meaningful, Different, Salient is the right frame. Three additions:
 
-**1. It measures claims, not behaviour.** MDS was built for brands whose difference is largely communicated. Clarity's difference is *enacted*: the product asks before it advises. So the framework needs a fourth test, sitting between Different and Salient:
+1. **Demonstrated.** The difference is enacted, not claimed, so the site shows one thoughtful question rather than describing the method. If a person can't feel the difference in the first minute, nothing above the fold has done its job.
+2. **Restraint as meaning.** What Clarity refuses to do (decide for you, manufacture precision) is part of the value, not a disclaimer.
+3. **Salience as vocabulary.** The cue is "I'm stuck → Clarity → what's the Pivot?" Language that travels between friends at exactly that moment beats reach.
 
-> **Demonstrated.** Can a person experience the difference inside the first minute, without being told?
-
-For Clarity the demonstration is the second question ("If your current job became less stressful tomorrow, would you still want to leave?"). Nothing on the site should claim what the product can show. That's why the homepage explains nothing.
-
-**2. It has no theory of trust.** MDS treats meaning as needs met. For a thinking tool, meaning is also *what the product refuses to do*. Restraint is equity. So the seven "Never" rules are not principles behind the brand; they are the brand, and they belong on the page. The line "We don't know yet" does more for Meaningful than any benefit statement.
-
-**3. Salience is usually treated as reach.** For Clarity, salience should be *cued*, not broadcast: the moment someone thinks "I have a big decision and can't see it clearly" is the only moment that matters. The proprietary language (Known, Assumed, Unknown, the Pivot, the Threshold, the Next Question) is the salience strategy, because language travels between people at exactly that moment. Vocabulary beats advertising.
-
-So the working model is:
-
-**Meaningful → Different → Demonstrated → Salient**, with one governing metric underneath: the "Oh" rate. Did anything become clearer? The report asks it, in four answers. Sessions, minutes and messages are not tracked as goals.
-
-## The paradox we keep on purpose
-
-Clarity is designed to be needed less over time. That contradicts conventional engagement thinking and it is the most differentiated thing about the brand. A person who learns to find their own Pivot has received the full product. The last line of every report says so.
+The governing metric is the "Oh" rate: *did anything become clearer?* The report asks it in four answers.
 
 ## What the identity is not
 
-No purple, no gradients, no "powered by AI", no probabilities with two decimal places, no dashboard, no recommendation. No serif: the earlier serif read as "editorial" but also as "old money"; a humanist sans reads as clear-headed, which is the actual promise.
+Not motivational, guru-like, clinical, corporate, mystical or "AI". Not Apple's aesthetics, only Apple's discipline. The distinctive part has to be the interaction itself: a question the person hasn't asked themselves yet.

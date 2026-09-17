@@ -1,6 +1,6 @@
 /* Clarity — copy and reference data. All user-facing words live here. */
 window.Content = {
-  values: [
+  factors: [
     { id: "income", label: "Income" },
     { id: "growth", label: "Career growth" },
     { id: "environment", label: "Day-to-day environment" },
@@ -63,5 +63,5 @@ window.Content = {
     return ["Something I could verify today", "Something I'm treating as true", "Something I don't know yet", "What it costs", "What it would give me"];
   },
 
-  steps: ["Deciding", "Hoping", "Knowing", "Weighing", "Comparing", "Horizons", "Risk", "Waiting", "Predicting", "Stress test", "Report"]
+  steps: ["Deciding", "What's hard", "Hoping", "What matters", "Stronger", "Know or assume", "Leaning", "Next", "Report"]
 };

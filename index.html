@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Clarity — See what you already know.</title>
-<meta name="description" content="A clearer way to think through life's important decisions. Clarity separates what you know from what you're assuming, finds what matters, and shows you the one thing that could change your call.">
+<title>Clarity — See what your decision depends on.</title>
+<meta name="description" content="When you're stuck, Clarity separates what you know from what you're assuming, finds what's uncertain, and identifies the one thing that could change your mind. It never decides for you.">
 <meta name="theme-color" content="#F3EFE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1512" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -13,21 +13,21 @@
 <link rel="canonical" href="https://clarity-production-957b.up.railway.app/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clarity-production-957b.up.railway.app/">
-<meta property="og:title" content="Clarity — See what you already know.">
-<meta property="og:description" content="You're probably closer to an answer than you think. A clearer way to think through life's important decisions.">
+<meta property="og:title" content="Clarity — See what your decision depends on.">
+<meta property="og:description" content="Don't ask what you should do. Ask what your decision depends on.">
 <meta property="og:image" content="https://clarity-production-957b.up.railway.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Clarity — See what you already know.">
-<meta name="twitter:description" content="A clearer way to think through life's important decisions.">
+<meta name="twitter:title" content="Clarity — See what your decision depends on.">
+<meta name="twitter:description" content="Don't ask what you should do. Ask what your decision depends on.">
 <meta name="twitter:image" content="https://clarity-production-957b.up.railway.app/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap">
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css?v=4">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Clarity","applicationCategory":"LifestyleApplication","operatingSystem":"Web","description":"A clearer way to think through life's important decisions.","url":"https://clarity-production-957b.up.railway.app/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Clarity","applicationCategory":"LifestyleApplication","operatingSystem":"Web","description":"See what your decision depends on.","url":"https://clarity-production-957b.up.railway.app/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 </head>
 <body>
@@ -58,7 +58,7 @@
   <canvas id="lens" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div>
-      <p class="line reveal"><b>Clarity</b><span>See what you already know.</span></p>
+      <p class="line reveal"><b>Clarity</b><span>See what your decision depends on.</span></p>
       <h1 class="display h1 reveal" data-delay="1">What's on <em>your</em> mind?</h1>
       <form class="ask reveal" data-delay="2" action="app.html" method="get">
         <label class="sr-only" for="q">What's on your mind?</label>
@@ -66,13 +66,13 @@
         <button class="btn" type="submit">Let's look at it clearly <span class="arrow" aria-hidden="true">→</span></button>
       </form>
       <div class="chips reveal" data-delay="3" aria-label="Examples">
-        <button class="chip" type="button" data-q="Should I take the new job?">Should I take the new job?</button>
-        <button class="chip" type="button" data-q="Should I move?">Should I move?</button>
-        <button class="chip" type="button" data-q="Should I go back to school?">Should I go back to school?</button>
-        <button class="chip" type="button" data-q="Should I buy the house?">Should I buy the house?</button>
-        <button class="chip" type="button" data-q="Should I stay?">Should I stay?</button>
+        <button class="chip" type="button" data-q="Should I take the new job?">Take the new job?</button>
+        <button class="chip" type="button" data-q="Should I move?">Move?</button>
+        <button class="chip" type="button" data-q="Should I go back to school?">Go back to school?</button>
+        <button class="chip" type="button" data-q="Should I stay?">Stay?</button>
+        <button class="chip" type="button" data-q="Should I start over?">Start over?</button>
       </div>
-      <p class="after reveal" data-delay="4">You're probably closer to an answer than you think.</p>
+      <p class="after reveal" data-delay="4">You don't need another opinion. You need to see what this decision depends on.</p>
     </div>
     <aside class="hero-aside reveal" data-delay="2">
       <button type="button" data-clover="hero" aria-label="Replay the Clarity mark animation"></button>
@@ -81,125 +81,79 @@
   </div>
 </section>
 
-<section class="section noise" id="noise" aria-labelledby="noise-h">
-  <div class="wrap">
-    <h2 class="display h2 reveal measure" id="noise-h">The world gives you more information. Clarity helps you make sense of it.</h2>
-    <canvas id="field" class="reveal" data-delay="1" aria-hidden="true"></canvas>
-    <p class="lede reveal" style="margin-top:28px">Most people stuck on a decision don't need more facts. They need to separate what they know from what they're assuming, name what matters, and find the one thing the decision turns on.</p>
-  </div>
-</section>
-
 <section class="section" id="how" aria-labelledby="how-h">
   <div class="wrap grid grid-5-7">
     <div>
-      <h2 class="display h2 reveal" id="how-h">Clarity asks before it advises.</h2>
-      <p class="lede reveal" data-delay="1" style="margin-top:22px">You don't need another opinion. You need to see the decision clearly.</p>
+      <h2 class="display h2 reveal" id="how-h">It won't tell you what to do.</h2>
+      <p class="lede reveal" data-delay="1" style="margin-top:22px">It asks the question you haven't asked yourself yet.</p>
+      <a class="btn reveal" data-delay="2" href="app.html" style="margin-top:28px">Try it with your own decision <span class="arrow" aria-hidden="true">→</span></a>
     </div>
     <div class="card reveal" data-delay="2">
       <div class="msg"><span class="who">You</span><p class="say">Should I move to New York?</p></div>
-      <div class="msg"><span class="who">Clarity</span><p class="say q">Maybe. But first: what are you hoping changes if you move?</p></div>
+      <div class="msg"><span class="who">Clarity</span><p class="say q">What are you hoping changes if you move?</p></div>
       <div class="rule"></div>
-      <div class="msg"><span class="who">You</span><p class="say">I want less stress and more energy.</p></div>
-      <div class="msg"><span class="who">Clarity</span><p class="say q">If your life here became significantly less stressful tomorrow, would you still want to go?</p></div>
+      <div class="msg"><span class="who">You</span><p class="say">Less stress. More energy.</p></div>
+      <div class="msg"><span class="who">Clarity</span><p class="say q">If your life here became much less stressful tomorrow, would you still want to go?</p></div>
     </div>
   </div>
 </section>
 
-<section class="section" id="method" aria-labelledby="method-h">
-  <div class="wrap pillars">
-    <div class="pillars-left">
-      <h2 class="display h2 reveal" id="method-h">Know. Weigh. See.</h2>
-      <p class="lede reveal" data-delay="1" style="margin-top:22px">Ten questions, one at a time. Then a report. The decision remains yours.</p>
-    </div>
-    <div>
-      <article class="pillar reveal">
-        <span class="num">01 · Know</span>
-        <h3 class="display h3">What is true, what is assumed, what is unknown?</h3>
-        <p class="sub">Everything you share is sorted into facts you could verify today, beliefs you're treating as true, and unknowns that could change the picture.</p>
-        <ul class="desk">
-          <li>"The new job pays $110,000." <span class="sub">Fact.</span></li>
-          <li>"I'll get promoted within two years." <span class="sub">Belief.</span></li>
-          <li>"How many hours I'll actually work." <span class="sub">Unknown.</span></li>
-        </ul>
-      </article>
-      <article class="pillar reveal">
-        <span class="num">02 · Weigh</span>
-        <h3 class="display h3">What matters, and what are you willing to risk?</h3>
-        <p class="sub">Six months against five years. The regret of acting against the regret of not acting. And the question most tools skip: if you dislike it, how easy is it to undo?</p>
-      </article>
-      <article class="pillar reveal">
-        <span class="num">03 · See</span>
-        <h3 class="display h3">What changes the decision?</h3>
-        <p class="sub">You predict first. Then Clarity argues the other side, tests how sensitive your call is to each assumption, and finds the one question most worth answering before you decide.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="lens-section" aria-labelledby="lens-h">
+<section class="section" id="smaller" aria-labelledby="smaller-h">
   <div class="wrap">
-    <h2 class="display h2 reveal" id="lens-h">A language for thinking.</h2>
-    <p class="lede reveal" data-delay="1" style="margin:22px 0 40px">Four words you'll start using on your own.</p>
-    <div class="vocab">
-      <div class="term reveal"><span class="k"></span><h3>Known</h3><p>What you actually know.</p></div>
-      <div class="term assumed reveal" data-delay="1"><span class="k"></span><h3>Assumed</h3><p>What you're treating as true.</p></div>
-      <div class="term unknown reveal" data-delay="2"><span class="k"></span><h3>Unknown</h3><p>What could change the decision if you found it out.</p></div>
-      <div class="term pivot reveal" data-delay="1">
-        <span class="k"></span>
-        <h3>The Pivot</h3>
-        <p class="display" style="font-size:clamp(1.25rem,2.4vw,1.8rem);max-width:30ch;margin-top:6px">Your decision changes depending on one thing. Clarity finds it, and tells you what it would take to know it.</p>
-      </div>
+    <h2 class="display h2 reveal measure" id="smaller-h">A big question becomes a small one.</h2>
+    <div class="compress reveal" data-delay="1" aria-label="How the question narrows">
+      <p class="c1">Should I move to New York?</p>
+      <p class="c2">Would moving actually reduce my stress?</p>
+      <p class="c3">Find out whether it would. Then decide.</p>
     </div>
+    <p class="lede reveal" data-delay="2">That's the whole job. Take a decision that's taking up too much space in your head and turn it into one question you can actually answer.</p>
+  </div>
+</section>
+
+<section class="section" id="thinks" aria-labelledby="thinks-h">
+  <div class="wrap grid grid-5-7">
+    <div>
+      <h2 class="display h2 reveal" id="thinks-h">How Clarity thinks.</h2>
+      <p class="lede reveal" data-delay="1" style="margin-top:22px">Seven questions. Each one makes the problem smaller.</p>
+    </div>
+    <ol class="how reveal" data-delay="2">
+      <li><b>What's known.</b> Things you could verify today.</li>
+      <li><b>What's assumed.</b> Things you're treating as true.</li>
+      <li><b>What's unknown.</b> Things that could change the picture.</li>
+      <li><b>The Pivot.</b> The one thing your decision actually depends on.</li>
+    </ol>
   </div>
 </section>
 
 <section class="section" id="report" aria-labelledby="report-h">
   <div class="wrap report-wrap">
     <div>
-      <h2 class="display h2 reveal" id="report-h">The Clarity Report.</h2>
-      <p class="lede reveal" data-delay="1" style="margin-top:22px">Not a recommendation. A map of your decision, ending with the one thing worth finding out next.</p>
+      <h2 class="display h2 reveal" id="report-h">Here's the thing you couldn't see from inside the problem.</h2>
+      <p class="lede reveal" data-delay="1" style="margin-top:22px">Not a recommendation. What your decision depends on, and the one thing worth finding out next.</p>
     </div>
     <article class="report reveal" data-delay="2" aria-label="Sample Clarity Report">
-      <p class="k">Sample</p>
-      <h3 style="margin-top:8px">Staying, or taking the new job</h3>
-      <div class="row" style="margin-top:14px"><span class="k">What appears to matter most</span><span class="v">Career growth · Work environment · Financial security</span></div>
-      <div class="row"><span class="k">Strongest argument for leaving</span><span class="v">Your current environment is producing a persistent problem the new role appears likely to address.</span></div>
-      <div class="row"><span class="k">Strongest argument for staying</span><span class="v">The new opportunity carries real uncertainty around stability and workload.</span></div>
-      <div class="row"><span class="k">Biggest assumption</span><span class="v">That the new company's culture will be substantially better.</span></div>
-      <div class="row pivot-row"><span class="k">The Pivot</span><span class="v big">Whether the new role actually delivers the growth you expect.</span></div>
-      <div class="row"><span class="k">Most valuable next step</span><span class="v">Find out the expected workload. Speak with two current employees.</span></div>
-      <div class="row"><span class="k">Your thinking</span><span class="v big">You appear less uncertain about what you want than about whether this opportunity will deliver it.</span></div>
+      <p class="k">Your decision</p>
+      <h3 style="margin-top:6px">Should I take the new job?</h3>
+      <div class="row pivot-row" style="margin-top:14px"><span class="k">The Pivot</span><span class="v big">Whether the new role really gives you the growth you're looking for.</span></div>
+      <div class="row"><span class="k">What you know</span><span class="v">Your current company is stable. The new role pays more.</span></div>
+      <div class="row"><span class="k">What you're assuming</span><span class="v">That the new company's culture is better.</span></div>
+      <div class="row"><span class="k">What you don't know</span><span class="v">The workload. Whether the growth is real.</span></div>
+      <div class="row"><span class="k">What to find out next</span><span class="v">Talk to two current employees about workload and advancement. You don't need to decide yet.</span></div>
+      <p class="closing">Now you know what you're deciding.</p>
     </article>
-  </div>
-</section>
-
-<section class="section" id="principles" aria-labelledby="principles-h">
-  <div class="wrap grid grid-5-7">
-    <div>
-      <h2 class="display h2 reveal" id="principles-h">We don't know yet.</h2>
-      <p class="lede reveal" data-delay="1" style="margin-top:22px">Clarity never pretends certainty. Seven rules it won't break.</p>
-    </div>
-    <ol class="principles">
-      <li class="reveal"><span class="n">01</span><span>Never manufacture precision.</span></li>
-      <li class="reveal"><span class="n">02</span><span>Never hide uncertainty.</span></li>
-      <li class="reveal"><span class="n">03</span><span>Never confuse correlation with causation.</span></li>
-      <li class="reveal"><span class="n">04</span><span>Never pretend preferences are facts.</span></li>
-      <li class="reveal"><span class="n">05</span><span>Never make the decision for you.</span></li>
-      <li class="reveal"><span class="n">06</span><span>Never bury the assumption driving the result.</span></li>
-      <li class="reveal"><span class="n">07</span><span>Never ask a question unless the answer could matter.</span></li>
-    </ol>
   </div>
 </section>
 
 <section class="section final" id="start" aria-labelledby="final-h">
   <div class="wrap">
     <h2 class="display h1 reveal" id="final-h" style="max-width:14ch">What's on <em>your</em> mind?</h2>
-    <p class="lede reveal" data-delay="1" style="margin-top:22px">Once you can see the decision clearly, you may not need Clarity anymore.</p>
+    <p class="lede reveal" data-delay="1" style="margin-top:22px">Don't ask what you should do. Ask what your decision depends on.</p>
     <form class="ask reveal" data-delay="2" action="app.html" method="get">
       <label class="sr-only" for="q2">What's on your mind?</label>
       <input id="q2" name="q" type="text" placeholder="Should I…" autocomplete="off" maxlength="160">
       <button class="btn" type="submit">Let's look at it clearly <span class="arrow" aria-hidden="true">→</span></button>
     </form>
+    <p class="after reveal" data-delay="3" style="margin-top:22px">Clarity never decides for you.</p>
   </div>
 </section>
 
@@ -217,7 +171,7 @@
   </button>
 </footer>
 
-<script src="js/clover.js" defer></script>
-<script src="js/site.js" defer></script>
+<script src="js/clover.js?v=4" defer></script>
+<script src="js/site.js?v=4" defer></script>
 </body>
 </html>

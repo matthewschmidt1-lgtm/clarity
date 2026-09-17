@@ -1,7 +1,7 @@
 # Clarity
 
-**See what you already know.**
-A clearer way to think through life's important decisions.
+**See what your decision depends on.**
+When you're stuck, Clarity separates what you know from what you're assuming, finds what's uncertain, and identifies the one thing that could change your mind.
 
 Clarity doesn't tell you what to do. It shows you what you're actually deciding: what you know, what you're assuming, what could happen, how much each outcome matters to you, what the answer is sensitive to, and the one thing you could learn that would most improve your decision.
 
@@ -30,52 +30,27 @@ The animation lives in `js/clover.js` (`Clover.mount(el).play()`), plays once on
 | **Motion** | Messy → organised. Blurred → focused. Many → few. Long easings (`cubic-bezier(.22,.72,.18,1)`, 700–1100 ms). The dot field in the hero and the "Noise" section literally resolves from scatter into one line and one gold point as you scroll. Reduced-motion is respected everywhere. |
 | **Rule** | Sophisticated engine. Simple experience. One question, one insight, one thing to consider next. |
 
-## The experience, first second to final CTA
+## The site
 
-| # | Section | Job |
-|---|---|---|
-| 0 | Loader | The mark plays once (≈3 s). Skipped on repeat visits and under reduced-motion. |
-| 1 | Hero | Brand line, *What's on your mind?*, one field, five example chips, one promise. On phones the dot field is hidden so nothing sits behind the questions. |
-| 2 | Noise | One headline, the field resolving into one line and one point, one paragraph. |
-| 3 | Ask before advise | A single four-line dialogue that demonstrates the second question. |
-| 4 | Know. Weigh. See. | Three pillars, one sentence each. Examples show on desktop only. |
-| 5 | A language for thinking | Known, Assumed, Unknown, the Pivot. |
-| 6 | The Clarity Report | A seven-row sample. |
-| 7 | We don't know yet | Seven rules. |
-| 8 | Final CTA | The same question and field. |
-
-Roughly 570 words on the whole page. Everything that only *described* the product was cut; what's left demonstrates it.
+Follows the cognitive journey in `BRAND.md`: recognition (*What's on your mind?*), reassurance (*It won't tell you what to do*), one demonstrated question, the CTA. Below that, for the curious: a big question becoming a small one, how Clarity thinks in four lines, and the report as the payoff. About 400 words.
 
 ## The app (`app.html`)
 
-Ten quiet questions, one at a time, then the report. Answers persist in `localStorage` so a person can leave and come back.
+Seven questions, one screen each, then the report. Each question narrows the problem. Answers persist locally.
 
-1. **Deciding** — the question, two options (inferred from the question, editable). Emotional intensity changes the tone of the copy, never the engine.
-2. **Hoping** — what are you hoping changes? Then: *if the other option gave you that tomorrow, would you still want to?* The "Oh" moment.
-3. **Knowing** — every item sorted as Fact / Belief / Unknown and tagged by which option it favours. First-pass classification is automatic from phrasing; the person corrects it.
-4. **Weighing** — three to five values, each weighted 1–5.
-5. **Comparing** — how well each option delivers each value, 1–5.
-6. **Horizons** — each option at six months and at five years.
-7. **Risk** — reversibility of each option, regret asymmetry (acting and failing vs not acting and wishing), the Threshold, the fear.
-8. **Waiting** — "don't decide yet" as a real option: what it costs, what it teaches.
-9. **Predicting** — the person's own probability *before* any calculation, and which unknown would most change their mind.
-10. **Stress test** — the engine works out the lean and generates "for the other option to be right, what would need to be true"; the person marks what's plausible.
-11. **Clarity Report** — see below.
+1. **What's on your mind?** The question and the two ways, inferred and editable.
+2. **What's making this hard?** In their own words.
+3. **What are you hoping changes?** Then: *if the other way gave you exactly that tomorrow, would you still want to?*
+4. **What does this come down to?** Up to four factors, most important first.
+5. **Which is stronger on each?** This option, that option, or *don't know*. Don't-knows become unknowns.
+6. **Do you know that, or are you assuming it?** Sorts every claim into known or assumed. Skipped if there's nothing to sort.
+7. **Which way are you leaning?** Then, for each uncertain factor: *if you were wrong about this, would you still lean that way?* The first "no" is the Pivot.
+8. **Could you find that out before deciding? How hard would it be to undo?**
+9. **The report.** Your decision · what you're really asking · the Pivot · known / assumed / unknown · the tradeoff · what to find out next · *Now you know what you're deciding.*
 
 ### The engine (`js/engine.js`)
 
-Deterministic. No language model decides a number.
-
-- `valueScores` — weighted comparison; lean ∈ [−1, 1].
-- `sensitivity` — which single factor could flip the lean, and how little it would take.
-- `epistemics` — facts vs beliefs vs unknowns; whether the lean rests on beliefs.
-- `horizons` — detects short-term vs long-term conflict.
-- `risk` — reversibility, regret asymmetry, the value of waiting.
-- `modelRange` — maps the lean to a defensible probability range, widened by unknowns, beliefs and plausible counter-conditions, then compares with the person's own estimate.
-- `clarity` — grades the quality of the *process* (High/Medium/Low), never the option.
-- `report` — composes the Pivot, the Tradeoff, the Next Question and the closing "Your thinking" sentence.
-
-An LLM layer can sit on top later for natural-language extraction, follow-up questions and counterarguments; the numbers stay here.
+Deterministic and small. `structure` sorts factors into known / assumed / unknown. `pivot` returns the first uncertain factor that flips the lean (or the most important unknown when the person is torn, or "robust" when nothing flips). `report` composes the reframe, the tradeoff, the next step and the "don't decide yet" line from those plus reversibility.
 
 ## Stack
 

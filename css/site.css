@@ -236,7 +236,7 @@ body::before {
 .hero .line { font-size: 1.1rem; color: var(--ink-2); display: flex; align-items: center; gap: 12px; margin-bottom: 26px; }
 .hero .line b { font-weight: 600; letter-spacing: -0.01em; }
 .hero .line span { color: var(--ink-2); }
-.hero .after { margin-top: 26px; font-size: 1.1rem; color: var(--ink-2); }
+.hero .after { margin-top: 26px; font-size: 1.15rem; color: var(--ink-2); max-width: 30em; text-wrap: pretty; }
 .hero .lede { margin-top: 26px; }
 .ask {
   margin-top: 40px; max-width: 560px;
@@ -398,6 +398,22 @@ body::before {
   .hero-aside .clover { margin-left: 0; width: 150px; }
   .hero-aside p { text-align: left; }
   .hero { padding-top: 110px; }
+  .hero .line b { display: none; }
   .section { padding-block: 80px; }
   .term.pivot .display { max-width: none; }
 }
+
+/* ---------- v2: compression, how-list, closing ---------- */
+.compress { display: grid; gap: 14px; margin: 40px 0; max-width: 40ch; }
+.compress p { font-family: var(--display); font-weight: 500; letter-spacing: -0.025em; line-height: 1.15; position: relative; padding-left: 28px; }
+.compress p::before { content: ""; position: absolute; left: 0; top: .55em; width: 14px; height: 1px; background: var(--line); }
+.compress .c1 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); color: var(--fog); }
+.compress .c2 { font-size: clamp(1.4rem, 2.8vw, 2rem); color: var(--ink-2); }
+.compress .c3 { font-size: clamp(1.25rem, 2.3vw, 1.6rem); color: var(--moss); }
+.compress .c3::before { background: var(--gold); width: 14px; height: 3px; top: .5em; }
+.how { list-style: none; margin: 0; padding: 0; display: grid; }
+.how li { padding: 20px 0; border-top: 1px solid var(--line); font-size: 1.15rem; line-height: 1.45; color: var(--ink-2); }
+.how li:last-child { border-bottom: 1px solid var(--line); }
+.how li b { color: var(--ink); font-weight: 600; display: block; }
+.report .closing { margin-top: 26px; font-family: var(--display); font-weight: 500; font-size: 1.3rem; letter-spacing: -0.02em; }
+.final .after { color: color-mix(in srgb, var(--paper) 70%, transparent); }
