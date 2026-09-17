@@ -25,7 +25,7 @@ The animation lives in `js/clover.js` (`Clover.mount(el).play()`), plays once on
 | **Signature behaviour** | Asks before it advises. |
 | **Signature output** | The Pivot: the one variable the decision turns on. |
 | **Palette** | Paper `#F3EFE6`, ink `#16201B`, fog `#7C857E`, moss `#1E6B47`, one gold `#C9A24C` reserved for the fallen leaf, the Pivot and "assumed". Dark theme inverts paper/ink and lifts moss. No purple gradients. |
-| **Type** | Fraunces (variable, optical size 144, weight 300) for display: editorial, soft, slightly old. Inter for everything else. |
+| **Type** | One family: Instrument Sans, a humanist sans. Display at weight 500 with tight tracking; body at 400. Editorial, modern, calm. No serif, no second typeface. (Markkula: impute. One voice reads as one mind.) |
 | **Materials & light** | Paper grain over the whole page, soft top-left daylight, long soft shadows, frosted-glass inputs. Nothing hard-edged. |
 | **Motion** | Messy → organised. Blurred → focused. Many → few. Long easings (`cubic-bezier(.22,.72,.18,1)`, 700–1100 ms). The dot field in the hero and the "Noise" section literally resolves from scatter into one line and one gold point as you scroll. Reduced-motion is respected everywhere. |
 | **Rule** | Sophisticated engine. Simple experience. One question, one insight, one thing to consider next. |
@@ -35,7 +35,7 @@ The animation lives in `js/clover.js` (`Clover.mount(el).play()`), plays once on
 | # | Section | Job | Interaction |
 |---|---|---|---|
 | 0 | Loader | The mark plays once (≈3 s), wordmark fades in, page reveals. Skipped on repeat visits and under reduced-motion. | |
-| 1 | Hero | *See what you already know.* One input: "What's on your mind?" Five example chips. Dot field drifts. | Typing or a chip goes straight into the app with the question prefilled. Scrolling resolves the dots. |
+| 1 | Hero | Brand line, then *What's on your mind?*, one field, five example chips, one promise. No explanation, no feature grid, no "powered by AI". | Typing or a chip goes straight into the app with the question prefilled. Scrolling resolves the dots. |
 | 2 | Noise | *The world gives you more information. Clarity helps you make sense of it.* | The scattered field resolves into one line with one gold point as the section reaches centre. |
 | 3 | Ask before advise | Side-by-side dialogue: typical AI vs Clarity's "Maybe. But first: what are you hoping changes?" | Staggered reveal. |
 | 4 | Know. Weigh. See. | The method in three pillars; the left column is sticky while the pillars scroll. | |
@@ -78,7 +78,7 @@ An LLM layer can sit on top later for natural-language extraction, follow-up que
 
 ## Stack
 
-Static HTML, CSS and vanilla JS. No build step, no framework, no bundler. Fonts from Google Fonts. Everything else inline.
+Static HTML, CSS and vanilla JS. No build step, no framework, no bundler. One font from Google Fonts. Everything else inline. Brand strategy in `BRAND.md`.
 
 ```
 index.html          marketing site

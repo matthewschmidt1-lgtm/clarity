@@ -97,7 +97,7 @@
     a.addEventListener("input", () => { S.options.a.label = a.value; S.optionsEdited = true; });
     b.addEventListener("input", () => { S.options.b.label = b.value; S.optionsEdited = true; });
     return [
-      who(), prompt(S.question ? "Let's look at it clearly." : "Tell me what you're trying to decide."), toneLine,
+      who(), prompt(S.question ? "Let's slow this down." : "Tell me what you're trying to decide."), toneLine,
       h("div", { class: "field" }, h("label", { for: "q" }, "The decision"), q),
       hint("Most decisions are two paths. Name them plainly. <b>Don't decide yet</b> is always on the table too; we'll come to it."),
       h("div", { class: "two" },

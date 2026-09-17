@@ -20,18 +20,18 @@
 @keyframes stepOut { to { opacity: 0; transform: translateY(-10px); filter: blur(4px); } }
 .who { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--fog); display: flex; align-items: center; gap: 10px; }
 .who::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--moss); }
-.prompt { font-family: var(--display); font-weight: 300; font-size: clamp(1.7rem, 3.6vw, 2.6rem); line-height: 1.12; letter-spacing: -0.015em; text-wrap: balance; }
-.prompt em { font-style: italic; color: var(--moss); }
+.prompt { font-family: var(--display); font-weight: 500; font-size: clamp(1.6rem, 3.2vw, 2.3rem); line-height: 1.12; letter-spacing: -0.03em; text-wrap: balance; }
+.prompt em { font-style: normal; color: var(--moss); }
 .hint { color: var(--fog); font-size: .98rem; max-width: 40em; text-wrap: pretty; }
 .hint b { color: var(--ink-2); font-weight: 500; }
-.you { font-family: var(--display); font-size: 1.15rem; color: var(--ink-2); padding: 12px 18px; border-left: 2px solid var(--gold); background: var(--gold-soft); border-radius: 0 12px 12px 0; }
+.you { font-family: var(--display); font-weight: 500; font-size: 1.1rem; color: var(--ink-2); padding: 12px 18px; border-left: 2px solid var(--gold); background: var(--gold-soft); border-radius: 0 12px 12px 0; }
 
 .field { display: grid; gap: 8px; }
 .field label { font-size: .85rem; color: var(--ink-2); font-weight: 500; }
 .input, textarea.input { width: 100%; font: inherit; font-size: 1.05rem; color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; outline: none; transition: border-color var(--fast), box-shadow var(--fast); }
 .input:focus { border-color: var(--moss); box-shadow: 0 0 0 4px var(--moss-soft); }
 textarea.input { min-height: 96px; resize: vertical; }
-.input.big { font-family: var(--display); font-size: 1.45rem; padding: 18px 20px; border-radius: 18px; }
+.input.big { font-family: var(--display); font-weight: 500; letter-spacing: -0.02em; font-size: 1.35rem; padding: 18px 20px; border-radius: 18px; }
 .two { display: grid; gap: 14px; }
 @media (min-width: 640px) { .two { grid-template-columns: 1fr 1fr; } }
 .opt-label { display: inline-flex; align-items: center; gap: 8px; }
@@ -74,13 +74,13 @@ textarea.input { min-height: 96px; resize: vertical; }
 .row-s { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
 .row-s .lbl { font-weight: 500; }
 .row-s .sub { color: var(--fog); font-size: .85rem; }
-.row-s .val { font-family: var(--display); font-size: 1.3rem; min-width: 2ch; text-align: right; font-variant-numeric: tabular-nums; }
+.row-s .val { font-family: var(--display); font-weight: 500; font-size: 1.2rem; min-width: 2ch; text-align: right; font-variant-numeric: tabular-nums; }
 .row-s input[type=range] { grid-column: 1 / -1; }
 .compare { display: grid; gap: 10px; }
 .compare .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .compare .pair > div { display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; }
 .compare .pair input { grid-column: 1 / -1; }
-.compare .pair .n { font-family: var(--display); font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+.compare .pair .n { font-family: var(--display); font-weight: 500; font-size: 1.1rem; font-variant-numeric: tabular-nums; }
 @media (max-width: 520px) { .compare .pair { grid-template-columns: 1fr; } }
 
 input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; }
@@ -95,7 +95,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px va
 .b-thumb::-webkit-slider-thumb { background: var(--gold); }
 .b-thumb::-moz-range-thumb { background: var(--gold); }
 
-.pct { font-family: var(--display); font-size: clamp(3rem, 8vw, 5rem); font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; }
+.pct { font-family: var(--display); font-size: clamp(3rem, 8vw, 5rem); font-weight: 500; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
 .pct small { font-size: .35em; color: var(--fog); }
 
 /* stress test checks */
@@ -111,7 +111,7 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px va
 /* thinking interstitial */
 .thinking { display: grid; gap: 14px; place-items: center; text-align: center; padding: 60px 0; }
 .thinking .mark { width: 120px; }
-.thinking p { font-family: var(--display); font-size: 1.3rem; color: var(--ink-2); }
+.thinking p { font-family: var(--display); font-weight: 500; font-size: 1.2rem; color: var(--ink-2); }
 
 /* report (reuses .report from site.css) */
 .report-page { display: grid; gap: 28px; }
@@ -123,14 +123,14 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px va
 .chips-k span.fact { background: var(--moss-soft); color: var(--moss); border-color: transparent; }
 .chips-k span.belief { background: var(--gold-soft); border-color: transparent; }
 .chips-k span.unknown { background: var(--paper-3); border-color: transparent; }
-.clar { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 1.6rem; }
+.clar { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 500; font-size: 1.4rem; }
 .clar .tag { font-family: var(--sans); font-size: .8rem; }
 .clar.Low .tag { background: var(--gold-soft); color: var(--ink); }
 .clar.Medium .tag { background: var(--paper-3); color: var(--ink); }
 .report ul.plain { margin: 6px 0 0; padding-left: 1.1em; color: var(--ink-2); font-size: .95rem; display: grid; gap: 4px; }
 .report .warn li::marker { color: var(--gold); }
 .after { display: grid; gap: 14px; padding: 28px; border: 1px solid var(--line); border-radius: 18px; }
-.after h4 { font-family: var(--display); font-weight: 400; font-size: 1.3rem; margin: 0; }
+.after h4 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.02em; margin: 0; }
 .after .thanks { color: var(--moss); font-size: .95rem; }
 .report-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-size: .9rem; opacity: 0; transition: all var(--fast) var(--ease); pointer-events: none; z-index: 60; }

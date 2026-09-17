@@ -24,7 +24,7 @@
 <meta name="twitter:image" content="https://clarity-production.up.railway.app/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..500,0..100;1,9..144,300..500,0..100&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap">
 <link rel="stylesheet" href="css/site.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Clarity","applicationCategory":"LifestyleApplication","operatingSystem":"Web","description":"A clearer way to think through life's important decisions.","url":"https://clarity-production.up.railway.app/","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -60,21 +60,21 @@
   <canvas id="lens" aria-hidden="true"></canvas>
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow reveal">For important decisions</p>
-      <h1 class="display h1 reveal" data-delay="1">See what you <em>already</em> know.</h1>
-      <p class="lede reveal" data-delay="2">You're probably closer to an answer than you think. Clarity separates what you know from what you're assuming, finds what actually matters, and shows you the one thing that could change your call.</p>
-      <form class="ask reveal" data-delay="3" action="app.html" method="get">
+      <p class="line reveal"><b>Clarity</b><span>See what you already know.</span></p>
+      <h1 class="display h1 reveal" data-delay="1">What's on <em>your</em> mind?</h1>
+      <form class="ask reveal" data-delay="2" action="app.html" method="get">
         <label class="sr-only" for="q">What's on your mind?</label>
-        <input id="q" name="q" type="text" placeholder="What's on your mind?" autocomplete="off" maxlength="160">
-        <button class="btn" type="submit">Look at it clearly <span class="arrow" aria-hidden="true">→</span></button>
+        <input id="q" name="q" type="text" placeholder="Should I…" autocomplete="off" maxlength="160">
+        <button class="btn" type="submit">Let's look at it clearly <span class="arrow" aria-hidden="true">→</span></button>
       </form>
-      <div class="chips reveal" data-delay="4" aria-label="Examples">
+      <div class="chips reveal" data-delay="3" aria-label="Examples">
         <button class="chip" type="button" data-q="Should I take the new job?">Should I take the new job?</button>
         <button class="chip" type="button" data-q="Should I move?">Should I move?</button>
         <button class="chip" type="button" data-q="Should I go back to school?">Should I go back to school?</button>
         <button class="chip" type="button" data-q="Should I buy the house?">Should I buy the house?</button>
         <button class="chip" type="button" data-q="Should I stay?">Should I stay?</button>
       </div>
+      <p class="after reveal" data-delay="4">You're probably closer to an answer than you think.</p>
     </div>
     <aside class="hero-aside reveal" data-delay="2">
       <button type="button" data-clover="hero" aria-label="Replay the Clarity mark animation"></button>
@@ -113,7 +113,8 @@
       <div>
         <p class="eyebrow reveal">A different kind of intelligence</p>
         <h2 class="display h2 reveal" id="how-h" data-delay="1">Clarity asks <em>before</em> it advises.</h2>
-        <p class="lede reveal" data-delay="2" style="margin-top:22px">Most AI tries to appear intelligent. Clarity is built to make you feel intelligent. It never rushes to the answer, because the answer isn't the point. Seeing the decision is.</p>
+        <p class="lede reveal" data-delay="2" style="margin-top:22px">You don't need another opinion. You need to see the decision clearly.</p>
+        <p class="quiet reveal" data-delay="3" style="margin-top:18px;max-width:34em">We'll separate what you know from what you think you know, identify what matters, and show you what could change the picture. Most AI tries to appear intelligent. Clarity is built to make you feel intelligent.</p>
       </div>
       <div class="dialogue">
         <div class="card dim reveal" data-delay="1">
@@ -139,7 +140,7 @@
       <p class="eyebrow reveal">The method</p>
       <h2 class="display h2 reveal" id="method-h" data-delay="1">Know. Weigh. <em>See.</em></h2>
       <p class="lede reveal" data-delay="2" style="margin-top:22px">Ten quiet questions. Sophisticated underneath, simple on top. The conclusion is held back until you've explored the decision, because the exploration is where the clarity comes from.</p>
-      <p class="quiet reveal" data-delay="3" style="margin-top:18px;font-size:.92rem">Then: now you can decide.</p>
+      <p class="reveal" data-delay="3" style="margin-top:18px;font-weight:500">Then: make your call. The decision remains yours.</p>
     </div>
     <div>
       <article class="pillar reveal">
@@ -181,7 +182,8 @@
   <div class="wrap">
     <p class="eyebrow reveal">A language for thinking</p>
     <h2 class="display h2 reveal measure" id="lens-h" data-delay="1">The Clarity <em>Lens</em></h2>
-    <p class="lede reveal" data-delay="2" style="margin:22px 0 48px">A small vocabulary you'll start using on your own. That's the idea.</p>
+    <p class="lede reveal" data-delay="2" style="margin:22px 0 12px">After fifteen minutes of talking it through, Clarity says: here's what you've told me. Here's what you know. Here's what you believe. Here's what you don't know. And here's the assumption your decision depends on most.</p>
+    <p class="quiet reveal" data-delay="3" style="margin:0 0 48px">A small vocabulary you'll start using on your own. That's the idea.</p>
     <div class="vocab">
       <div class="term reveal"><span class="k"></span><h3>Known</h3><p>What you actually know. Things you could verify today.</p></div>
       <div class="term assumed reveal" data-delay="1"><span class="k"></span><h3>Assumed</h3><p>What you're treating as true. Often the whole decision rests here.</p></div>
@@ -279,7 +281,7 @@
   <div class="wrap">
     <p class="eyebrow reveal">Whenever you're ready</p>
     <h2 class="display h1 reveal" id="final-h" data-delay="1" style="max-width:14ch">What's on <em>your</em> mind?</h2>
-    <p class="lede reveal" data-delay="2" style="margin-top:22px">You don't need another opinion. You need to see the decision clearly. Once you do, you may not need Clarity anymore. That's the point.</p>
+    <p class="lede reveal" data-delay="2" style="margin-top:22px">Let's slow this down. Once you can see the decision clearly, you may not need Clarity anymore. That's the point.</p>
     <form class="ask reveal" data-delay="3" action="app.html" method="get">
       <label class="sr-only" for="q2">What's on your mind?</label>
       <input id="q2" name="q" type="text" placeholder="Should I…" autocomplete="off" maxlength="160">
