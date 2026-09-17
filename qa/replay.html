@@ -5,35 +5,31 @@
 (async () => {
   const file = new URLSearchParams(location.search).get("file") || "personas/sessions.json";
   const data = await (await fetch(file)).json();
+  const IMP = Object.fromEntries(Content.importance), CONFW = Object.fromEntries(Content.confidence);
   const out = [];
   for (const p of data) {
-    const sc = p.session, o = Content.inferOptions(sc.question);
-    const s = Object.assign({ options: { a: { label: o.a }, b: { label: o.b } }, hard: "", hope: "", stillWant: null, factors: [], lean: null, findOut: null, reversibility: null }, JSON.parse(JSON.stringify(sc)));
-    if (sc.options) s.options = { a: { label: sc.options[0] }, b: { label: sc.options[1] } };
-    const L = id => Engine.toYou(s.options[id].label), r = Engine.report(s), m = Engine.model(s);
-    const lines = [];
-    lines.push(`=== ${p.id} ===`, `Persona: ${p.persona || ""}`, ``, `--- What the person saw and answered ---`);
-    lines.push(`Clarity: What's on your mind?`, `  You: ${s.question}   [${L("a")} / ${L("b")}]`);
-    lines.push(`Clarity: What's making this hard?`, `  You: ${s.hard}`);
-    lines.push(`Clarity: ${Engine.hopeQuestion(s)}`, `  You: ${s.hope}`);
-    const tn = Engine.tension(s); if (tn) lines.push(`Clarity: ${tn}`);
-    lines.push(`Clarity: ${Engine.stillWantQuestion(s)}`, `  You: ${s.stillWant}`);
-    const d = Engine.discovery(s); if (d) lines.push(`Clarity: ${d}`);
-    lines.push(`Clarity: What does this decision come down to? (up to four, most important first)`, `  You: ${s.factors.map(f => f.label).join(", ")}`);
-    lines.push(`Clarity: For each one, which is stronger? (${L("a")} / ${L("b")} / don't know)`);
-    s.factors.forEach(f => lines.push(`  ${f.label}: ${f.winner === "unknown" ? "don't know" : L(f.winner)}`));
-    lines.push(`Clarity: Do you know that, or are you assuming it?`);
-    s.factors.filter(f => f.winner && f.winner !== "unknown").forEach(f => lines.push(`  ${f.label}: ${f.basis === "know" ? "I know that" : "I'm assuming it"}`));
-    lines.push(`Clarity: Right now, which way are you leaning?`, `  You: ${s.lean === "torn" ? "honestly torn" : L(s.lean)}`);
-    if (s.lean && s.lean !== "torn") { lines.push(`Clarity: And if you were wrong? (for each uncertainty: would you still lean the same way?)`); Engine.uncertain(s).forEach(f => lines.push(`  ${f.label}: ${f.flips ? "no, that changes it" : "yes, still"}`)); }
-    lines.push(`Clarity: Could you find that out before deciding?`, `  You: ${s.findOut}`, `Clarity: If it didn't work out, how hard would it be to undo?`, `  You: ${s.reversibility}`);
-    lines.push(``, `--- The report the person received ---`, `Here's what this depends on.`, `${s.question}`, `${L("a")} · ${L("b")}`);
+    const sc = p.session;
+    const s = { title: sc.title, options: sc.options.map((l, i) => ({ id: "o" + i, label: l })), criteria: sc.criteria.map(([id, label, importance]) => ({ id, label, importance })), evals: {}, notes: sc.notes || {}, ruledOut: sc.ruledOut || {} };
+    for (const id in sc.evals) { const e = sc.evals[id]; s.evals[id] = { pref: e.pref, conf: e.conf, ratings: {} }; if (e.ratings) s.options.forEach(o => { s.evals[id].ratings[o.id] = e.ratings[o.label]; }); }
+    const L = o => Engine.toYou(o.label), r = Engine.report(s), m = Engine.model(s), pv = Engine.pivot(s);
+    const lines = [`=== ${p.id} ===`, `Persona: ${p.persona || ""}`, ``, `--- What the person saw and answered ---`];
+    lines.push(`Clarity: What are you deciding?`, `  You: I'm deciding whether to ${s.title}`);
+    lines.push(`Clarity: Name the ways this could go.`, `  You: ${s.options.map(L).join(" / ")}`);
+    lines.push(`Clarity: What could matter here? (pick everything that matters)`, `  You: ${s.criteria.map(c => c.label).join(", ")}`);
+    lines.push(`Clarity: If you couldn't have everything, what would you protect? (how much does each matter)`);
+    s.criteria.forEach(c => lines.push(`  ${c.label}: ${IMP[c.importance]}`));
+    lines.push(`Clarity: For each one: which is better, and how sure are you?`);
+    s.criteria.forEach(c => { const e = s.evals[c.id] || {}; let read; if (typeof e.pref === "number") { const [a, b] = s.options; read = e.pref === 0 ? "about the same" : `${L(e.pref > 0 ? a : b)}${Math.abs(e.pref) === 2 ? ", clearly" : ""}`; } else read = s.options.map(o => `${L(o)} ${["", "poor", "weak", "okay", "good", "strong"][e.ratings[o.id]] || "?"}`).join(", "); lines.push(`  ${c.label}: ${read} · ${CONFW[e.conf] || "?"}`); });
+    if (s.notes.hope) { lines.push(`Clarity: What are you hoping changes?`, `  You: ${s.notes.hope}`); const t = Engine.tension(s); if (t) { lines.push(`Clarity: ${t}`, `Clarity: ${Engine.stillWantQuestion(s)}`, `  You: ${s.notes.stillWant}`); const d = Engine.discovery(s); if (d) lines.push(`Clarity: ${d}`); } }
+    if (s.notes.worry) lines.push(`Clarity: What are you most worried about?`, `  You: ${s.notes.worry}`);
+    if (pv.question) lines.push(`Clarity: If you knew the answer to this, could it change your decision? "${pv.question}"`, `  You: ${s.ruledOut && Object.keys(s.ruledOut).length ? "(earlier candidates ruled out) yes" : "yes"}`);
+    lines.push(``, `--- What this depends on (the report) ---`, `${s.title}`, `${s.options.map(L).join(" · ")}`, `What matters most: ${r.matters.join(" · ")}`);
     if (r.reframe) lines.push(`What you're really asking: ${r.reframe.join(" ")}`);
-    lines.push(r.settled ? `Where you are: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.observation ? r.observation + " " : ""}${r.pivot.question} ${r.pivotNote}`);
-    lines.push(`Known: ${r.structure.known.map(x => x.text).join(" ") || "Nothing you named."}`, `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "Nothing you named."}`, `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "Nothing you named."}`);
-    lines.push(`The tradeoff: ${r.pairs.map(x => `${x.factor}: ${x.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`);
-    lines.push(`${r.settled ? "What's left" : "Find out this first"}: ${r.next}${r.how ? " " + r.how : ""}${r.wait ? " " + r.wait : ""}${r.settled ? "" : " You don't have to solve everything. Just this."}`);
-    lines.push(`Now you know what you're deciding.`, ``, `--- Model (what the engine concluded) ---`, JSON.stringify(m), ``);
+    lines.push(`What appears clear: ${r.clear.concat(r.same).map(x => x.text).join(" ") || "Nothing here."}`, `What you're less certain about: ${r.unsure.map(x => x.text).join(" ") || "Nothing here."}`, `The tension: ${r.tensionLine.text}`);
+    lines.push(r.settled ? `Where you are: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.observation ? r.observation + " " : ""}${r.pivotBlock} ${r.stability}`);
+    if (r.changeMind) lines.push(`What could change your mind: ${r.changeMind}`);
+    if (r.learn) lines.push(`What might be worth learning: ${r.learn.text}${r.learn.rest.length ? ` Less important: ${r.learn.rest.join(", ")}.` : ""} You don't need more information about everything. You need better information about this.`);
+    lines.push(`Now you know what you're deciding.`, ``, `--- Model ---`, JSON.stringify(m), ``);
     out.push(lines.join("\n"));
   }
   document.getElementById("out").textContent = out.join("\n");

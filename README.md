@@ -36,21 +36,26 @@ Follows the cognitive journey in `BRAND.md`: recognition (*What's on your mind?*
 
 ## The app (`app.html`)
 
-Seven questions, one screen each, then the report. Each question narrows the problem. Answers persist locally.
+The person builds the decision model in constrained steps; decision theory does the intelligence; free text is optional context. Every step is a confirmation point. Answers persist locally.
 
-1. **What's on your mind?** The question and the two ways, inferred and editable.
-2. **What's making this hard?** In their own words.
-3. **What are you hoping changes?** Then: *if the other way gave you exactly that tomorrow, would you still want to?*
-4. **What does this come down to?** Up to four factors, most important first.
-5. **Which is stronger on each?** This option, that option, or *don't know*. Don't-knows become unknowns.
-6. **Do you know that, or are you assuming it?** Sorts every claim into known or assumed. Skipped if there's nothing to sort.
-7. **Which way are you leaning?** Then, for each uncertain factor: *if you were wrong about this, would you still lean that way?* The first "no" is the Pivot.
-8. **Could you find that out before deciding? How hard would it be to undo?**
-9. **The report.** Your decision · what you're really asking · the Pivot · known / assumed / unknown · the tradeoff · what to find out next · *Now you know what you're deciding.*
+1. **Framing.** "I'm deciding whether to…" plus a pattern (stay or leave, buy or rent, move or stay, start now or wait, take it or turn it down, commit or hold off, A or B, something else).
+2. **Options.** Two or more, editable, add another.
+3. **What could matter.** A library grouped by money, work, life, people, risk and self, plus custom. Pick everything; don't rank yet.
+4. **How much.** Not much · Somewhat · Important · Very important · Critical (stored 1–5).
+5. **Each option.** Which is better on each criterion (a five-point comparison for two options, a five-point rating per option for three or more) and how sure you are (Guessing · Somewhat sure · Fairly sure · Very sure · I know this, stored as belief strengths 0.25 to 0.98). Preference and belief are kept apart.
+6. **Context, optional.** What you hope changes; if a status quo option exists, the test "if it gave you what you want, would you still want to…?"; what you're most worried about. Kept in the person's words.
+7. **The Pivot, confirmed.** "If you knew the answer to this, could it change your decision?" A "no" rules it out and the next candidate is offered.
+8. **What this depends on.** What matters most · what you're really asking · what appears clear · what you're less certain about · the tension · the Pivot (or "you already know enough") · what could change your mind · what might be worth learning. Then "Does this feel right?" with a way to add a factor, an option or an assumption without starting over.
 
 ### The engine (`js/engine.js`)
 
-Deterministic and small. `structure` sorts factors into known / assumed / unknown. `pivot` returns the first uncertain factor that flips the lean (or the most important unknown when the person is torn, or "robust" when nothing flips). `report` composes the reframe, the tradeoff, the next step and the "don't decide yet" line from those plus reversibility.
+Deterministic multi-attribute analysis. Never shows a score, never recommends.
+
+- `utilities`: each option's read on each criterion mapped into [0.1, 0.9].
+- `analyze`: weights from importance; expected utility per option; leader and runner-up; for each criterion the swing needed to reorder them (sensitivity), the person's uncertainty (1 − belief strength) and the weight, multiplied into a **hinge score**.
+- `pivot`: the highest hinge the person hasn't ruled out, or the hope test when they'd stay if they got what they want. "None" when everything is known; "robust" when no single uncertainty can reorder the options. The ranked remainder is the value-of-information list ("less important: …").
+- `report`: the synthesis, in the Clarity voice.
+- `model`: the structured intermediate representation the test harness inspects.
 
 ## Testing the engine
 

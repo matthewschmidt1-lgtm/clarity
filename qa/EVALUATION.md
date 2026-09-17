@@ -27,6 +27,10 @@ sh qa/run.sh                       # in another
 
 Scores are pass/fail per check, not a 1–100 number. The failure names are the useful part.
 
+## The model under test (v3)
+
+Sessions now carry `title`, `options`, `criteria` (`[id, label, importance]`), `evals` (`{pref: -2..2, conf: 1..5}` for two options; `{ratings: {label: 1..5}, conf}` for more), optional `notes` (`hope`, `stillWant`, `worry`) and `ruledOut`. The engine computes weights, expected utility, sensitivity (the swing needed to reorder the top two), uncertainty and a hinge score; the Pivot is the top hinge the person hasn't ruled out. Invariants added: the rendered report contains no digits or percent signs; the word Pivot never appears when the verdict is "none" or "robust". Persona evaluations v1 and v2 were run against the earlier seven-question engine and are kept for history.
+
 ## The principle under test
 
 **Unknown ≠ Pivot.** A person can have ten unknowns and one Pivot. The Pivot is the uncertainty that would change the choice: the assumption or unknown the person themselves said would flip their lean, ranked by how much they said it matters. When they are torn, it is the most important uncertainty. When they would stay if their current situation gave them what they want, it is that, not a factor. When nothing is uncertain, there is no Pivot, and the engine must say so.

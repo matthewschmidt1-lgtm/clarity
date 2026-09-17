@@ -1,153 +1,58 @@
 [
   {
-    "id": "job-change",
-    "persona": "Priya, 29, a mid-level product manager at a stable but slow-moving insurance company. She's been offered a senior PM role at a fast-growing startup with a 20% raise. She's excited but also scared she's romanticizing the grass on the other side.",
+    "id": "smoke",
+    "persona": "smoke test",
     "session": {
-      "question": "Should I take the new job at the startup?",
-      "hard": "I don't know if I actually want the startup, or if I just want to stop feeling stuck where I am.",
-      "hope": "to feel challenged again and stop dreading Mondays",
-      "stillWant": "unsure",
-      "factors": [
-        { "id": "growth", "label": "Career growth", "winner": "a", "basis": "assume", "flips": true },
-        { "id": "security", "label": "Financial security", "winner": "b", "basis": "know", "flips": null },
-        { "id": "environment", "label": "Day-to-day environment", "winner": "unknown", "basis": null, "flips": true },
-        { "id": "time", "label": "Free time", "winner": "b", "basis": "assume", "flips": false }
+      "title": "move to Austin",
+      "options": [
+        "Move to Austin",
+        "Stay here"
       ],
-      "lean": "a",
-      "findOut": "while",
-      "reversibility": "hard"
-    }
-  },
-  {
-    "id": "move-home",
-    "persona": "Daniel, 34, lives four hours from his aging parents. His mother was just diagnosed with early-stage Parkinson's. He's considering moving back to his hometown to be near them, but he built a whole life — friends, a girlfriend, a job he likes — in his current city.",
-    "session": {
-      "question": "Should I move back home to be near my parents?",
-      "hard": "If I don't move now and something happens to my mom, I'll never forgive myself. But my whole life is here.",
-      "hope": "to not feel guilty every time my phone rings",
-      "stillWant": "no",
-      "factors": [
-        { "id": "relationships", "label": "Relationships", "winner": "unknown", "basis": null, "flips": null },
-        { "id": "meaning", "label": "Meaning", "winner": "a", "basis": "assume", "flips": null },
-        { "id": "growth", "label": "Career growth", "winner": "b", "basis": "know", "flips": null }
+      "criteria": [
+        [
+          "growth",
+          "Career growth",
+          5
+        ],
+        [
+          "security",
+          "Financial security",
+          4
+        ],
+        [
+          "friends",
+          "Friends",
+          3
+        ],
+        [
+          "adventure",
+          "Adventure",
+          2
+        ]
       ],
-      "lean": "torn",
-      "findOut": "soon",
-      "reversibility": "hard"
-    }
-  },
-  {
-    "id": "grad-school",
-    "persona": "Marisol, 26, works as a research assistant and is considering a fully-funded PhD program that would mean five more years of low pay before (maybe) a professorship. She loves the work but is tired of being broke and watching friends buy houses.",
-    "session": {
-      "question": "Should I go back to school for a PhD?",
-      "options": ["Start the PhD", "Stay in my job and look for a raise elsewhere"],
-      "hard": "Five years is a long time to bet on an academic job market that might not have a spot for me at the end.",
-      "hope": "to finally be doing the kind of research I actually care about instead of assisting someone else's",
-      "stillWant": "no",
-      "factors": [
-        { "id": "meaning", "label": "Meaning", "winner": "a", "basis": "know", "flips": null },
-        { "id": "income", "label": "Income", "winner": "b", "basis": "know", "flips": null },
-        { "id": "growth", "label": "Career growth", "winner": "unknown", "basis": null, "flips": null },
-        { "id": "stability", "label": "Stability", "winner": "b", "basis": "assume", "flips": null }
-      ],
-      "lean": "torn",
-      "findOut": "while",
-      "reversibility": "hard"
-    }
-  },
-  {
-    "id": "heavy-hearted-relationship",
-    "persona": "Aisha, 31, has been with her partner for six years. He's kind and stable but she's felt quietly unhappy for over a year and can't tell if it's him, her, or just life. She cries thinking about leaving and cries thinking about staying.",
-    "session": {
-      "question": "Should I leave my relationship?",
-      "hard": "I don't have a reason. He hasn't done anything wrong. I just feel like I'm disappearing.",
-      "hope": "to feel like myself again, excited about my own life",
-      "stillWant": "unsure",
-      "factors": [
-        { "id": "meaning", "label": "Meaning", "winner": "unknown", "basis": null, "flips": null },
-        { "id": "stability", "label": "Stability", "winner": "b", "basis": "know", "flips": null },
-        { "id": "growth", "label": "Career growth", "winner": "unknown", "basis": null, "flips": null },
-        { "id": "relationships", "label": "Relationships", "winner": "b", "basis": "assume", "flips": null }
-      ],
-      "lean": "torn",
-      "findOut": "doing",
-      "reversibility": "hard"
-    }
-  },
-  {
-    "id": "buy-vs-rent",
-    "persona": "Ken, 38, married with one kid, has been renting the same apartment for six years. Prices in his city are high and he keeps hearing he's 'throwing money away' on rent, but he's also worried about being locked into a mortgage and a neighborhood if his job situation changes.",
-    "session": {
-      "question": "Should I buy a house or keep renting?",
-      "hard": "Everyone says renting is wasting money, but buying feels like betting our whole savings on one bad-timed decision.",
-      "hope": "to stop feeling like we're behind everyone else our age",
-      "stillWant": "no",
-      "factors": [
-        { "id": "security", "label": "Financial security", "winner": "unknown", "basis": null, "flips": true },
-        { "id": "freedom", "label": "Freedom and control", "winner": "b", "basis": "know", "flips": false },
-        { "id": "stability", "label": "Stability", "winner": "a", "basis": "assume", "flips": true }
-      ],
-      "lean": "b",
-      "findOut": "soon",
-      "reversibility": "hard"
-    }
-  },
-  {
-    "id": "start-business",
-    "persona": "Ola, 41, has a stable engineering director job and a business idea (a niche B2B tool) she's been sketching on nights and weekends for a year. She has three kids and a mortgage, and her husband is supportive but nervous about the money.",
-    "session": {
-      "question": "Should I quit my job to start my own business?",
-      "hard": "I have three kids depending on my paycheck, and the idea only works if I can go all-in, not do it as a side project forever.",
-      "hope": "to build something that's actually mine instead of making someone else rich",
-      "stillWant": "no",
-      "factors": [
-        { "id": "security", "label": "Financial security", "winner": "b", "basis": "know", "flips": null },
-        { "id": "meaning", "label": "Meaning", "winner": "a", "basis": "know", "flips": null },
-        { "id": "growth", "label": "Career growth", "winner": "unknown", "basis": null, "flips": true },
-        { "id": "time", "label": "Free time", "winner": "b", "basis": "assume", "flips": false }
-      ],
-      "lean": "b",
-      "findOut": "while",
-      "reversibility": "hard"
-    }
-  },
-  {
-    "id": "already-knows",
-    "persona": "Tom, 45, has been offered early retirement with a decent buyout after 22 years at the same manufacturing plant. He's done the math obsessively for months, talked to a financial advisor twice, and asked his wife a dozen times. He's not scared anymore, just tired of sitting on it.",
-    "session": {
-      "question": "Should I accept the early retirement package?",
-      "hard": "Nothing, really. I've run the numbers so many times I could recite them in my sleep. I think I'm just scared to say yes out loud.",
-      "hope": "to stop working the floor and get my knees and my weekends back",
-      "stillWant": "yes",
-      "factors": [
-        { "id": "security", "label": "Financial security", "winner": "a", "basis": "know", "flips": null },
-        { "id": "health", "label": "Health and energy", "winner": "a", "basis": "know", "flips": null },
-        { "id": "meaning", "label": "Meaning", "winner": "b", "basis": "know", "flips": null },
-        { "id": "time", "label": "Free time", "winner": "a", "basis": "know", "flips": null }
-      ],
-      "lean": "a",
-      "findOut": "none",
-      "reversibility": "easy"
-    }
-  },
-  {
-    "id": "torn-many-unknowns",
-    "persona": "Jae, 27, single, has been offered a two-year expat assignment in Singapore with their company. Great résumé line, unclear everything else: visa rules for a future partner, whether the role even still exists when they'd come back, whether they'd be lonely there.",
-    "session": {
-      "question": "Should I take the two-year assignment in Singapore?",
-      "hard": "I genuinely don't know if this is a once-in-a-lifetime opportunity or a two-year detour that sets me back socially and romantically.",
-      "hope": "to prove to myself I can build a life somewhere on my own",
-      "stillWant": "unsure",
-      "factors": [
-        { "id": "growth", "label": "Career growth", "winner": "unknown", "basis": null, "flips": null },
-        { "id": "relationships", "label": "Relationships", "winner": "unknown", "basis": null, "flips": null },
-        { "id": "meaning", "label": "Meaning", "winner": "a", "basis": "assume", "flips": null },
-        { "id": "stability", "label": "Stability", "winner": "unknown", "basis": null, "flips": null }
-      ],
-      "lean": "torn",
-      "findOut": "while",
-      "reversibility": "hard"
+      "evals": {
+        "growth": {
+          "pref": 2,
+          "conf": 1
+        },
+        "security": {
+          "pref": -1,
+          "conf": 4
+        },
+        "friends": {
+          "pref": -2,
+          "conf": 5
+        },
+        "adventure": {
+          "pref": 1,
+          "conf": 3
+        }
+      },
+      "notes": {
+        "hope": "to feel like my life is actually moving",
+        "stillWant": "no",
+        "worry": "That I'm running from something rather than toward it."
+      }
     }
   }
 ]

@@ -1,9 +1,9 @@
-/* Clarity — the conversation. Seven questions. Each one makes the problem smaller. */
+/* Clarity — the person builds the model, one confirmed step at a time. */
 (function () {
   const C = window.Content, E = window.Engine;
   const $ = (s, r = document) => r.querySelector(s);
   const stage = $("#stage"), progress = $("#progress"), toast = $("#toast");
-  const KEY = "clarity-session-2";
+  const KEY = "clarity-session-3";
 
   function h(tag, attrs, ...kids) {
     const n = document.createElement(tag);
@@ -18,17 +18,17 @@
     return n;
   }
   const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const lower = t => E.lower(t);
+  const uid = () => "o" + Math.random().toString(36).slice(2, 7);
 
   function fresh(q) {
-    const o = C.inferOptions(q);
-    return { step: 0, question: q || "", options: { a: { label: o.a }, b: { label: o.b } }, optionsEdited: false,
-      hard: "", hope: "", stillWant: null, hopeRuledOut: false, checked: null, factors: [], lean: null, findOut: null, reversibility: null, feedback: null };
+    const s = { step: 0, pattern: null, title: "", options: [{ id: uid(), label: "" }, { id: uid(), label: "" }], criteria: [], evals: {}, notes: { hope: "", stillWant: null, worry: "" }, ruledOut: {}, feedback: null, feeling: null, missing: null };
+    if (q) { const o = C.inferOptions(q); s.title = q.replace(/[?.!]+$/, "").replace(/^(should|do|shall|could|can|would|will)\s+(i|we)\s+/i, ""); s.title = s.title.charAt(0).toLowerCase() + s.title.slice(1); s.options[0].label = o.a; s.options[1].label = o.b; s.pattern = "other"; }
+    return s;
   }
   let S;
   const params = new URLSearchParams(location.search);
   try { S = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { S = null; }
-  if (params.get("q") && (!S || S.question !== params.get("q"))) S = fresh(params.get("q"));
+  if (params.get("q") && (!S || S.source !== params.get("q"))) { S = fresh(params.get("q")); S.source = params.get("q"); }
   if (!S) S = fresh("");
   if (params.get("q")) history.replaceState(null, "", "app.html");
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
@@ -43,8 +43,9 @@
   $("#restart").addEventListener("click", () => { if (S.step === 0 || confirm("Start over? Your answers here will be cleared.")) { S = fresh(""); save(); go(0); } });
 
   function say(msg) { toast.textContent = msg; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 1800); }
-  const A = () => E.toYou(S.options.a.label), B = () => E.toYou(S.options.b.label);
+  const L = o => E.toYou(o.label);
   const short = l => l.length > 22 ? l.slice(0, 20).trim() + "…" : l;
+  const opts = () => S.options.filter(o => o.label.trim());
 
   function who() { return h("p", { class: "who" }, "Clarity"); }
   function prompt(html) { return h("h1", { class: "prompt", html }); }
@@ -63,244 +64,215 @@
     });
     return wrap;
   }
-  const nextFactorsNeedingBasis = () => S.factors.filter(f => f.winner && f.winner !== "unknown");
 
   const steps = [];
 
-  // 0 · The decision
+  // 0 · Framing
   steps.push(() => {
-    const q = h("input", { class: "input big", type: "text", value: S.question, placeholder: "Should I…", maxlength: 160, "aria-label": "What's on your mind?" });
-    const a = h("input", { class: "input", type: "text", value: A(), maxlength: 60, "aria-label": "Option A" });
-    const b = h("input", { class: "input", type: "text", value: B(), maxlength: 60, "aria-label": "Option B" });
-    const toneLine = h("p", { class: "hint" });
-    const setTone = () => { toneLine.textContent = C.tone(S.question) === "heavy" ? "The facts and your feelings may be pulling in different directions here. We'll take it slowly." : "Clarity won't tell you what to do. It finds what this depends on."; };
-    setTone();
-    q.addEventListener("input", () => { S.question = q.value; if (!S.optionsEdited) { const o = C.inferOptions(S.question); S.options.a.label = o.a; S.options.b.label = o.b; a.value = o.a; b.value = o.b; } setTone(); });
-    a.addEventListener("input", () => { S.options.a.label = a.value; S.optionsEdited = true; });
-    b.addEventListener("input", () => { S.options.b.label = b.value; S.optionsEdited = true; });
+    const title = h("input", { class: "input big", type: "text", value: S.title, placeholder: "…", maxlength: 120, "aria-label": "I'm deciding whether to" });
+    title.addEventListener("input", () => { S.title = title.value; save(); });
+    const tone = h("p", { class: "hint" });
+    const setTone = () => { tone.textContent = C.tone(S.title) === "heavy" ? "The facts and your feelings may be pulling in different directions here. We'll take it slowly." : "Clarity won't tell you what to do. It shows you which uncertainty matters."; };
+    title.addEventListener("input", setTone); setTone();
+    const pats = choices(C.patterns.map(p => [p.id, p.label]), S.pattern, id => {
+      S.pattern = id; const p = C.patterns.find(x => x.id === id);
+      if (p && p.options[0] && !S.options[0].label.trim() && !S.options[1].label.trim()) { S.options[0].label = p.options[0]; S.options[1].label = p.options[1]; }
+      save();
+    });
     return [
-      who(), prompt("What's on your mind?"), toneLine,
-      q,
-      h("div", { class: "two" },
-        h("div", { class: "field" }, h("label", { class: "opt-label" }, h("i", { class: "dot" }), "One way"), a),
-        h("div", { class: "field" }, h("label", { class: "opt-label b" }, h("i", { class: "dot" }), "The other"), b)),
-      actions(() => S.question.trim().length > 2 && A().trim() && B().trim(), "Name the decision and both ways first.")
+      who(), prompt("What are you deciding?"), tone,
+      h("div", { class: "field" }, h("label", {}, "I'm deciding whether to"), title),
+      h("div", { class: "field" }, h("label", {}, "It's a question of"), pats),
+      actions(() => S.title.trim().length > 2 && S.pattern, "Say what you're deciding, and what kind of question it is.")
     ];
   });
 
-  // 1 · What's making this hard?
+  // 1 · Options
   steps.push(() => {
-    const ta = h("textarea", { class: "input", placeholder: "In your own words.", "aria-label": "What's making this hard?" }, S.hard);
-    ta.addEventListener("input", () => { S.hard = ta.value; });
-    return [who(), prompt("What's making this hard?"), hint("Not the options. The knot."), ta,
-      actions(() => S.hard.trim().length > 1, "A sentence is enough.")];
-  });
-
-  // 2 · What are you hoping changes? Would you still want it?
-  steps.push(() => {
-    const ta = h("textarea", { class: "input", placeholder: "Less stress. More money. To feel like myself again…", "aria-label": "What are you hoping changes?" }, S.hope);
-    ta.addEventListener("input", () => { S.hope = ta.value; renderDiscovery(); });
-    const disc = h("div", { class: "discovery", "aria-live": "polite" });
-    function renderDiscovery() {
-      const line = E.discovery(S);
-      disc.innerHTML = "";
-      if (!line) return;
-      disc.appendChild(who());
-      disc.appendChild(h("p", { class: "prompt small" }, line));
-    }
-    renderDiscovery();
-    const test = h("div", { class: "test" });
-    function renderTest() {
-      test.innerHTML = "";
-      const t = E.tension(S);
-      if (!t) return;
-      test.appendChild(h("div", { class: "rule" }));
-      test.appendChild(who());
-      test.appendChild(h("p", { class: "hint", style: "color:var(--ink)" }, t));
-      test.appendChild(prompt(esc(E.stillWantQuestion(S))));
-      test.appendChild(choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], S.stillWant, v => { S.stillWant = v; S.hopeRuledOut = false; save(); renderDiscovery(); }));
-    }
-    ta.addEventListener("input", renderTest);
-    renderTest();
-    return [
-      who(), prompt(esc(E.hopeQuestion(S)).replace(esc(lower(A())), `<em>${esc(lower(A()))}</em>`)), ta,
-      test,
-      disc,
-      actions(() => S.hope.trim().length > 1 && S.stillWant, "Say what you're hoping for, and whether you'd still go.")
-    ];
-  });
-
-  // 3 · What does this come down to?
-  steps.push(() => {
-    const picked = () => S.factors.map(f => f.id);
-    const list = h("div", { class: "picked" });
-    function renderList() {
+    const list = h("div", { class: "rows" });
+    function render() {
       list.innerHTML = "";
-      S.factors.forEach((f, i) => list.appendChild(h("span", { class: "pick" }, `${i + 1}. ${f.label}`, h("button", { type: "button", "aria-label": "Remove " + f.label, onclick: () => { S.factors.splice(i, 1); save(); renderList(); chips.querySelectorAll(".choice").forEach(c => c.setAttribute("aria-pressed", String(picked().includes(c.dataset.id)))); } }, "×"))));
-    }
-    function add(id, label) {
-      if (picked().includes(id)) { S.factors = S.factors.filter(f => f.id !== id); }
-      else { if (S.factors.length >= 4) return say("Four is plenty. Leave out what wouldn't change your mind."); S.factors.push({ id, label, winner: null, basis: null, flips: null }); }
-      save(); renderList();
-    }
-    const chips = h("div", { class: "choices" }, C.factors.map(v => h("button", { class: "choice", type: "button", "data-id": v.id, "aria-pressed": String(picked().includes(v.id)), onclick: e => { add(v.id, v.label); e.currentTarget.setAttribute("aria-pressed", String(picked().includes(v.id))); } }, v.label)));
-    const own = h("input", { class: "input", type: "text", placeholder: "Something else…", maxlength: 40, "aria-label": "Add your own" });
-    const ownForm = h("form", { class: "add", onsubmit: e => { e.preventDefault(); const t = own.value.trim(); if (!t) return; add("own-" + Date.now(), t.charAt(0).toUpperCase() + t.slice(1)); own.value = ""; } }, own, h("button", { class: "btn btn-ghost", type: "submit" }, "Add"));
-    renderList();
-    return [
-      who(), prompt("What does this decision come down to?"),
-      hint("Pick up to four, most important first. Leave out anything that wouldn't change your mind."),
-      chips, ownForm, list,
-      actions(() => S.factors.length >= 2, "Pick at least two.")
-    ];
-  });
-
-  // 4 · Which option is stronger on each?
-  steps.push(() => {
-    const rows = h("div", { class: "rows" }, S.factors.map(f => h("div", { class: "qrow" }, h("div", { class: "lbl" }, f.label),
-      choices([["a", short(A())], ["b", short(B())], ["unknown", "Don't know"]], f.winner, v => { f.winner = v; if (v === "unknown") f.basis = null; save(); }, "small"))));
-    return [
-      who(), prompt("For each one: which is stronger?"),
-      hint("“Don't know” is a real answer. It's often the most useful one."),
-      rows,
-      actions(() => S.factors.every(f => f.winner), "Answer each one, even if the answer is “don't know”.")
-    ];
-  });
-
-  // 5 · Do you know that, or are you assuming it?
-  steps.push(() => {
-    const need = nextFactorsNeedingBasis();
-    const rows = h("div", { class: "rows" }, need.map(f => h("div", { class: "qrow" }, h("div", { class: "lbl" }, `${quoteL(f.winner)} is stronger on ${f.label.toLowerCase()}.`),
-      choices([["know", "I know that"], ["assume", "I'm assuming it"]], f.basis, v => { f.basis = v; save(); }, "small"))));
-    return [
-      who(), prompt("Do you know that, or are you assuming it?"),
-      hint("Known means you could verify it today."),
-      rows,
-      actions(() => need.every(f => f.basis), "Say which ones you actually know.")
-    ];
-  });
-  const quoteL = id => `“${S.options[id].label}”`;
-
-  // 6 · Which way are you leaning? Would you still lean if you were wrong?
-  steps.push(() => {
-    const flipsBox = h("div", { class: "rows", style: "margin-top:8px" });
-    function renderFlips() {
-      flipsBox.innerHTML = "";
-      if (!S.lean || S.lean === "torn") return;
-      const unc = E.uncertain(S);
-      if (!unc.length) return;
-      flipsBox.appendChild(h("div", { class: "rule" }));
-      flipsBox.appendChild(who());
-      flipsBox.appendChild(prompt("And if you were wrong?"));
-      flipsBox.appendChild(hint("Take each thing you're unsure about. If it went the other way, would you still lean the same way?"));
-      unc.forEach(f => {
-        const claim = f.winner === "unknown" ? `If ${quoteL(S.lean === "a" ? "b" : "a")} turned out stronger on ${f.label.toLowerCase()}` : `If ${quoteL(f.winner)} turned out not to be stronger on ${f.label.toLowerCase()}`;
-        flipsBox.appendChild(h("div", { class: "qrow" }, h("div", { class: "lbl" }, `${claim}, would you still lean ${quoteL(S.lean)}?`),
-          choices([["still", "Yes, still"], ["flip", "No, that changes it"]], f.flips === null ? null : (f.flips ? "flip" : "still"), v => { f.flips = v === "flip"; save(); }, "small")));
+      S.options.forEach((o, i) => {
+        const inp = h("input", { class: "input", type: "text", value: o.label, maxlength: 60, placeholder: i === 0 ? "One way" : i === 1 ? "The other" : "Another way", "aria-label": `Option ${i + 1}` });
+        inp.addEventListener("input", () => { o.label = inp.value; save(); });
+        list.appendChild(h("div", { class: "optrow" }, h("span", { class: "opt-label " + (i === 1 ? "b" : "") }, h("i", { class: "dot" })), inp, S.options.length > 2 ? h("button", { class: "del", type: "button", "aria-label": "Remove", onclick: () => { S.options.splice(i, 1); save(); render(); } }, "×") : null));
       });
     }
-    renderFlips();
+    render();
     return [
-      who(), prompt("Right now, which way are you leaning?"),
-      choices([["a", A()], ["b", B()], ["torn", "Honestly torn"]], S.lean, v => { S.lean = v; save(); renderFlips(); }),
-      flipsBox,
-      actions(() => S.lean && (S.lean === "torn" || E.uncertain(S).every(f => f.flips !== null)), "Say which way you lean, and answer each “if you were wrong”.")
+      who(), prompt("Name the ways this could go."),
+      hint("Two is usual. Three is fine. Plain words, the way you'd say them to a friend."),
+      list,
+      S.options.length < 4 ? h("button", { class: "link-btn", type: "button", onclick: () => { S.options.push({ id: uid(), label: "" }); save(); render(); } }, "+ Add another way") : null,
+      actions(() => opts().length >= 2, "Name at least two ways this could go.")
     ];
   });
 
-  // 7 · Can you find it out? Can you undo it?
+  // 2 · Criteria
   steps.push(() => {
-    const pv = E.pivot(S);
-    const leanLabel = S.lean && S.lean !== "torn" ? S.options[S.lean].label : A();
-    const block = [];
-    if (pv.statement) {
-      const opts = [["soon", "Yes, within a few weeks"], ["while", "Yes, but it would take a while"], ["doing", "Only by doing it"]];
-      if (pv.kind === "hope") opts.push(["cant", "No. I already know it can't."]);
-      block.push(who(), prompt(`Could you find out ${esc(pv.statement)} <em>before</em> deciding?`),
-        choices(opts, S.findOut, v => { if (v === "cant") { S.hopeRuledOut = true; S.findOut = null; save(); go(7); } else { S.findOut = v; save(); } }));
-    } else {
-      block.push(who(), prompt("One last thing."), hint("Nothing you're unsure about would change your mind. So the remaining question is about the cost of being wrong."));
-      S.findOut = S.findOut || "none";
-    }
-    block.push(h("div", { class: "rule" }), who(), prompt(`If you chose <em>${esc(lower(leanLabel))}</em> and it didn't work out, how hard would it be to undo?`),
-      choices([["easy", "Easy enough"], ["hard", "Hard, or impossible"]], S.reversibility, v => { S.reversibility = v; save(); }),
-      h("div", { class: "actions" },
-        h("button", { class: "btn btn-ghost", type: "button", onclick: () => go(S.step - 1) }, "Back"),
-        h("button", { class: "btn", type: "button", onclick: () => { if (S.findOut && S.reversibility) think(); else say("Both answers matter here."); } }, "Show me what this depends on", h("span", { class: "arrow", "aria-hidden": "true" }, "→"))));
-    return block;
+    const picked = () => new Set(S.criteria.map(c => c.id));
+    const groups = C.criteria.map(g => h("div", { class: "group" }, h("p", { class: "eyebrow-plain" }, g.cat),
+      h("div", { class: "choices" }, g.items.map(([id, label]) => h("button", { class: "choice small", type: "button", "data-id": id, "aria-pressed": String(picked().has(id)), onclick: e => {
+        if (picked().has(id)) S.criteria = S.criteria.filter(c => c.id !== id); else S.criteria.push({ id, label, importance: null });
+        e.currentTarget.setAttribute("aria-pressed", String(picked().has(id))); save(); tally();
+      } }, label)))));
+    const own = h("input", { class: "input", type: "text", placeholder: "Something else…", maxlength: 40, "aria-label": "Add your own" });
+    const ownForm = h("form", { class: "add", onsubmit: e => { e.preventDefault(); const t = own.value.trim(); if (!t) return; S.criteria.push({ id: "own-" + uid(), label: t.charAt(0).toUpperCase() + t.slice(1), importance: null }); own.value = ""; save(); tally(); } }, own, h("button", { class: "btn btn-ghost", type: "submit" }, "Add"));
+    const count = h("p", { class: "hint" });
+    const tally = () => { const n = S.criteria.length; count.textContent = n ? `${n} chosen.${n > 7 ? " That's a lot. It's fine for now; weighting comes next." : ""}` : ""; };
+    tally();
+    return [
+      who(), prompt("What could matter here?"),
+      hint("Pick everything that matters. Don't rank yet."),
+      groups, ownForm, count,
+      actions(() => S.criteria.length >= 2, "Pick at least two things that matter.")
+    ];
   });
 
-  // 8 · The report
+  // 3 · Importance
+  steps.push(() => [
+    who(), prompt("If you couldn't have everything, what would you protect?"),
+    hint("How much does each one matter?"),
+    h("div", { class: "rows" }, S.criteria.map(c => h("div", { class: "qrow" }, h("div", { class: "lbl" }, c.label),
+      choices(C.importance, c.importance, v => { c.importance = v; save(); }, "small")))),
+    actions(() => S.criteria.every(c => c.importance), "Weigh each one, even roughly.")
+  ]);
+
+  // 4 · Assess each option, and how sure you are
+  steps.push(() => {
+    const os = opts();
+    const rows = S.criteria.map(c => {
+      const ev = S.evals[c.id] || (S.evals[c.id] = { pref: null, ratings: {}, conf: null });
+      let control;
+      if (os.length === 2) {
+        const [a, b] = os;
+        control = choices([[2, `${short(L(a))}, clearly`], [1, short(L(a))], [0, "About the same"], [-1, short(L(b))], [-2, `${short(L(b))}, clearly`]], ev.pref, v => { ev.pref = v; save(); }, "small");
+      } else {
+        control = h("div", { class: "rows" }, os.map(o => h("div", { class: "subrow" }, h("span", { class: "sub" }, L(o)), choices([[1, "Poor"], [2, "Weak"], [3, "Okay"], [4, "Good"], [5, "Strong"]], ev.ratings[o.id], v => { ev.ratings[o.id] = v; save(); }, "small"))));
+      }
+      return h("div", { class: "qrow" }, h("div", { class: "lbl" }, c.label), h("p", { class: "sub" }, os.length === 2 ? "Which is better on this?" : "How does each one do on this?"), control,
+        h("p", { class: "sub", style: "margin-top:6px" }, "How sure are you?"), choices(C.confidence, ev.conf, v => { ev.conf = v; save(); }, "small"));
+    });
+    const done = () => S.criteria.every(c => { const ev = S.evals[c.id]; return ev && ev.conf && (os.length === 2 ? typeof ev.pref === "number" : os.every(o => ev.ratings[o.id])); });
+    return [
+      who(), prompt("For each one: which is better, and how sure are you?"),
+      hint("Your read and your confidence are stored separately. Guessing is a real answer."),
+      h("div", { class: "rows" }, rows),
+      actions(done, "Answer both parts for each one.")
+    ];
+  });
+
+  // 5 · Context (optional)
+  steps.push(() => {
+    const n = S.notes;
+    const hope = h("textarea", { class: "input", placeholder: "Less stress. More money. To feel like myself again…", "aria-label": "What are you hoping changes?" }, n.hope);
+    const worry = h("textarea", { class: "input", placeholder: "The outcome I keep picturing is…", "aria-label": "What are you most worried about?" }, n.worry);
+    worry.addEventListener("input", () => { n.worry = worry.value; save(); });
+    const test = h("div", { class: "test" }), disc = h("div", { class: "discovery", "aria-live": "polite" });
+    function renderTest() {
+      test.innerHTML = ""; disc.innerHTML = "";
+      const t = E.tension(S); if (!t) return;
+      test.appendChild(who()); test.appendChild(h("p", { class: "hint", style: "color:var(--ink)" }, t));
+      test.appendChild(prompt(esc(E.stillWantQuestion(S))));
+      test.appendChild(choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], n.stillWant, v => { n.stillWant = v; delete S.ruledOut.hope; save(); renderDisc(); }));
+      renderDisc();
+    }
+    function renderDisc() { disc.innerHTML = ""; const d = E.discovery(S); if (!d) return; disc.appendChild(who()); disc.appendChild(h("p", { class: "prompt small" }, d)); }
+    hope.addEventListener("input", () => { n.hope = hope.value; save(); renderTest(); });
+    renderTest();
+    const sq = E.statusQuo(S);
+    const act = actions(() => !n.hope.trim() || !sq || n.stillWant, "If you've said what you hope for, answer the test too.", n.hope.trim() || n.worry.trim() ? "Continue" : "Skip");
+    const relabel = () => { const b = act.querySelector(".btn:not(.btn-ghost)"); if (b) b.firstChild.textContent = (n.hope.trim() || n.worry.trim()) ? "Continue" : "Skip"; };
+    hope.addEventListener("input", relabel); worry.addEventListener("input", relabel);
+    return [
+      who(), prompt("A little context. Optional."),
+      hint("Nothing here is calculated. It's kept in your words, and one of it becomes a test."),
+      h("div", { class: "field" }, h("label", {}, sq ? `What are you hoping changes if you ${esc(E.changeVerb(S))}?` : "What are you hoping changes?"), hope),
+      test, disc,
+      h("div", { class: "field" }, h("label", {}, "What are you most worried about?"), worry),
+      act
+    ];
+  });
+
+  // 6 · Confirm the Pivot
+  steps.push(() => {
+    const pv = E.pivot(S);
+    if (pv.kind === "none" || pv.kind === "robust") {
+      return [who(), prompt(pv.kind === "none" ? "Everything you named, you're sure of." : "Nothing you're unsure about would change the order."), hint("There isn't a question left that would change this. The report says so, plainly."),
+        h("div", { class: "actions" }, h("button", { class: "btn btn-ghost", type: "button", onclick: () => go(S.step - 1) }, "Back"), h("button", { class: "btn", type: "button", onclick: () => think() }, "Show me what this depends on", h("span", { class: "arrow", "aria-hidden": "true" }, "→")))];
+    }
+    const key = pv.kind === "hope" ? "hope" : pv.r.c.id;
+    return [
+      who(), prompt("If you knew the answer to this, could it change your decision?"),
+      h("p", { class: "you" }, pv.question),
+      hint("This is the uncertainty that moves the result most, given how much it matters to you and how sure you are. You get the final say on whether it's real."),
+      choices([["yes", "Yes, it could"], ["no", "No, not really"], ["unsure", "I'm not sure"]], S.confirm === key ? "yes" : null, v => {
+        if (v === "no") { S.ruledOut[key] = true; S.confirm = null; save(); go(6); }
+        else { S.confirm = key; save(); }
+      }),
+      h("div", { class: "actions" }, h("button", { class: "btn btn-ghost", type: "button", onclick: () => go(S.step - 1) }, "Back"), h("button", { class: "btn", type: "button", onclick: () => { if (S.confirm === key) think(); else say("Say whether knowing this could change your decision."); } }, "Show me what this depends on", h("span", { class: "arrow", "aria-hidden": "true" }, "→")))
+    ];
+  });
+
+  // 7 · The synthesis
   steps.push(() => {
     const r = E.report(S);
-    const L = id => S.options[id].label;
-    const row = (k, v, cls = "") => h("div", { class: "row " + cls }, h("span", { class: "k" }, k), typeof v === "string" ? h("span", { class: "v" }, v) : v);
+    const row = (k, ...v) => h("div", { class: "row" }, h("span", { class: "k" }, k), ...v);
     const items = xs => xs.length ? h("ul", { class: "plain" }, xs.map(x => h("li", {}, x.text))) : h("span", { class: "v quiet" }, "Nothing here.");
-    const refresh = () => feedback.replaceWith(steps[8]().find(n => n.classList && n.classList.contains("after")));
-    const feedback = h("div", { class: "after" },
-      h("h4", {}, "Did anything become clearer?"),
-      S.feedback ? h("p", { class: "thanks" }, "Thank you.") :
-        choices([["do", "Yes, I know what I need to do"], ["find", "Yes, I know what I need to find out"], ["struggle", "Yes, I understand what I'm actually struggling with"], ["not", "Not yet"]], null, v => { S.feedback = v; save(); refresh(); }),
-      h("h4", { style: "margin-top:10px" }, "And compared with before?"),
-      S.feeling ? h("p", { class: "thanks" }, S.feeling === "lighter" ? "That's the whole point." : "Thank you for saying so.") :
-        choices([["lighter", "Lighter"], ["same", "About the same"], ["heavier", "Heavier"]], null, v => { S.feeling = v; save(); refresh(); }));
-    const report = h("article", { class: "report", "aria-label": "Your Clarity Report" },
-      h("h3", {}, S.question.replace(/[.?!]+$/, "") + "?"),
-      h("p", { class: "v quiet", style: "margin-top:4px" }, `${L("a")} · ${L("b")}`),
-      r.reframe ? h("div", { class: "row" }, h("span", { class: "k" }, "What you're really asking"), h("p", { class: "v big" }, r.reframe[0]), h("p", { class: "v", style: "margin-top:6px" }, r.reframe[1])) : null,
+    const report = h("article", { class: "report", "aria-label": "What this depends on" },
+      h("h3", {}, S.title.replace(/^(i'm |i am )?deciding whether to /i, "").replace(/^./, c => c.toUpperCase()) + "?"),
+      h("p", { class: "v quiet", style: "margin-top:4px" }, opts().map(L).join(" · ")),
+      row("What matters most", h("span", { class: "v" }, r.matters.join(" · "))),
+      r.reframe ? row("What you're really asking", h("p", { class: "v big" }, r.reframe[0]), h("p", { class: "v", style: "margin-top:6px" }, r.reframe[1])) : null,
+      row("What appears clear", items(r.clear.concat(r.same))),
+      row("What you're less certain about", items(r.unsure)),
+      row("The tension", h("span", { class: "v" }, r.tensionLine.text)),
       r.settled
         ? h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "Where you are"), h("p", { class: "v", style: "margin-bottom:6px" }, "Based on what you've told me:"), h("span", { class: "v big" }, r.settled.title), h("p", { class: "v", style: "margin-top:6px" }, r.settled.body))
-        : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), r.observation ? h("p", { class: "v", style: "margin-bottom:6px" }, r.observation) : null, h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
-      h("div", { class: "row" }, h("span", { class: "k" }, "Right now"),
-        h("dl", { class: "now" },
-          h("dt", {}, "Known"), h("dd", {}, r.structure.known.length ? r.structure.known.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")),
-          h("dt", {}, "Assumed"), h("dd", {}, r.structure.assumed.length ? r.structure.assumed.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")),
-          h("dt", {}, "Unknown"), h("dd", {}, r.structure.unknown.length ? r.structure.unknown.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")))),
-      h("div", { class: "row" }, h("span", { class: "k" }, "The tradeoff"),
-        r.pairs.length ? h("dl", { class: "now" }, r.pairs.map(p => [h("dt", {}, p.factor), h("dd", {}, p.option)])) : null,
-        h("p", { class: "v", style: r.pairs.length ? "margin-top:8px" : "" }, r.tradeoffLine)),
-      h("div", { class: "row" }, h("span", { class: "k" }, r.settled ? "What's left" : "Find out this first"), h("span", { class: "v big" }, r.next), r.how ? h("p", { class: "v", style: "margin-top:8px" }, r.how) : null, r.wait ? h("p", { class: "v", style: "margin-top:8px" }, r.wait) : null, !r.settled ? h("p", { class: "v", style: "margin-top:8px" }, "You don't have to solve everything. Just this.") : null),
+        : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), r.observation ? h("p", { class: "v", style: "margin-bottom:6px" }, r.observation) : null, h("span", { class: "v big" }, r.pivotBlock), h("p", { class: "v", style: "margin-top:6px" }, r.stability)),
+      r.changeMind ? row("What could change your mind", h("span", { class: "v" }, r.changeMind)) : null,
+      r.learn ? row("What might be worth learning", h("span", { class: "v big" }, r.learn.text), r.learn.rest.length ? h("p", { class: "v quiet", style: "margin-top:8px" }, `Less important: ${r.learn.rest.join(", ")}.`) : null, h("p", { class: "v", style: "margin-top:8px" }, "You don't need more information about everything. You need better information about this.")) : null,
+      r.worry ? row("In your words", h("span", { class: "v quiet" }, `“${r.worry.trim()}”`)) : null,
       h("p", { class: "closing" }, "Now you know what you're deciding.")
     );
-    const text = () => [
-      `CLARITY · ${S.question}`, `${L("a")} · ${L("b")}`, ``,
-      r.reframe ? `What you're really asking: ${r.reframe.join(" ")}\n` : null,
-      r.settled ? `${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.pivot.question} ${r.pivotNote}`, ``,
-      `Known: ${r.structure.known.map(x => x.text).join(" ") || "—"}`,
-      `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "—"}`,
-      `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "—"}`, ``,
-      `The tradeoff: ${r.pairs.map(p => `${p.factor}: ${p.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`, ``,
-      `Find out this first: ${r.next}${r.how ? " " + r.how : ""}${r.wait ? " " + r.wait : ""}`, ``, `Now you know what you're deciding.`
-    ].filter(x => x !== null).join("\n");
-    const check = h("div", { class: "after missing" });
-    function renderCheck() {
-      check.innerHTML = "";
-      check.appendChild(h("h4", {}, "One thing to check"));
-      check.appendChild(h("p", { class: "hint" }, "Clarity can only see what's been put into the decision. Is there anything important you're worried about that isn't represented above?"));
-      if (S.checked === "no") { check.appendChild(h("p", { class: "thanks" }, "Then this is the whole picture, as far as you've described it.")); return; }
-      if (S.checked === "yes") {
-        const inp = h("input", { class: "input", type: "text", placeholder: "What is it? A few words.", maxlength: 40, "aria-label": "What's missing?" });
-        check.appendChild(h("form", { class: "add", onsubmit: e => {
-          e.preventDefault(); const t = inp.value.trim(); if (!t) return say("Name it in a few words.");
-          S.factors.push({ id: "own-" + Date.now(), label: t.charAt(0).toUpperCase() + t.slice(1), winner: null, basis: null, flips: null });
-          S.checked = null; S.findOut = null; save(); go(4);
-        } }, inp, h("button", { class: "btn", type: "submit" }, "Add it and look again")));
-        check.appendChild(h("p", { class: "hint" }, "It becomes part of the decision. Clarity will ask about it and look again."));
+    const missing = h("div", { class: "after missing" });
+    function renderMissing() {
+      missing.innerHTML = "";
+      missing.appendChild(h("h4", {}, "Does this feel right?"));
+      if (S.feedback === "yes") { missing.appendChild(h("p", { class: "thanks" }, "Then this is your decision, as you've described it. Clarity only ever sees what's been put into it.")); return; }
+      if (S.feedback === "no") {
+        missing.appendChild(h("p", { class: "hint" }, "What's missing?"));
+        missing.appendChild(choices([["factor", "Something that matters"], ["option", "Another way this could go"], ["assumption", "An assumption I've made"], ["other", "Something else"]], S.missing, v => { S.missing = v; save(); renderMissing(); }));
+        if (S.missing === "factor") missing.appendChild(h("p", { class: "hint" }, "Add it on the “what could matter” screen; the rest of your answers are kept."), h("button", { class: "btn", type: "button", onclick: () => { S.feedback = null; save(); go(2); } }, "Add what matters"));
+        if (S.missing === "option") missing.appendChild(h("button", { class: "btn", type: "button", onclick: () => { S.feedback = null; S.options.push({ id: uid(), label: "" }); save(); go(1); } }, "Add another way"));
+        if (S.missing === "assumption") missing.appendChild(h("p", { class: "hint" }, "Go back to “each option” and lower your confidence on the thing you've been assuming. The Pivot will move if it should."), h("button", { class: "btn", type: "button", onclick: () => { S.feedback = null; save(); go(4); } }, "Revisit my confidence"));
+        if (S.missing === "other") { const inp = h("input", { class: "input", type: "text", placeholder: "In a few words", maxlength: 120, "aria-label": "What's missing?" }); missing.appendChild(h("form", { class: "add", onsubmit: e => { e.preventDefault(); S.notes.missing = inp.value.trim(); S.feedback = "noted"; save(); renderMissing(); } }, inp, h("button", { class: "btn", type: "submit" }, "Keep this"))); }
         return;
       }
-      check.appendChild(choices([["yes", "Yes, there's something"], ["no", "No, that's everything"]], null, v => { S.checked = v; save(); renderCheck(); }));
+      if (S.feedback === "noted") { missing.appendChild(h("p", { class: "thanks" }, "Kept, in your words. It isn't calculated, but it's part of the record.")); return; }
+      missing.appendChild(choices([["yes", "Yes, this captures it"], ["no", "Not quite"]], null, v => { S.feedback = v; save(); renderMissing(); }));
     }
-    renderCheck();
+    renderMissing();
+    const feel = h("div", { class: "after" }, h("h4", {}, "And compared with before?"), S.feeling ? h("p", { class: "thanks" }, S.feeling === "lighter" ? "That's the whole point." : "Thank you for saying so.") : choices([["lighter", "Lighter"], ["same", "About the same"], ["heavier", "Heavier"]], null, v => { S.feeling = v; save(); feel.replaceWith(steps[7]().find(n => n.classList && n.classList.contains("after") && !n.classList.contains("missing"))); }));
+    const text = () => [
+      `CLARITY · ${S.title}`, opts().map(L).join(" · "), ``, `What matters most: ${r.matters.join(", ")}`,
+      r.reframe ? `What you're really asking: ${r.reframe.join(" ")}` : null,
+      `What appears clear: ${r.clear.concat(r.same).map(x => x.text).join(" ") || "—"}`, `What you're less certain about: ${r.unsure.map(x => x.text).join(" ") || "—"}`,
+      `The tension: ${r.tensionLine.text}`, ``,
+      r.settled ? `Based on what you've told me: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.observation ? r.observation + " " : ""}${r.pivotBlock} ${r.stability}`, ``,
+      r.changeMind ? `What could change your mind: ${r.changeMind}` : null,
+      r.learn ? `What might be worth learning: ${r.learn.text}${r.learn.rest.length ? ` Less important: ${r.learn.rest.join(", ")}.` : ""} You don't need more information about everything. You need better information about this.` : null,
+      ``, `Now you know what you're deciding.`].filter(x => x !== null).join("\n");
     return [
       who(), prompt("Here's what this depends on."),
-      hint("Based on what you've told me. If something important isn't here, add it below."),
-      report, check,
+      hint("Based on what you've told me. No score, no verdict. Which uncertainty matters, and what to do about it."),
+      report,
       h("div", { class: "report-actions" },
         h("button", { class: "btn btn-ghost", type: "button", onclick: () => navigator.clipboard.writeText(text()).then(() => say("Copied."), () => say("Couldn't copy.")) }, "Copy"),
         h("button", { class: "btn btn-ghost", type: "button", onclick: () => window.print() }, "Print"),
-        h("button", { class: "btn btn-ghost", type: "button", onclick: () => go(6) }, "Change an answer"),
+        h("button", { class: "btn btn-ghost", type: "button", onclick: () => go(4) }, "Change an answer"),
         h("button", { class: "btn", type: "button", onclick: () => { S = fresh(""); save(); go(0); } }, "Another decision")),
-      feedback
+      missing, feel
     ];
   });
 
@@ -308,9 +280,8 @@
     save(); stage.innerHTML = "";
     const m = h("div", { class: "mark" });
     stage.appendChild(h("div", { class: "thinking" }, m, h("p", {}, "Letting one thing fall.")));
-    Clover.mount(m).play().then(() => setTimeout(() => go(8), 400));
+    Clover.mount(m).play().then(() => setTimeout(() => go(7), 400));
   }
-
   function renderProgress() {
     progress.innerHTML = "";
     C.steps.forEach((label, i) => progress.appendChild(h("i", { class: i < S.step ? "done" : i === S.step ? "now" : "", title: label })));
@@ -323,14 +294,12 @@
     const old = stage.firstElementChild;
     const paint = () => {
       stage.innerHTML = "";
-      // step 5 may skip itself when there is nothing to ask
-      if (S.step === 5 && !nextFactorsNeedingBasis().length) { S.step = old && old.dataset.step === "6" ? 4 : 6; save(); }
       const step = h("div", { class: "step", "data-step": String(S.step) }, steps[S.step]());
       stage.appendChild(step);
       renderProgress();
       window.scrollTo({ top: 0, behavior: "smooth" });
       const first = step.querySelector("input:not([type=range]), textarea");
-      if (first && window.innerWidth > 720) first.focus();
+      if (first && window.innerWidth > 720 && S.step <= 1) first.focus();
     };
     if (old && !matchMedia("(prefers-reduced-motion: reduce)").matches) { old.classList.add("out"); setTimeout(paint, 300); } else paint();
   }
