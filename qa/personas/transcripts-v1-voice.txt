@@ -1,0 +1,388 @@
+=== job-change ===
+Persona: Priya, 29, a mid-level product manager at a stable but slow-moving insurance company. She's been offered a senior PM role at a fast-growing startup with a 20% raise. She's excited but also scared she's romanticizing the grass on the other side.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I take the new job at the startup?   [Take the new job at the startup / Stay where you are]
+Clarity: What's making this hard?
+  You: I don't know if I actually want the startup, or if I just want to stop feeling stuck where I am.
+Clarity: What are you hoping changes if you take the new job at the startup?
+  You: to feel challenged again and stop dreading Mondays
+Clarity: You want to take the new job at the startup. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current job gave you what you want, would you still take the new job at the startup?
+  You: unsure
+Clarity: You want to take the new job at the startup. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Career growth, Financial security, Day-to-day environment, Free time
+Clarity: For each one, which is stronger? (Take the new job at the startup / Stay where you are / don't know)
+  Career growth: Take the new job at the startup
+  Financial security: Stay where you are
+  Day-to-day environment: don't know
+  Free time: Stay where you are
+Clarity: Do you know that, or are you assuming it?
+  Career growth: I'm assuming it
+  Financial security: I know that
+  Free time: I'm assuming it
+Clarity: Right now, which way are you leaning?
+  You: Take the new job at the startup
+Clarity: And if you were wrong? (for each uncertainty: would you still lean the same way?)
+  Career growth: no, that changes it
+  Day-to-day environment: no, that changes it
+  Free time: yes, still
+Clarity: Could you find that out before deciding?
+  You: while
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I take the new job at the startup?
+Take the new job at the startup · Stay where you are
+What you're really asking: You want to feel challenged again and stop dreading Mondays. You're not sure this is the only way to get it. That comes before anything else.
+THE PIVOT: “Take the new job at the startup” isn't the uncertainty. Career growth is. Is “Take the new job at the startup” really stronger on career growth? If that's true, “Take the new job at the startup” has a strong case. If it isn't, the decision changes.
+Known: “Stay where you are” is stronger on financial security.
+Assumed: “Take the new job at the startup” is stronger on career growth. “Stay where you are” is stronger on free time.
+Unknown: Which option is stronger on day-to-day environment.
+The tradeoff: Career growth: Take the new job at the startup · Financial security: Stay where you are · Free time: Stay where you are. More career growth against more financial security. That's the exchange.
+Find out this first: Is “Take the new job at the startup” really stronger on career growth? Ask two people who joined a year ago what actually changed for them. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I take the new job at the startup?","options":["Take the new job at the startup","Stay where I am"]},"desired_outcome":"to feel challenged again and stop dreading Mondays","still_want":"unsure","hard":"I don't know if I actually want the startup, or if I just want to stop feeling stuck where I am.","factors":[{"name":"Career growth","rank":1,"advantage":"a","status":"assumed","would_flip":true},{"name":"Financial security","rank":2,"advantage":"b","status":"known","would_flip":null},{"name":"Day-to-day environment","rank":3,"advantage":null,"status":"unknown","would_flip":true},{"name":"Free time","rank":4,"advantage":"b","status":"assumed","would_flip":false}],"lean":"a","candidate_pivots":[{"question":"Can your current job actually let you feel challenged again and stop dreading Mondays?","impact":"medium"},{"question":"Is “Take the new job at the startup” really stronger on career growth?","impact":"high"},{"question":"Which option is actually stronger on day-to-day environment?","impact":"high"},{"question":"Is “Stay where you are” really stronger on free time?","impact":"none"}],"pivot":{"kind":"factor","question":"Is “Take the new job at the startup” really stronger on career growth?","factor":"Career growth"},"find_out":"while","reversibility":"hard","known":["“Stay where you are” is stronger on financial security."],"assumed":["“Take the new job at the startup” is stronger on career growth.","“Stay where you are” is stronger on free time."],"unknown":["Which option is stronger on day-to-day environment."]}
+
+=== move-home ===
+Persona: Daniel, 34, lives four hours from his aging parents. His mother was just diagnosed with early-stage Parkinson's. He's considering moving back to his hometown to be near them, but he built a whole life — friends, a girlfriend, a job he likes — in his current city.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I move back home to be near my parents?   [Move back home to be near your parents / Stay here]
+Clarity: What's making this hard?
+  You: If I don't move now and something happens to my mom, I'll never forgive myself. But my whole life is here.
+Clarity: What are you hoping changes if you move back home to be near your parents?
+  You: to not feel guilty every time my phone rings
+Clarity: You want to move back home to be near your parents. What you've described is what you hope it changes. One way to test that:
+Clarity: If where you live now gave you what you want, would you still move back home to be near your parents?
+  You: no
+Clarity: Maybe the question isn't whether to move back home to be near your parents. It's whether you can get what you want without moving.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Relationships, Meaning, Career growth
+Clarity: For each one, which is stronger? (Move back home to be near your parents / Stay here / don't know)
+  Relationships: don't know
+  Meaning: Move back home to be near your parents
+  Career growth: Stay here
+Clarity: Do you know that, or are you assuming it?
+  Meaning: I'm assuming it
+  Career growth: I know that
+Clarity: Right now, which way are you leaning?
+  You: honestly torn
+Clarity: Could you find that out before deciding?
+  You: soon
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I move back home to be near my parents?
+Move back home to be near your parents · Stay here
+What you're really asking: You don't just want to move back home to be near your parents. You want to not feel guilty every time your phone rings. If where you live now could give you that, you'd stay.
+THE PIVOT: You know what you want. You don't know whether you can get it without moving. Can where you live now actually let you not feel guilty every time your phone rings? If it can, you don't need to move back home to be near your parents. If it can't, the next question is which option is actually stronger on relationships.
+Known: “Stay here” is stronger on career growth.
+Assumed: “Move back home to be near your parents” is stronger on meaning.
+Unknown: Which option is stronger on relationships.
+The tradeoff: Meaning: Move back home to be near your parents · Career growth: Stay here. More meaning against more career growth. That's the exchange.
+Find out this first: Can where you live now actually let you not feel guilty every time your phone rings? Ask for it directly. The answer to a real request is information. You don't need to decide yet. You need to know this first. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I move back home to be near my parents?","options":["Move back home to be near my parents","Stay here"]},"desired_outcome":"to not feel guilty every time my phone rings","still_want":"no","hard":"If I don't move now and something happens to my mom, I'll never forgive myself. But my whole life is here.","factors":[{"name":"Relationships","rank":1,"advantage":null,"status":"unknown","would_flip":null},{"name":"Meaning","rank":2,"advantage":"a","status":"assumed","would_flip":null},{"name":"Career growth","rank":3,"advantage":"b","status":"known","would_flip":null}],"lean":"torn","candidate_pivots":[{"question":"Can where you live now actually let you not feel guilty every time your phone rings?","impact":"high"},{"question":"Which option is actually stronger on relationships?","impact":"high"},{"question":"Is “Move back home to be near your parents” really stronger on meaning?","impact":"medium"}],"pivot":{"kind":"hope","question":"Can where you live now actually let you not feel guilty every time your phone rings?","factor":null},"find_out":"soon","reversibility":"hard","known":["“Stay here” is stronger on career growth."],"assumed":["“Move back home to be near your parents” is stronger on meaning."],"unknown":["Which option is stronger on relationships."]}
+
+=== grad-school ===
+Persona: Marisol, 26, works as a research assistant and is considering a fully-funded PhD program that would mean five more years of low pay before (maybe) a professorship. She loves the work but is tired of being broke and watching friends buy houses.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I go back to school for a PhD?   [Start the PhD / Stay in your job and look for a raise elsewhere]
+Clarity: What's making this hard?
+  You: Five years is a long time to bet on an academic job market that might not have a spot for me at the end.
+Clarity: What are you hoping changes if you start the PhD?
+  You: to finally be doing the kind of research I actually care about instead of assisting someone else's
+Clarity: You want to start the PhD. What you've described is what you hope it changes. One way to test that:
+Clarity: If where you are now gave you what you want, would you still start the PhD?
+  You: no
+Clarity: Maybe the question isn't whether to start the PhD. It's whether you can get what you want where you are.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Meaning, Income, Career growth, Stability
+Clarity: For each one, which is stronger? (Start the PhD / Stay in your job and look for a raise elsewhere / don't know)
+  Meaning: Start the PhD
+  Income: Stay in your job and look for a raise elsewhere
+  Career growth: don't know
+  Stability: Stay in your job and look for a raise elsewhere
+Clarity: Do you know that, or are you assuming it?
+  Meaning: I know that
+  Income: I know that
+  Stability: I'm assuming it
+Clarity: Right now, which way are you leaning?
+  You: honestly torn
+Clarity: Could you find that out before deciding?
+  You: while
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I go back to school for a PhD?
+Start the PhD · Stay in your job and look for a raise elsewhere
+What you're really asking: You don't just want to start the PhD. You want to finally be doing the kind of research you actually care about instead of assisting someone else's. If where you are now could give you that, you'd stay where you are.
+THE PIVOT: You know what you want. You don't know whether you can get it where you are. Can where you are now actually let you finally be doing the kind of research you actually care about instead of assisting someone else's? If it can, you don't need to start the PhD. If it can't, the next question is which option is actually stronger on career growth.
+Known: “Start the PhD” is stronger on meaning. “Stay in your job and look for a raise elsewhere” is stronger on income.
+Assumed: “Stay in your job and look for a raise elsewhere” is stronger on stability.
+Unknown: Which option is stronger on career growth.
+The tradeoff: Meaning: Start the PhD · Income: Stay in your job and look for a raise elsewhere · Stability: Stay in your job and look for a raise elsewhere. More meaning against more income. That's the exchange.
+Find out this first: Can where you are now actually let you finally be doing the kind of research you actually care about instead of assisting someone else's? Ask for it directly. The answer to a real request is information. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I go back to school for a PhD?","options":["Start the PhD","Stay in my job and look for a raise elsewhere"]},"desired_outcome":"to finally be doing the kind of research I actually care about instead of assisting someone else's","still_want":"no","hard":"Five years is a long time to bet on an academic job market that might not have a spot for me at the end.","factors":[{"name":"Meaning","rank":1,"advantage":"a","status":"known","would_flip":null},{"name":"Income","rank":2,"advantage":"b","status":"known","would_flip":null},{"name":"Career growth","rank":3,"advantage":null,"status":"unknown","would_flip":null},{"name":"Stability","rank":4,"advantage":"b","status":"assumed","would_flip":null}],"lean":"torn","candidate_pivots":[{"question":"Can where you are now actually let you finally be doing the kind of research you actually care about instead of assisting someone else's?","impact":"high"},{"question":"Which option is actually stronger on career growth?","impact":"high"},{"question":"Is “Stay in your job and look for a raise elsewhere” really stronger on stability?","impact":"medium"}],"pivot":{"kind":"hope","question":"Can where you are now actually let you finally be doing the kind of research you actually care about instead of assisting someone else's?","factor":null},"find_out":"while","reversibility":"hard","known":["“Start the PhD” is stronger on meaning.","“Stay in your job and look for a raise elsewhere” is stronger on income."],"assumed":["“Stay in your job and look for a raise elsewhere” is stronger on stability."],"unknown":["Which option is stronger on career growth."]}
+
+=== heavy-hearted-relationship ===
+Persona: Aisha, 31, has been with her partner for six years. He's kind and stable but she's felt quietly unhappy for over a year and can't tell if it's him, her, or just life. She cries thinking about leaving and cries thinking about staying.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I leave my relationship?   [Leave your relationship / Stay]
+Clarity: What's making this hard?
+  You: I don't have a reason. He hasn't done anything wrong. I just feel like I'm disappearing.
+Clarity: What are you hoping changes if you leave your relationship?
+  You: to feel like myself again, excited about my own life
+Clarity: You want to leave your relationship. What you've described is what you hope it changes. One way to test that:
+Clarity: If this relationship gave you what you want, would you still leave your relationship?
+  You: unsure
+Clarity: You want to leave your relationship. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Meaning, Stability, Career growth, Relationships
+Clarity: For each one, which is stronger? (Leave your relationship / Stay / don't know)
+  Meaning: don't know
+  Stability: Stay
+  Career growth: don't know
+  Relationships: Stay
+Clarity: Do you know that, or are you assuming it?
+  Stability: I know that
+  Relationships: I'm assuming it
+Clarity: Right now, which way are you leaning?
+  You: honestly torn
+Clarity: Could you find that out before deciding?
+  You: doing
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I leave my relationship?
+Leave your relationship · Stay
+What you're really asking: You want to feel like yourself again, excited about your own life. You're not sure this is the only way to get it. That comes before anything else.
+THE PIVOT: The options aren't the uncertainty. Meaning is. Which option is actually stronger on meaning? That's the question that changes the decision.
+Known: “Stay” is stronger on stability.
+Assumed: “Stay” is stronger on relationships.
+Unknown: Which option is stronger on meaning. Which option is stronger on career growth.
+The tradeoff: Stability: Stay · Relationships: Stay. On everything you named, “Stay” is stronger. The tradeoff isn't between the options; it's between what you're sure of and what you're not.
+Find out this first: The only way to know is to live it. That's a bigger ask than it sounds. Worth saying out loud to someone before you do. You said “Leave your relationship” would be hard to undo. A choice you can't test in advance and can't reverse is worth taking slowly. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I leave my relationship?","options":["Leave my relationship","Stay"]},"desired_outcome":"to feel like myself again, excited about my own life","still_want":"unsure","hard":"I don't have a reason. He hasn't done anything wrong. I just feel like I'm disappearing.","factors":[{"name":"Meaning","rank":1,"advantage":null,"status":"unknown","would_flip":null},{"name":"Stability","rank":2,"advantage":"b","status":"known","would_flip":null},{"name":"Career growth","rank":3,"advantage":null,"status":"unknown","would_flip":null},{"name":"Relationships","rank":4,"advantage":"b","status":"assumed","would_flip":null}],"lean":"torn","candidate_pivots":[{"question":"Can this relationship actually let you feel like yourself again, excited about your own life?","impact":"medium"},{"question":"Which option is actually stronger on meaning?","impact":"high"},{"question":"Which option is actually stronger on career growth?","impact":"medium"},{"question":"Is “Stay” really stronger on relationships?","impact":"medium"}],"pivot":{"kind":"factor","question":"Which option is actually stronger on meaning?","factor":"Meaning"},"find_out":"doing","reversibility":"hard","known":["“Stay” is stronger on stability."],"assumed":["“Stay” is stronger on relationships."],"unknown":["Which option is stronger on meaning.","Which option is stronger on career growth."]}
+
+=== buy-vs-rent ===
+Persona: Ken, 38, married with one kid, has been renting the same apartment for six years. Prices in his city are high and he keeps hearing he's 'throwing money away' on rent, but he's also worried about being locked into a mortgage and a neighborhood if his job situation changes.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I buy a house or keep renting?   [Buy a house / Keep renting]
+Clarity: What's making this hard?
+  You: Everyone says renting is wasting money, but buying feels like betting our whole savings on one bad-timed decision.
+Clarity: What are you hoping changes if you buy a house?
+  You: to stop feeling like we're behind everyone else our age
+Clarity: You want to buy a house. What you've described is what you hope it changes. One way to test that:
+Clarity: If where you live now gave you what you want, would you still buy a house?
+  You: no
+Clarity: Maybe the question isn't whether to buy a house. It's whether you can get what you want where you are.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Financial security, Freedom and control, Stability
+Clarity: For each one, which is stronger? (Buy a house / Keep renting / don't know)
+  Financial security: don't know
+  Freedom and control: Keep renting
+  Stability: Buy a house
+Clarity: Do you know that, or are you assuming it?
+  Freedom and control: I know that
+  Stability: I'm assuming it
+Clarity: Right now, which way are you leaning?
+  You: Keep renting
+Clarity: And if you were wrong? (for each uncertainty: would you still lean the same way?)
+  Financial security: no, that changes it
+  Stability: no, that changes it
+Clarity: Could you find that out before deciding?
+  You: soon
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I buy a house or keep renting?
+Buy a house · Keep renting
+What you're really asking: You don't just want to buy a house. You want to stop feeling like we're behind everyone else our age. If where you live now could give you that, you'd stay.
+THE PIVOT: You know what you want. You don't know whether you can get it where you are. Can where you live now actually let you stop feeling like we're behind everyone else our age? If it can, you don't need to buy a house. If it can't, the next question is which option is actually stronger on financial security.
+Known: “Keep renting” is stronger on freedom and control.
+Assumed: “Buy a house” is stronger on stability.
+Unknown: Which option is stronger on financial security.
+The tradeoff: Freedom and control: Keep renting · Stability: Buy a house. More stability against more freedom and control. That's the exchange.
+Find out this first: Can where you live now actually let you stop feeling like we're behind everyone else our age? Ask for it directly. The answer to a real request is information. You don't need to decide yet. You need to know this first. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I buy a house or keep renting?","options":["Buy a house","Keep renting"]},"desired_outcome":"to stop feeling like we're behind everyone else our age","still_want":"no","hard":"Everyone says renting is wasting money, but buying feels like betting our whole savings on one bad-timed decision.","factors":[{"name":"Financial security","rank":1,"advantage":null,"status":"unknown","would_flip":true},{"name":"Freedom and control","rank":2,"advantage":"b","status":"known","would_flip":false},{"name":"Stability","rank":3,"advantage":"a","status":"assumed","would_flip":true}],"lean":"b","candidate_pivots":[{"question":"Can where you live now actually let you stop feeling like we're behind everyone else our age?","impact":"high"},{"question":"Which option is actually stronger on financial security?","impact":"high"},{"question":"Is “Buy a house” really stronger on stability?","impact":"high"}],"pivot":{"kind":"hope","question":"Can where you live now actually let you stop feeling like we're behind everyone else our age?","factor":null},"find_out":"soon","reversibility":"hard","known":["“Keep renting” is stronger on freedom and control."],"assumed":["“Buy a house” is stronger on stability."],"unknown":["Which option is stronger on financial security."]}
+
+=== start-business ===
+Persona: Ola, 41, has a stable engineering director job and a business idea (a niche B2B tool) she's been sketching on nights and weekends for a year. She has three kids and a mortgage, and her husband is supportive but nervous about the money.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I quit my job to start my own business?   [Quit your job to start your own business / Stay]
+Clarity: What's making this hard?
+  You: I have three kids depending on my paycheck, and the idea only works if I can go all-in, not do it as a side project forever.
+Clarity: What are you hoping changes if you quit your job to start your own business?
+  You: to build something that's actually mine instead of making someone else rich
+Clarity: You want to quit your job to start your own business. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current job gave you what you want, would you still quit your job to start your own business?
+  You: no
+Clarity: Maybe the question isn't whether to quit your job to start your own business. It's whether you can get what you want without leaving.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Financial security, Meaning, Career growth, Free time
+Clarity: For each one, which is stronger? (Quit your job to start your own business / Stay / don't know)
+  Financial security: Stay
+  Meaning: Quit your job to start your own business
+  Career growth: don't know
+  Free time: Stay
+Clarity: Do you know that, or are you assuming it?
+  Financial security: I know that
+  Meaning: I know that
+  Free time: I'm assuming it
+Clarity: Right now, which way are you leaning?
+  You: Stay
+Clarity: And if you were wrong? (for each uncertainty: would you still lean the same way?)
+  Career growth: no, that changes it
+  Free time: yes, still
+Clarity: Could you find that out before deciding?
+  You: while
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I quit my job to start my own business?
+Quit your job to start your own business · Stay
+What you're really asking: You don't just want to quit your job to start your own business. You want to build something that's actually yours instead of making someone else rich. If your current job could give you that, you'd stay.
+THE PIVOT: You know what you want. You don't know whether you can get it without leaving. Can your current job actually let you build something that's actually yours instead of making someone else rich? If it can, you don't need to quit your job to start your own business. If it can't, the next question is which option is actually stronger on career growth.
+Known: “Stay” is stronger on financial security. “Quit your job to start your own business” is stronger on meaning.
+Assumed: “Stay” is stronger on free time.
+Unknown: Which option is stronger on career growth.
+The tradeoff: Financial security: Stay · Meaning: Quit your job to start your own business · Free time: Stay. More meaning against more financial security. That's the exchange.
+Find out this first: Can your current job actually let you build something that's actually yours instead of making someone else rich? Ask for it directly. The answer to a real request is information. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I quit my job to start my own business?","options":["Quit my job to start my own business","Stay"]},"desired_outcome":"to build something that's actually mine instead of making someone else rich","still_want":"no","hard":"I have three kids depending on my paycheck, and the idea only works if I can go all-in, not do it as a side project forever.","factors":[{"name":"Financial security","rank":1,"advantage":"b","status":"known","would_flip":null},{"name":"Meaning","rank":2,"advantage":"a","status":"known","would_flip":null},{"name":"Career growth","rank":3,"advantage":null,"status":"unknown","would_flip":true},{"name":"Free time","rank":4,"advantage":"b","status":"assumed","would_flip":false}],"lean":"b","candidate_pivots":[{"question":"Can your current job actually let you build something that's actually yours instead of making someone else rich?","impact":"high"},{"question":"Which option is actually stronger on career growth?","impact":"high"},{"question":"Is “Stay” really stronger on free time?","impact":"none"}],"pivot":{"kind":"hope","question":"Can your current job actually let you build something that's actually yours instead of making someone else rich?","factor":null},"find_out":"while","reversibility":"hard","known":["“Stay” is stronger on financial security.","“Quit your job to start your own business” is stronger on meaning."],"assumed":["“Stay” is stronger on free time."],"unknown":["Which option is stronger on career growth."]}
+
+=== already-knows ===
+Persona: Tom, 45, has been offered early retirement with a decent buyout after 22 years at the same manufacturing plant. He's done the math obsessively for months, talked to a financial advisor twice, and asked his wife a dozen times. He's not scared anymore, just tired of sitting on it.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I accept the early retirement package?   [Accept the early retirement package / Stay where you are]
+Clarity: What's making this hard?
+  You: Nothing, really. I've run the numbers so many times I could recite them in my sleep. I think I'm just scared to say yes out loud.
+Clarity: What are you hoping changes if you accept the early retirement package?
+  You: to stop working the floor and get my knees and my weekends back
+Clarity: You want to accept the early retirement package. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current job gave you what you want, would you still accept the early retirement package?
+  You: yes
+Clarity: Then it's the change you want, not only what it brings.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Financial security, Health and energy, Meaning, Free time
+Clarity: For each one, which is stronger? (Accept the early retirement package / Stay where you are / don't know)
+  Financial security: Accept the early retirement package
+  Health and energy: Accept the early retirement package
+  Meaning: Stay where you are
+  Free time: Accept the early retirement package
+Clarity: Do you know that, or are you assuming it?
+  Financial security: I know that
+  Health and energy: I know that
+  Meaning: I know that
+  Free time: I know that
+Clarity: Right now, which way are you leaning?
+  You: Accept the early retirement package
+Clarity: And if you were wrong? (for each uncertainty: would you still lean the same way?)
+Clarity: Could you find that out before deciding?
+  You: none
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: easy
+
+--- The report the person received ---
+Here's what this depends on.
+Should I accept the early retirement package?
+Accept the early retirement package · Stay where you are
+Where you are: You already know enough. There's no unknown left that would materially change this decision. What's left is preference, and that's yours.
+Known: “Accept the early retirement package” is stronger on financial security. “Accept the early retirement package” is stronger on health and energy. “Stay where you are” is stronger on meaning. “Accept the early retirement package” is stronger on free time.
+Assumed: Nothing you named.
+Unknown: Nothing you named.
+The tradeoff: Financial security: Accept the early retirement package · Health and energy: Accept the early retirement package · Meaning: Stay where you are · Free time: Accept the early retirement package. More financial security against more meaning. That's the exchange.
+What's left: Nothing. You already have what you need. Name the one thing you'd want to be true before you'd feel settled. If you can't, that's your answer.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I accept the early retirement package?","options":["Accept the early retirement package","Stay where I am"]},"desired_outcome":"to stop working the floor and get my knees and my weekends back","still_want":"yes","hard":"Nothing, really. I've run the numbers so many times I could recite them in my sleep. I think I'm just scared to say yes out loud.","factors":[{"name":"Financial security","rank":1,"advantage":"a","status":"known","would_flip":null},{"name":"Health and energy","rank":2,"advantage":"a","status":"known","would_flip":null},{"name":"Meaning","rank":3,"advantage":"b","status":"known","would_flip":null},{"name":"Free time","rank":4,"advantage":"a","status":"known","would_flip":null}],"lean":"a","candidate_pivots":[],"pivot":{"kind":"none","question":"There doesn't appear to be a decision-critical unknown.","factor":null},"find_out":"none","reversibility":"easy","known":["“Accept the early retirement package” is stronger on financial security.","“Accept the early retirement package” is stronger on health and energy.","“Stay where you are” is stronger on meaning.","“Accept the early retirement package” is stronger on free time."],"assumed":[],"unknown":[]}
+
+=== torn-many-unknowns ===
+Persona: Jae, 27, single, has been offered a two-year expat assignment in Singapore with their company. Great résumé line, unclear everything else: visa rules for a future partner, whether the role even still exists when they'd come back, whether they'd be lonely there.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I take the two-year assignment in Singapore?   [Take the two-year assignment in Singapore / Stay where you are]
+Clarity: What's making this hard?
+  You: I genuinely don't know if this is a once-in-a-lifetime opportunity or a two-year detour that sets me back socially and romantically.
+Clarity: What are you hoping changes if you take the two-year assignment in Singapore?
+  You: to prove to myself I can build a life somewhere on my own
+Clarity: You want to take the two-year assignment in Singapore. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current situation gave you what you want, would you still take the two-year assignment in Singapore?
+  You: unsure
+Clarity: You want to take the two-year assignment in Singapore. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Career growth, Relationships, Meaning, Stability
+Clarity: For each one, which is stronger? (Take the two-year assignment in Singapore / Stay where you are / don't know)
+  Career growth: don't know
+  Relationships: don't know
+  Meaning: Take the two-year assignment in Singapore
+  Stability: don't know
+Clarity: Do you know that, or are you assuming it?
+  Meaning: I'm assuming it
+Clarity: Right now, which way are you leaning?
+  You: honestly torn
+Clarity: Could you find that out before deciding?
+  You: while
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I take the two-year assignment in Singapore?
+Take the two-year assignment in Singapore · Stay where you are
+What you're really asking: You want to prove to yourself you can build a life somewhere on your own. You're not sure this is the only way to get it. That comes before anything else.
+THE PIVOT: The options aren't the uncertainty. Career growth is. Which option is actually stronger on career growth? That's the question that changes the decision.
+Known: Nothing you named.
+Assumed: “Take the two-year assignment in Singapore” is stronger on meaning.
+Unknown: Which option is stronger on career growth. Which option is stronger on relationships. Which option is stronger on stability.
+The tradeoff: Meaning: Take the two-year assignment in Singapore. On everything you named, “Take the two-year assignment in Singapore” is stronger. The tradeoff isn't between the options; it's between what you're sure of and what you're not.
+Find out this first: Which option is actually stronger on career growth? Ask two people who joined a year ago what actually changed for them. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I take the two-year assignment in Singapore?","options":["Take the two-year assignment in Singapore","Stay where I am"]},"desired_outcome":"to prove to myself I can build a life somewhere on my own","still_want":"unsure","hard":"I genuinely don't know if this is a once-in-a-lifetime opportunity or a two-year detour that sets me back socially and romantically.","factors":[{"name":"Career growth","rank":1,"advantage":null,"status":"unknown","would_flip":null},{"name":"Relationships","rank":2,"advantage":null,"status":"unknown","would_flip":null},{"name":"Meaning","rank":3,"advantage":"a","status":"assumed","would_flip":null},{"name":"Stability","rank":4,"advantage":null,"status":"unknown","would_flip":null}],"lean":"torn","candidate_pivots":[{"question":"Can your current situation actually let you prove to yourself you can build a life somewhere on your own?","impact":"medium"},{"question":"Which option is actually stronger on career growth?","impact":"high"},{"question":"Which option is actually stronger on relationships?","impact":"medium"},{"question":"Is “Take the two-year assignment in Singapore” really stronger on meaning?","impact":"medium"},{"question":"Which option is actually stronger on stability?","impact":"medium"}],"pivot":{"kind":"factor","question":"Which option is actually stronger on career growth?","factor":"Career growth"},"find_out":"while","reversibility":"hard","known":[],"assumed":["“Take the two-year assignment in Singapore” is stronger on meaning."],"unknown":["Which option is stronger on career growth.","Which option is stronger on relationships.","Which option is stronger on stability."]}
+
