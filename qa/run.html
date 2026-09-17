@@ -26,6 +26,12 @@
     if (r.pivot.statement && (s.findOut === "soon" || s.findOut === "while")) chk("chain: next action resolves the Pivot", r.next === r.pivot.question, r.next);
     // no-pivot discipline
     if (m.unknown.length + m.assumed.length === 0) chk("no-pivot: none manufactured", m.pivot.kind === "none", m.pivot.kind);
+    // the word "Pivot" only appears when there is one
+    if (m.pivot.kind === "none" || m.pivot.kind === "robust") chk("no-pivot: report has no Pivot block", !!r.settled && !/pivot/i.test(JSON.stringify(r.settled)), r.settled && r.settled.title);
+    else chk("pivot: report shows it", !r.settled, r.settled);
+    // discovery line matches the stillWant answer
+    const d = Engine.discovery(s);
+    if (s.stillWant === "no") chk("discovery: reframes on no", /may not be deciding/.test(d), d);
     // agency: never tells them what to choose
     chk("agency: no instruction to choose", !/you should (take|stay|leave|move|buy|choose)|we recommend|the right choice is/i.test(all), "");
     // unsupported inference: every factor named in the report was named by the person

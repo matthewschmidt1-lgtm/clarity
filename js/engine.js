@@ -71,6 +71,15 @@
     };
   }
 
+  /* 5b. The Discovery line, shown the moment the person answers "would you still want to?" */
+  function discovery(s) {
+    const A = s.options.a.label, B = s.options.b.label;
+    if (!s.stillWant || !s.hope) return null;
+    if (s.stillWant === "no") return `Then you may not be deciding whether to ${lower(A)}. You may be deciding whether you can get what you need without it.`;
+    if (s.stillWant === "unsure") return `Worth noticing. You're not sure ${quote(A)} is the only way to get that.`;
+    return `Then this really is about ${quote(A)}. Let's find what it depends on.`;
+  }
+
   /* 6. The report. Decision → real question → Pivot → evidence → tradeoff → next. */
   function report(s) {
     const L = id => s.options[id].label;
@@ -113,8 +122,13 @@
       wait = `Name the one thing you'd want to be true before you'd feel settled. If you can't, that's your answer.`;
     }
 
-    return { reframe, structure: st, pivot: pv, pivotNote, pairs, tradeoffLine, next, wait, lean, hard: s.hard };
+    // When there is no Pivot, say so plainly and never use the word.
+    let settled = null;
+    if (pv.kind === "none") settled = { title: "You already know enough.", body: "There's no unknown left that would materially change this decision. What's left is preference, and that's yours." };
+    else if (pv.kind === "robust") settled = { title: "You already know enough.", body: `Nothing you're unsure about would change your mind. You may be more decided than you feel.` };
+
+    return { reframe, structure: st, pivot: pv, pivotNote, settled, pairs, tradeoffLine, next, wait, lean, hard: s.hard };
   }
 
-  window.Engine = { lower, structure, uncertain, candidates, pivot, model, report };
+  window.Engine = { lower, structure, uncertain, candidates, pivot, discovery, model, report };
 })();

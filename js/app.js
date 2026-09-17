@@ -99,12 +99,22 @@
   // 2 · What are you hoping changes? Would you still want it?
   steps.push(() => {
     const ta = h("textarea", { class: "input", placeholder: "Less stress. More money. To feel like myself again…", "aria-label": "What are you hoping changes?" }, S.hope);
-    ta.addEventListener("input", () => { S.hope = ta.value; });
+    ta.addEventListener("input", () => { S.hope = ta.value; renderDiscovery(); });
+    const disc = h("div", { class: "discovery", "aria-live": "polite" });
+    function renderDiscovery() {
+      const line = E.discovery(S);
+      disc.innerHTML = "";
+      if (!line) return;
+      disc.appendChild(who());
+      disc.appendChild(h("p", { class: "prompt small" }, line));
+    }
+    renderDiscovery();
     return [
       who(), prompt(`What are you hoping changes if you <em>${esc(lower(A()))}</em>?`), ta,
       h("div", { class: "rule" }),
       who(), prompt(`If <em>${esc(lower(B()))}</em> gave you exactly that tomorrow, would you still want to ${esc(lower(A()))}?`),
-      choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], S.stillWant, v => { S.stillWant = v; save(); }),
+      choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], S.stillWant, v => { S.stillWant = v; save(); renderDiscovery(); }),
+      disc,
       actions(() => S.hope.trim().length > 1 && S.stillWant, "Say what you're hoping for, and whether you'd still go.")
     ];
   });
@@ -213,15 +223,21 @@
     const L = id => S.options[id].label;
     const row = (k, v, cls = "") => h("div", { class: "row " + cls }, h("span", { class: "k" }, k), typeof v === "string" ? h("span", { class: "v" }, v) : v);
     const items = xs => xs.length ? h("ul", { class: "plain" }, xs.map(x => h("li", {}, x.text))) : h("span", { class: "v quiet" }, "Nothing here.");
+    const refresh = () => feedback.replaceWith(steps[8]().find(n => n.classList && n.classList.contains("after")));
     const feedback = h("div", { class: "after" },
       h("h4", {}, "Did anything become clearer?"),
-      S.feedback ? h("p", { class: "thanks" }, "Thank you. That's the only thing we measure.") :
-        choices([["do", "Yes, I know what I need to do"], ["find", "Yes, I know what I need to find out"], ["struggle", "Yes, I understand what I'm actually struggling with"], ["not", "Not yet"]], null, v => { S.feedback = v; save(); feedback.replaceWith(steps[8]().find(n => n.classList && n.classList.contains("after"))); }));
+      S.feedback ? h("p", { class: "thanks" }, "Thank you.") :
+        choices([["do", "Yes, I know what I need to do"], ["find", "Yes, I know what I need to find out"], ["struggle", "Yes, I understand what I'm actually struggling with"], ["not", "Not yet"]], null, v => { S.feedback = v; save(); refresh(); }),
+      h("h4", { style: "margin-top:10px" }, "And compared with before?"),
+      S.feeling ? h("p", { class: "thanks" }, S.feeling === "lighter" ? "That's the whole point." : "Thank you for saying so.") :
+        choices([["lighter", "Lighter"], ["same", "About the same"], ["heavier", "Heavier"]], null, v => { S.feeling = v; save(); refresh(); }));
     const report = h("article", { class: "report", "aria-label": "Your Clarity Report" },
       h("h3", {}, S.question.replace(/[.?!]+$/, "") + "?"),
       h("p", { class: "v quiet", style: "margin-top:4px" }, `${L("a")} · ${L("b")}`),
       r.reframe ? h("div", { class: "row" }, h("span", { class: "k" }, "What you're really asking"), h("p", { class: "v big" }, r.reframe[0]), h("p", { class: "v", style: "margin-top:6px" }, r.reframe[1])) : null,
-      h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
+      r.settled
+        ? h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "Where you are"), h("span", { class: "v big" }, r.settled.title), h("p", { class: "v", style: "margin-top:6px" }, r.settled.body))
+        : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
       h("div", { class: "row" }, h("span", { class: "k" }, "Right now"),
         h("dl", { class: "now" },
           h("dt", {}, "Known"), h("dd", {}, r.structure.known.length ? r.structure.known.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")),
@@ -230,13 +246,13 @@
       h("div", { class: "row" }, h("span", { class: "k" }, "The tradeoff"),
         r.pairs.length ? h("dl", { class: "now" }, r.pairs.map(p => [h("dt", {}, p.factor), h("dd", {}, p.option)])) : null,
         h("p", { class: "v", style: r.pairs.length ? "margin-top:8px" : "" }, r.tradeoffLine)),
-      h("div", { class: "row" }, h("span", { class: "k" }, "Find out this first"), h("span", { class: "v big" }, r.next), r.wait ? h("p", { class: "v", style: "margin-top:8px" }, r.wait) : null),
+      h("div", { class: "row" }, h("span", { class: "k" }, r.settled ? "What's left" : "Find out this first"), h("span", { class: "v big" }, r.next), r.wait ? h("p", { class: "v", style: "margin-top:8px" }, r.wait) : null, !r.settled ? h("p", { class: "v", style: "margin-top:8px" }, "You don't have to solve everything. Just this.") : null),
       h("p", { class: "closing" }, "Now you know what you're deciding.")
     );
     const text = () => [
       `CLARITY · ${S.question}`, `${L("a")} · ${L("b")}`, ``,
       r.reframe ? `What you're really asking: ${r.reframe.join(" ")}\n` : null,
-      `THE PIVOT: ${r.pivot.question} ${r.pivotNote}`, ``,
+      r.settled ? `${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.pivot.question} ${r.pivotNote}`, ``,
       `Known: ${r.structure.known.map(x => x.text).join(" ") || "—"}`,
       `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "—"}`,
       `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "—"}`, ``,

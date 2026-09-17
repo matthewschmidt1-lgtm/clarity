@@ -1,0 +1,38 @@
+[
+  {
+    "id": "smoke",
+    "persona": "smoke test",
+    "session": {
+      "question": "Should I take the new job?",
+      "hope": "less stress and a manager who respects me",
+      "stillWant": "no",
+      "hard": "Leaving people I like for a company I don't know.",
+      "factors": [
+        {
+          "id": "growth",
+          "label": "Career growth",
+          "winner": "a",
+          "basis": "assume",
+          "flips": true
+        },
+        {
+          "id": "environment",
+          "label": "Day-to-day environment",
+          "winner": "unknown",
+          "basis": null,
+          "flips": false
+        },
+        {
+          "id": "security",
+          "label": "Financial security",
+          "winner": "b",
+          "basis": "know",
+          "flips": null
+        }
+      ],
+      "lean": "a",
+      "findOut": "soon",
+      "reversibility": "easy"
+    }
+  }
+]

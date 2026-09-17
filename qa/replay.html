@@ -1,0 +1,41 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Clarity persona replay</title></head><body>
+<pre id="out"></pre>
+<script src="../js/content.js"></script><script src="../js/engine.js"></script>
+<script>
+(async () => {
+  const file = new URLSearchParams(location.search).get("file") || "personas/sessions.json";
+  const data = await (await fetch(file)).json();
+  const out = [];
+  for (const p of data) {
+    const sc = p.session, o = Content.inferOptions(sc.question);
+    const s = Object.assign({ options: { a: { label: o.a }, b: { label: o.b } }, hard: "", hope: "", stillWant: null, factors: [], lean: null, findOut: null, reversibility: null }, JSON.parse(JSON.stringify(sc)));
+    if (sc.options) s.options = { a: { label: sc.options[0] }, b: { label: sc.options[1] } };
+    const L = id => s.options[id].label, r = Engine.report(s), m = Engine.model(s);
+    const lines = [];
+    lines.push(`=== ${p.id} ===`, `Persona: ${p.persona || ""}`, ``, `--- What the person saw and answered ---`);
+    lines.push(`Clarity: What's on your mind?`, `  You: ${s.question}   [${L("a")} / ${L("b")}]`);
+    lines.push(`Clarity: What's making this hard?`, `  You: ${s.hard}`);
+    lines.push(`Clarity: What are you hoping changes if you ${Engine.lower(L("a"))}?`, `  You: ${s.hope}`);
+    lines.push(`Clarity: If ${Engine.lower(L("b"))} gave you exactly that tomorrow, would you still want to ${Engine.lower(L("a"))}?`, `  You: ${s.stillWant}`);
+    const d = Engine.discovery(s); if (d) lines.push(`Clarity: ${d}`);
+    lines.push(`Clarity: What does this decision come down to? (up to four, most important first)`, `  You: ${s.factors.map(f => f.label).join(", ")}`);
+    lines.push(`Clarity: For each one, which is stronger? (${L("a")} / ${L("b")} / don't know)`);
+    s.factors.forEach(f => lines.push(`  ${f.label}: ${f.winner === "unknown" ? "don't know" : L(f.winner)}`));
+    lines.push(`Clarity: Do you know that, or are you assuming it?`);
+    s.factors.filter(f => f.winner && f.winner !== "unknown").forEach(f => lines.push(`  ${f.label}: ${f.basis === "know" ? "I know that" : "I'm assuming it"}`));
+    lines.push(`Clarity: Right now, which way are you leaning?`, `  You: ${s.lean === "torn" ? "honestly torn" : L(s.lean)}`);
+    if (s.lean && s.lean !== "torn") { lines.push(`Clarity: And if you were wrong? (for each uncertainty: would you still lean the same way?)`); Engine.uncertain(s).forEach(f => lines.push(`  ${f.label}: ${f.flips ? "no, that changes it" : "yes, still"}`)); }
+    lines.push(`Clarity: Could you find that out before deciding?`, `  You: ${s.findOut}`, `Clarity: If it didn't work out, how hard would it be to undo?`, `  You: ${s.reversibility}`);
+    lines.push(``, `--- The report the person received ---`, `Here's what this depends on.`, `${s.question}`, `${L("a")} · ${L("b")}`);
+    if (r.reframe) lines.push(`What you're really asking: ${r.reframe.join(" ")}`);
+    lines.push(r.settled ? `Where you are: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.pivot.question} ${r.pivotNote}`);
+    lines.push(`Known: ${r.structure.known.map(x => x.text).join(" ") || "Nothing you named."}`, `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "Nothing you named."}`, `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "Nothing you named."}`);
+    lines.push(`The tradeoff: ${r.pairs.map(x => `${x.factor}: ${x.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`);
+    lines.push(`${r.settled ? "What's left" : "Find out this first"}: ${r.next}${r.wait ? " " + r.wait : ""}${r.settled ? "" : " You don't have to solve everything. Just this."}`);
+    lines.push(`Now you know what you're deciding.`, ``, `--- Model (what the engine concluded) ---`, JSON.stringify(m), ``);
+    out.push(lines.join("\n"));
+  }
+  document.getElementById("out").textContent = out.join("\n");
+  document.body.dataset.done = "1";
+})();
+</script></body></html>
