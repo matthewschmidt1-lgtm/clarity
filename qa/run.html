@@ -36,6 +36,9 @@
     // discovery line matches the stillWant answer
     const d = Engine.discovery(s);
     if (s.stillWant === "no") chk("discovery: reframes on no", /may not be deciding/.test(d), d);
+    // epistemic boundary: never claims completeness or certainty about the real world
+    chk("boundary: no claim of completeness", !/\b(everything that matters|the real crux|this is the pivot|the only thing that matters|you have considered everything)\b/i.test(all), "");
+    chk("boundary: hedged verbs on the pivot", !/\b(definitely|certainly|without doubt)\b/i.test(all), "");
     // agency: never tells them what to choose
     chk("agency: no instruction to choose", !/you should (take|stay|leave|move|buy|choose)|we recommend|the right choice is/i.test(all), "");
     // unsupported inference: every factor named in the report was named by the person

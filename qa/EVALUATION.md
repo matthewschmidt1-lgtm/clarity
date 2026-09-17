@@ -31,6 +31,10 @@ Scores are pass/fail per check, not a 1–100 number. The failure names are the 
 
 **Unknown ≠ Pivot.** A person can have ten unknowns and one Pivot. The Pivot is the uncertainty that would change the choice: the assumption or unknown the person themselves said would flip their lean, ranked by how much they said it matters. When they are torn, it is the most important uncertainty. When they would stay if their current situation gave them what they want, it is that, not a factor. When nothing is uncertain, there is no Pivot, and the engine must say so.
 
+## The invariants
+
+The engine must not: invent a factor; treat an unexpressed motive as fact; manufacture an unknown; claim completeness; imply the Pivot is necessarily the real-world crux. Every report is prefaced *based on what you've told me*, and every report ends with *One thing to check*, which lets the person add what's missing and rerun. The `fidelity`, `no-pivot` and `boundary` checks enforce the first four; the fifth is wording, and the check for hedged verbs guards it.
+
 ## Intermediate representation
 
 `Engine.model(session)` returns the structure an evaluator should inspect instead of the prose:

@@ -23,7 +23,7 @@
   function fresh(q) {
     const o = C.inferOptions(q);
     return { step: 0, question: q || "", options: { a: { label: o.a }, b: { label: o.b } }, optionsEdited: false,
-      hard: "", hope: "", stillWant: null, hopeRuledOut: false, factors: [], lean: null, findOut: null, reversibility: null, feedback: null };
+      hard: "", hope: "", stillWant: null, hopeRuledOut: false, checked: null, factors: [], lean: null, findOut: null, reversibility: null, feedback: null };
   }
   let S;
   const params = new URLSearchParams(location.search);
@@ -238,8 +238,8 @@
       h("p", { class: "v quiet", style: "margin-top:4px" }, `${L("a")} · ${L("b")}`),
       r.reframe ? h("div", { class: "row" }, h("span", { class: "k" }, "What you're really asking"), h("p", { class: "v big" }, r.reframe[0]), h("p", { class: "v", style: "margin-top:6px" }, r.reframe[1])) : null,
       r.settled
-        ? h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "Where you are"), h("span", { class: "v big" }, r.settled.title), h("p", { class: "v", style: "margin-top:6px" }, r.settled.body))
-        : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
+        ? h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "Where you are"), h("p", { class: "v", style: "margin-bottom:6px" }, "Based on what you've told me:"), h("span", { class: "v big" }, r.settled.title), h("p", { class: "v", style: "margin-top:6px" }, r.settled.body))
+        : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), h("p", { class: "v", style: "margin-bottom:6px" }, "Based on what you've told me, this appears to hinge on:"), h("span", { class: "v big" }, r.pivot.question), h("p", { class: "v", style: "margin-top:6px" }, r.pivotNote)),
       h("div", { class: "row" }, h("span", { class: "k" }, "Right now"),
         h("dl", { class: "now" },
           h("dt", {}, "Known"), h("dd", {}, r.structure.known.length ? r.structure.known.map(x => h("span", {}, x.text)) : h("span", { class: "quiet" }, "Nothing you named.")),
@@ -261,9 +261,29 @@
       `The tradeoff: ${r.pairs.map(p => `${p.factor}: ${p.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`, ``,
       `Find out this first: ${r.next}${r.how ? " " + r.how : ""}${r.wait ? " " + r.wait : ""}`, ``, `Now you know what you're deciding.`
     ].filter(x => x !== null).join("\n");
+    const check = h("div", { class: "after missing" });
+    function renderCheck() {
+      check.innerHTML = "";
+      check.appendChild(h("h4", {}, "One thing to check"));
+      check.appendChild(h("p", { class: "hint" }, "Clarity can only see what's been put into the decision. Is there anything important you're worried about that isn't represented above?"));
+      if (S.checked === "no") { check.appendChild(h("p", { class: "thanks" }, "Then this is the whole picture, as far as you've described it.")); return; }
+      if (S.checked === "yes") {
+        const inp = h("input", { class: "input", type: "text", placeholder: "What is it? A few words.", maxlength: 40, "aria-label": "What's missing?" });
+        check.appendChild(h("form", { class: "add", onsubmit: e => {
+          e.preventDefault(); const t = inp.value.trim(); if (!t) return say("Name it in a few words.");
+          S.factors.push({ id: "own-" + Date.now(), label: t.charAt(0).toUpperCase() + t.slice(1), winner: null, basis: null, flips: null });
+          S.checked = null; S.findOut = null; save(); go(4);
+        } }, inp, h("button", { class: "btn", type: "submit" }, "Add it and look again")));
+        check.appendChild(h("p", { class: "hint" }, "It becomes part of the decision. Clarity will ask about it and look again."));
+        return;
+      }
+      check.appendChild(choices([["yes", "Yes, there's something"], ["no", "No, that's everything"]], null, v => { S.checked = v; save(); renderCheck(); }));
+    }
+    renderCheck();
     return [
       who(), prompt("Here's what this depends on."),
-      report,
+      hint("Based on what you've told me. If something important isn't here, you can add it below."),
+      report, check,
       h("div", { class: "report-actions" },
         h("button", { class: "btn btn-ghost", type: "button", onclick: () => navigator.clipboard.writeText(text()).then(() => say("Copied."), () => say("Couldn't copy.")) }, "Copy"),
         h("button", { class: "btn btn-ghost", type: "button", onclick: () => window.print() }, "Print"),
