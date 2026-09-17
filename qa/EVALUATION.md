@@ -52,6 +52,10 @@ Copy one in `scenarios.json`. A session needs `question`, `hope`, `stillWant`, `
 
 A mutation names a base scenario, one `set` of dotted paths, and an expectation: `pivot_changes`, `pivot_same`, `pivot_kind:<kind>` or `pivot_factor:<label>`.
 
+## Persona tests (a model in the loop)
+
+`qa/personas/` holds the first agent-run evaluation. A Sonnet agent answered the seven questions as eight people (`sessions.json`), `sh qa/replay.sh` replayed them through the real engine (`transcripts.txt`), and the agent then judged each report in the person's own voice on the Meaningful / Different / Salient questions plus a skeptical read (`evaluation.md`). Its four engine findings (the "give you to …" grammar, first-person labels leaking, the hope Pivot firing on fully-known facts, and "unsure" never producing a hope Pivot) are fixed and now covered by scenarios in `scenarios.json`. Re-run the protocol after any change to the questions or the report copy.
+
 ## What needs a model, and isn't built yet
 
 Three agent evaluators belong on top of this once an API key is in play. Their prompts, in one line each:

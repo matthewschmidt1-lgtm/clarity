@@ -21,6 +21,10 @@
     if (e.secondary_factor) chk("pivot: secondary factor", r.pivot.secondary && r.pivot.secondary.f.label === e.secondary_factor, r.pivot.secondary && r.pivot.secondary.f.label);
     if (e.pivot_mentions) chk("pivot: names the right option", r.pivot.question.includes(e.pivot_mentions), r.pivot.question);
     if ("reframe" in e) chk("intent: reframe present", !!r.reframe === e.reframe, r.reframe ? r.reframe[0] : null);
+    if (e.pivot_contains) chk("pivot: wording", r.pivot.question.includes(e.pivot_contains), r.pivot.question);
+    if (e.no_text) e.no_text.forEach(t => chk(`writing: never says "${t}"`, !all.includes(t), t));
+    if (e.text_contains) chk(`writing: says "${e.text_contains}"`, all.includes(e.text_contains), "");
+    if (r.how) chk("next step: concrete method given", r.how.length > 10, r.how);
     if ("tradeoff_pairs" in e) chk("tradeoff: pairs", r.pairs.length === e.tradeoff_pairs, r.pairs.length);
     // chain: the next action resolves the Pivot when it can be found out
     if (r.pivot.statement && (s.findOut === "soon" || s.findOut === "while")) chk("chain: next action resolves the Pivot", r.next === r.pivot.question, r.next);

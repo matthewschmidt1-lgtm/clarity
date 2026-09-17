@@ -15,6 +15,22 @@ window.Content = {
     { id: "stability", label: "Stability" }
   ],
 
+  /* One concrete way to find each factor out. Shown under "Find out this first". */
+  how: {
+    income: "Get the number in writing, and the date it starts.",
+    growth: "Ask two people who joined a year ago what actually changed for them.",
+    environment: "Spend a day there, or ask what a bad week looks like.",
+    time: "Count the hours in a real week, not the promise.",
+    relationships: "Say it out loud to the person it's about.",
+    security: "Run the numbers for the worst realistic month, not the average one.",
+    health: "Notice a full week honestly, not a good day.",
+    meaning: "Ask what you'd be doing on an ordinary Tuesday.",
+    location: "Spend a weekend there in the off-season.",
+    freedom: "Ask who would be able to say no to you.",
+    learning: "Ask what you'd know in a year that you don't know now.",
+    stability: "Ask how the last hard year went, and who left."
+  },
+
   /* Emotional intensity changes the interaction, never the engine. */
   tone(q) {
     const t = (q || "").toLowerCase();

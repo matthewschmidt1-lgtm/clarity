@@ -10,7 +10,7 @@
     const sc = p.session, o = Content.inferOptions(sc.question);
     const s = Object.assign({ options: { a: { label: o.a }, b: { label: o.b } }, hard: "", hope: "", stillWant: null, factors: [], lean: null, findOut: null, reversibility: null }, JSON.parse(JSON.stringify(sc)));
     if (sc.options) s.options = { a: { label: sc.options[0] }, b: { label: sc.options[1] } };
-    const L = id => s.options[id].label, r = Engine.report(s), m = Engine.model(s);
+    const L = id => Engine.toYou(s.options[id].label), r = Engine.report(s), m = Engine.model(s);
     const lines = [];
     lines.push(`=== ${p.id} ===`, `Persona: ${p.persona || ""}`, ``, `--- What the person saw and answered ---`);
     lines.push(`Clarity: What's on your mind?`, `  You: ${s.question}   [${L("a")} / ${L("b")}]`);
@@ -31,7 +31,7 @@
     lines.push(r.settled ? `Where you are: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.pivot.question} ${r.pivotNote}`);
     lines.push(`Known: ${r.structure.known.map(x => x.text).join(" ") || "Nothing you named."}`, `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "Nothing you named."}`, `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "Nothing you named."}`);
     lines.push(`The tradeoff: ${r.pairs.map(x => `${x.factor}: ${x.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`);
-    lines.push(`${r.settled ? "What's left" : "Find out this first"}: ${r.next}${r.wait ? " " + r.wait : ""}${r.settled ? "" : " You don't have to solve everything. Just this."}`);
+    lines.push(`${r.settled ? "What's left" : "Find out this first"}: ${r.next}${r.how ? " " + r.how : ""}${r.wait ? " " + r.wait : ""}${r.settled ? "" : " You don't have to solve everything. Just this."}`);
     lines.push(`Now you know what you're deciding.`, ``, `--- Model (what the engine concluded) ---`, JSON.stringify(m), ``);
     out.push(lines.join("\n"));
   }

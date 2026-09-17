@@ -371,6 +371,175 @@
         "pivot_kind": "none",
         "tradeoff_pairs": 2
       }
+    },
+    {
+      "id": "hope-phrased-as-to",
+      "note": "A hope that starts with 'to' must read as 'let you …', never 'give you to …'.",
+      "session": {
+        "question": "Should I quit my job to start my own business?",
+        "hope": "to build something that's actually mine",
+        "stillWant": "no",
+        "factors": [
+          {
+            "id": "freedom",
+            "label": "Freedom and control",
+            "winner": "a",
+            "basis": "assume",
+            "flips": true
+          },
+          {
+            "id": "security",
+            "label": "Financial security",
+            "winner": "b",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "a",
+        "findOut": "soon",
+        "reversibility": "hard"
+      },
+      "expect": {
+        "pivot_kind": "hope",
+        "pivot_contains": "let you build something that's actually yours",
+        "no_text": [
+          "give you to",
+          " my ",
+          "mine"
+        ]
+      }
+    },
+    {
+      "id": "first-person-label",
+      "note": "A first-person option label must read in second person inside the report.",
+      "session": {
+        "question": "Should I move back home to be near my parents?",
+        "hope": "to stop feeling guilty",
+        "stillWant": "no",
+        "factors": [
+          {
+            "id": "relationships",
+            "label": "Relationships",
+            "winner": "a",
+            "basis": "know",
+            "flips": null
+          },
+          {
+            "id": "growth",
+            "label": "Career growth",
+            "winner": "b",
+            "basis": "assume",
+            "flips": true
+          }
+        ],
+        "lean": "a",
+        "findOut": "soon",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "options": [
+          "Move back home to be near my parents",
+          "Stay here"
+        ],
+        "pivot_kind": "hope",
+        "no_text": [
+          "near my parents"
+        ],
+        "text_contains": "near your parents"
+      }
+    },
+    {
+      "id": "hope-ruled-out-settles",
+      "note": "Fully known facts, said 'no', then ruled the hope out: no Pivot.",
+      "session": {
+        "question": "Should I retire this year?",
+        "hope": "my mornings back",
+        "stillWant": "no",
+        "hopeRuledOut": true,
+        "factors": [
+          {
+            "id": "security",
+            "label": "Financial security",
+            "winner": "b",
+            "basis": "know",
+            "flips": null
+          },
+          {
+            "id": "time",
+            "label": "Free time",
+            "winner": "a",
+            "basis": "know",
+            "flips": null
+          }
+        ],
+        "lean": "a",
+        "findOut": "none",
+        "reversibility": "hard"
+      },
+      "expect": {
+        "known": 2,
+        "assumed": 0,
+        "unknown": 0,
+        "pivot_kind": "none",
+        "reframe": true
+      }
+    },
+    {
+      "id": "unsure-yields-hope-pivot",
+      "note": "'Unsure' with no flipping factor: the hope becomes the Pivot.",
+      "session": {
+        "question": "Should I take the promotion?",
+        "hope": "to feel trusted",
+        "stillWant": "unsure",
+        "factors": [
+          {
+            "id": "income",
+            "label": "Income",
+            "winner": "a",
+            "basis": "know",
+            "flips": null
+          },
+          {
+            "id": "time",
+            "label": "Free time",
+            "winner": "b",
+            "basis": "assume",
+            "flips": false
+          }
+        ],
+        "lean": "a",
+        "findOut": "soon",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "pivot_kind": "hope",
+        "pivot_contains": "let you feel trusted"
+      }
+    },
+    {
+      "id": "unsure-yields-to-flipping-factor",
+      "note": "'Unsure' but a factor would flip the lean: the factor wins.",
+      "session": {
+        "question": "Should I take the promotion?",
+        "hope": "to feel trusted",
+        "stillWant": "unsure",
+        "factors": [
+          {
+            "id": "time",
+            "label": "Free time",
+            "winner": "b",
+            "basis": "assume",
+            "flips": true
+          }
+        ],
+        "lean": "a",
+        "findOut": "soon",
+        "reversibility": "easy"
+      },
+      "expect": {
+        "pivot_kind": "factor",
+        "pivot_factor": "Free time"
+      }
     }
   ],
   "mutations": [
@@ -427,6 +596,15 @@
       },
       "expect": "pivot_factor:Career growth",
       "note": "When torn, if the first-ranked factor becomes known, the Pivot moves to the next uncertainty."
+    },
+    {
+      "id": "ruling-out-hope-moves-pivot",
+      "base": "job-growth-hope",
+      "set": {
+        "hopeRuledOut": true
+      },
+      "expect": "pivot_factor:Career growth",
+      "note": "Once the person says the current option can't give them what they want, the factor Pivot takes over."
     }
   ]
 }

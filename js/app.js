@@ -23,7 +23,7 @@
   function fresh(q) {
     const o = C.inferOptions(q);
     return { step: 0, question: q || "", options: { a: { label: o.a }, b: { label: o.b } }, optionsEdited: false,
-      hard: "", hope: "", stillWant: null, factors: [], lean: null, findOut: null, reversibility: null, feedback: null };
+      hard: "", hope: "", stillWant: null, hopeRuledOut: false, factors: [], lean: null, findOut: null, reversibility: null, feedback: null };
   }
   let S;
   const params = new URLSearchParams(location.search);
@@ -43,7 +43,7 @@
   $("#restart").addEventListener("click", () => { if (S.step === 0 || confirm("Start over? Your answers here will be cleared.")) { S = fresh(""); save(); go(0); } });
 
   function say(msg) { toast.textContent = msg; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 1800); }
-  const A = () => S.options.a.label, B = () => S.options.b.label;
+  const A = () => E.toYou(S.options.a.label), B = () => E.toYou(S.options.b.label);
   const short = l => l.length > 22 ? l.slice(0, 20).trim() + "…" : l;
 
   function who() { return h("p", { class: "who" }, "Clarity"); }
@@ -113,7 +113,7 @@
       who(), prompt(`What are you hoping changes if you <em>${esc(lower(A()))}</em>?`), ta,
       h("div", { class: "rule" }),
       who(), prompt(`If <em>${esc(lower(B()))}</em> gave you exactly that tomorrow, would you still want to ${esc(lower(A()))}?`),
-      choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], S.stillWant, v => { S.stillWant = v; save(); renderDiscovery(); }),
+      choices([["yes", "Yes, I'd still want to"], ["no", "No, probably not"], ["unsure", "I'm not sure"]], S.stillWant, v => { S.stillWant = v; S.hopeRuledOut = false; save(); renderDiscovery(); }),
       disc,
       actions(() => S.hope.trim().length > 1 && S.stillWant, "Say what you're hoping for, and whether you'd still go.")
     ];
@@ -203,8 +203,10 @@
     const leanLabel = S.lean && S.lean !== "torn" ? S.options[S.lean].label : A();
     const block = [];
     if (pv.statement) {
+      const opts = [["soon", "Yes, within a few weeks"], ["while", "Yes, but it would take a while"], ["doing", "Only by doing it"]];
+      if (pv.kind === "hope") opts.push(["cant", "No. I already know it can't."]);
       block.push(who(), prompt(`Could you find out ${esc(pv.statement)} <em>before</em> deciding?`),
-        choices([["soon", "Yes, within a few weeks"], ["while", "Yes, but it would take a while"], ["doing", "Only by doing it"]], S.findOut, v => { S.findOut = v; save(); }));
+        choices(opts, S.findOut, v => { if (v === "cant") { S.hopeRuledOut = true; S.findOut = null; save(); go(7); } else { S.findOut = v; save(); } }));
     } else {
       block.push(who(), prompt("One last thing."), hint("Nothing you're unsure about would change your mind. So the remaining question is about the cost of being wrong."));
       S.findOut = S.findOut || "none";
@@ -246,7 +248,7 @@
       h("div", { class: "row" }, h("span", { class: "k" }, "The tradeoff"),
         r.pairs.length ? h("dl", { class: "now" }, r.pairs.map(p => [h("dt", {}, p.factor), h("dd", {}, p.option)])) : null,
         h("p", { class: "v", style: r.pairs.length ? "margin-top:8px" : "" }, r.tradeoffLine)),
-      h("div", { class: "row" }, h("span", { class: "k" }, r.settled ? "What's left" : "Find out this first"), h("span", { class: "v big" }, r.next), r.wait ? h("p", { class: "v", style: "margin-top:8px" }, r.wait) : null, !r.settled ? h("p", { class: "v", style: "margin-top:8px" }, "You don't have to solve everything. Just this.") : null),
+      h("div", { class: "row" }, h("span", { class: "k" }, r.settled ? "What's left" : "Find out this first"), h("span", { class: "v big" }, r.next), r.how ? h("p", { class: "v", style: "margin-top:8px" }, r.how) : null, r.wait ? h("p", { class: "v", style: "margin-top:8px" }, r.wait) : null, !r.settled ? h("p", { class: "v", style: "margin-top:8px" }, "You don't have to solve everything. Just this.") : null),
       h("p", { class: "closing" }, "Now you know what you're deciding.")
     );
     const text = () => [
@@ -257,7 +259,7 @@
       `Assumed: ${r.structure.assumed.map(x => x.text).join(" ") || "—"}`,
       `Unknown: ${r.structure.unknown.map(x => x.text).join(" ") || "—"}`, ``,
       `The tradeoff: ${r.pairs.map(p => `${p.factor}: ${p.option}`).join(" · ")}${r.pairs.length ? ". " : ""}${r.tradeoffLine}`, ``,
-      `Find out this first: ${r.next}${r.wait ? " " + r.wait : ""}`, ``, `Now you know what you're deciding.`
+      `Find out this first: ${r.next}${r.how ? " " + r.how : ""}${r.wait ? " " + r.wait : ""}`, ``, `Now you know what you're deciding.`
     ].filter(x => x !== null).join("\n");
     return [
       who(), prompt("Here's what this depends on."),
