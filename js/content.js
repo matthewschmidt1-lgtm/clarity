@@ -22,13 +22,30 @@ window.Content = {
     return heavy ? "heavy" : "plain";
   },
 
-  /* Turn "Should I take the new job?" into two options and a "current state". */
+  /* Turn "Should I take the new job?" into two options and a "current state".
+     "Should I take the job or go back to school?" becomes two named options. */
   inferOptions(q) {
-    let t = (q || "").trim().replace(/[?.!]+$/, "");
-    const m = t.match(/^(should|do|shall|could|can|would)\s+(i|we)\s+(.*)$/i);
-    let act = m ? m[3] : t;
+    let t = (q || "").trim().replace(/[?.!]+$/, "").replace(/\s+/g, " ");
+    const cap = x => x ? x.charAt(0).toUpperCase() + x.slice(1) : x;
+    const lead = /^(should|do|shall|could|can|would|will)\s+(i|we)\s+/i;
+    const stripLead = x => x.replace(lead, "").replace(/^(to\s+)/i, "").trim();
+    const both = t.match(/^(.*?)\s+(?:or|vs\.?|versus)\s+(.+)$/i);
+    if (both) {
+      let a = stripLead(both[1]), b = stripLead(both[2]);
+      // "…or not" / "…or stay put" style tails
+      if (/^not$/i.test(b) || /^(not|don't|do not)\b/i.test(b) && b.split(" ").length <= 2) b = "";
+      // "move to Austin or Denver" → carry the verb phrase across
+      if (a && b && !/\s/.test(b)) {
+        const m = a.match(/^(.+\s(?:to|in|at|for|with|on)\s)(\S+)$/i);
+        if (m) b = m[1] + b;
+      }
+      if (a && b) return { a: cap(a), b: cap(b) };
+      if (a) t = a;
+    }
+    const m = t.match(lead);
+    let act = m ? stripLead(t) : t;
     if (!act) act = "Make the change";
-    act = act.charAt(0).toUpperCase() + act.slice(1);
+    act = cap(act);
     const l = act.toLowerCase();
     let stay = "Stay as things are";
     if (/^(leave|quit|resign|move|relocate|break up|end|sell|go back|return|start|launch|take|accept|buy|switch|change|apply|join|invest|have|get|try)/.test(l)) stay = /^(take|accept|join)/.test(l) ? "Stay where I am" : /^(buy|sell|invest)/.test(l) ? "Don't, for now" : /^(move|relocate)/.test(l) ? "Stay here" : /^(break up|end|leave|quit|resign)/.test(l) ? "Stay" : "Keep things as they are";
