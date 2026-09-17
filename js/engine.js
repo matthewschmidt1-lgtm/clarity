@@ -61,7 +61,8 @@
     const L = id => label(s, id);
     const out = [];
     if ((s.stillWant === "no" || s.stillWant === "unsure") && s.hope && s.hope.trim() && !s.hopeRuledOut) {
-      out.push({ kind: "hope", impact: s.stillWant === "no" ? "high" : "medium", question: `Can ${hereRef(s)} actually ${giveYou(s.hope)}?`, statement: `whether ${hereRef(s)} can actually ${giveYou(s.hope)}` });
+      if (here(s)) out.push({ kind: "hope", impact: s.stillWant === "no" ? "high" : "medium", question: `Can ${hereRef(s)} actually ${giveYou(s.hope)}?`, statement: `whether ${hereRef(s)} can actually ${giveYou(s.hope)}` });
+      else out.push({ kind: "hope", twoSided: true, impact: s.stillWant === "no" ? "high" : "medium", question: `Could either option ${giveYou(s.hope)}?`, statement: `whether either option can ${giveYou(s.hope)}` });
     }
     uncertain(s).forEach((f, i) => {
       const fl = f.label.toLowerCase();
@@ -102,18 +103,19 @@
   /* 5b. The voice at the second question: name the tension, ask once, then notice. */
   function tension(s) {
     if (!s.hope || !s.hope.trim()) return null;
-    return `You want to ${goVerb(s)}. What you've described is what you hope it changes. One way to test that:`;
+    return here(s) ? `You want to ${goVerb(s)}. What you've described is what you hope it changes. One way to test that:` : `What you've described is what you hope changes. One way to test whether the choice itself matters:`;
   }
+  function hopeQuestion(s) { return here(s) ? `What are you hoping changes if you ${goVerb(s)}?` : `What are you hoping changes?`; }
   function stillWantQuestion(s) {
     const h = here(s);
-    return h ? `If ${h} gave you what you want, would you still ${goVerb(s)}?` : `If ${quote(label(s, "b"))} gave you what you want, would you still ${goVerb(s)}?`;
+    return h ? `If ${h} gave you what you want, would you still want to ${goVerb(s)}?` : `If the other option gave you exactly that, would you still want to ${goVerb(s)}?`;
   }
   function discovery(s) {
     if (!s.stillWant || !s.hope) return null;
     const h = here(s);
     if (s.stillWant === "no") return h ? `Maybe the question isn't whether to ${goVerb(s)}. It's whether you can get what you want ${without(s)}.` : `Maybe the question isn't which one. It's whether you can get what you want either way.`;
     if (s.stillWant === "unsure") return `You want to ${goVerb(s)}. But you're not sure it's the only way to get what you want. That's worth knowing.`;
-    return `Then it's the change you want, not only what it brings.`;
+    return `Then you want the change itself, not only what it brings.`;
   }
 
   /* 6. The report. Decision → real question → Pivot → evidence → tradeoff → next. */
@@ -125,13 +127,14 @@
 
     let reframe = null;
     if (s.stillWant === "no" && s.hope) {
-      reframe = [`You don't just want to ${goVerb(s)}. You ${wantTo(s.hope)}.`, s.hopeRuledOut ? `You've said ${hereRef(s)} can't give you that. So this is about the change itself.` : `If ${hereRef(s)} could give you that, you'd ${stayVerb(s)}.`];
+      reframe = [`You don't just want to ${goVerb(s)}. You ${wantTo(s.hope)}.`, s.hopeRuledOut ? `You've said ${hereRef(s)} can't give you that. So this is about the change itself.` : here(s) ? `If ${hereRef(s)} could give you that, you'd ${stayVerb(s)}.` : `If the other option could give you that, you'd take it.`];
     } else if (s.stillWant === "unsure" && s.hope) {
-      reframe = [`You ${wantTo(s.hope)}. You're not sure ${goVerb(s) === lower(A) ? "this" : quote(A)} is the only way to get it.`, s.hopeRuledOut ? `You've since said ${hereRef(s)} can't give you that.` : `That comes before anything else.`];
+      reframe = [`You ${wantTo(s.hope)}. You're not sure the only way to get it is to ${goVerb(s)}.`, s.hopeRuledOut ? `You've since said ${hereRef(s)} can't give you that.` : `That comes before anything else.`];
     }
 
     let pivotNote, observation = null;
-    if (pv.kind === "hope") { observation = `You know what you want. You don't know whether you can get it ${without(s)}.`; pivotNote = pv.secondary ? `If it can, you don't need to ${goVerb(s)}. If it can't, the next question is ${pv.secondary.statement}.` : `If it can, you don't need to ${goVerb(s)}. If it can't, the case for it gets much stronger.`; }
+    if (pv.kind === "hope" && pv.twoSided) { observation = `You know what you want. You don't know which option can give it to you.`; pivotNote = `If both can, this isn't what decides it. If only one can, it is.`; }
+    else if (pv.kind === "hope") { observation = `You know what you want. You don't know whether you can get it ${without(s)}.`; pivotNote = pv.secondary ? `If it can, you don't need to ${goVerb(s)}. If it can't, the next question is ${pv.secondary.statement}.` : `If it can, you don't need to ${goVerb(s)}. If it can't, the case for it gets much stronger.`; }
     else if (pv.kind === "factor") { observation = pv.f.winner === "unknown" ? `The options aren't the uncertainty. ${pv.f.label} is.` : `${quote(L(pv.f.winner))} isn't the uncertainty. ${pv.f.label} is.`; pivotNote = lean ? `If that's true, ${quote(L(lean))} has a strong case. If it isn't, the decision changes.` : `That's the question that changes the decision.`; }
     else if (pv.kind === "robust") pivotNote = `You may be more decided than you feel.`;
     else pivotNote = `You have enough to decide. This comes down to what you prefer.`;
@@ -139,7 +142,7 @@
     const pairs = s.factors.filter(f => f.winner && f.winner !== "unknown").map(f => ({ factor: f.label, option: L(f.winner) }));
     const sideA = pairs.filter(p => p.option === A), sideB = pairs.filter(p => p.option === B);
     let tradeoffLine = null;
-    if (sideA.length && sideB.length) tradeoffLine = `More ${sideA[0].factor.toLowerCase()} against more ${sideB[0].factor.toLowerCase()}. That's the exchange.`;
+    if (sideA.length && sideB.length) tradeoffLine = `That's the exchange: ${sideA[0].factor.toLowerCase()} for ${sideB[0].factor.toLowerCase()}.`;
     else if (pairs.length) tradeoffLine = `On everything you named, ${quote(pairs[0].option)} is stronger. The tradeoff isn't between the options; it's between what you're sure of and what you're not.`;
     else tradeoffLine = `You couldn't say which option is stronger on anything you named. That isn't indecision. It's a decision made too early.`;
 
@@ -147,7 +150,7 @@
     const rev = s.reversibility, leanLabel = lean ? L(lean) : A;
     const heavy = window.Content && Content.tone(s.question) === "heavy";
     if (pv.statement) {
-      how = pv.kind === "hope" ? "Ask for it directly. The answer to a real request is information." : (window.Content && Content.how[pv.f.id]) || "Ask someone who's already there. Ask about specifics, not the vibe.";
+      how = pv.kind === "hope" ? (pv.twoSided ? "Ask both sides the same question, in the same words." : "Ask for it directly. The answer to a real request is information.") : (window.Content && Content.how[pv.f.id]) || "Ask someone who's already there. Ask about specifics, not the vibe.";
       if (s.findOut === "soon") { next = pv.question; wait = `You don't need to decide yet. You need to know this first.`; }
       else if (s.findOut === "while") { next = pv.question; wait = `This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date.`; }
       else { next = heavy ? `The only way to know is to live it.` : `The only way to know is to try.`; how = heavy ? "That's a bigger ask than it sounds. Worth saying out loud to someone before you do." : null; wait = rev === "hard" ? `You said ${quote(leanLabel)} would be hard to undo. A choice you can't test in advance and can't reverse is worth taking slowly.` : `You said ${quote(leanLabel)} would be easy to undo. A choice you can test and reverse is a smaller decision than it feels.`; }
@@ -156,7 +159,7 @@
       wait = rev === "hard" ? `${quote(leanLabel)} would be hard to undo, so take one more look at what you're assuming. But you already know which way you're facing.` : `${quote(leanLabel)} would be easy to undo, and nothing you're unsure of changes the picture.`;
     } else {
       next = `Nothing. You already have what you need.`;
-      wait = `Name the one thing you'd want to be true before you'd feel settled. If you can't, that's your answer.`;
+      wait = `What's left is what you prefer. That's yours to weigh, and it isn't a smaller thing than a fact.`;
     }
 
     // When there is no Pivot, say so plainly and never use the word.
@@ -167,5 +170,5 @@
     return { reframe, structure: st, pivot: pv, pivotNote, observation, settled, pairs, tradeoffLine, next, wait, how, lean, hard: s.hard };
   }
 
-  window.Engine = { lower, toYou, structure, uncertain, candidates, pivot, tension, stillWantQuestion, discovery, model, report };
+  window.Engine = { lower, toYou, structure, uncertain, candidates, pivot, tension, hopeQuestion, stillWantQuestion, discovery, model, report };
 })();

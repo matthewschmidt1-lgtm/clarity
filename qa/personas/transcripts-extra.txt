@@ -1,0 +1,143 @@
+=== denver-austin ===
+Persona: Sam, 33, has two lateral job offers of equal pay and title, one in Denver and one in Austin. There's no current job to fall back on and compare against — this is a two-sided choice between two futures, not a stay-vs-go question.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I take the offer in Denver or the offer in Austin?   [Take the offer in Denver / Take the offer in Austin]
+Clarity: What's making this hard?
+  You: Neither city is my life right now — I'd be starting over either way, and I keep flip-flopping on which unknown matters more.
+Clarity: What are you hoping changes?
+  You: to stop feeling like I'm gambling with where the next five years happen
+Clarity: What you've described is what you hope changes. One way to test whether the choice itself matters:
+Clarity: If the other option gave you exactly that, would you still want to take the offer in Denver?
+  You: no
+Clarity: Maybe the question isn't which one. It's whether you can get what you want either way.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Career growth, Relationships, Location
+Clarity: For each one, which is stronger? (Take the offer in Denver / Take the offer in Austin / don't know)
+  Career growth: Take the offer in Denver
+  Relationships: Take the offer in Austin
+  Location: don't know
+Clarity: Do you know that, or are you assuming it?
+  Career growth: I'm assuming it
+  Relationships: I know that
+Clarity: Right now, which way are you leaning?
+  You: honestly torn
+Clarity: Could you find that out before deciding?
+  You: while
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I take the offer in Denver or the offer in Austin?
+Take the offer in Denver · Take the offer in Austin
+What you're really asking: You don't just want to take the offer in Denver. You want to stop feeling like you're gambling with where the next five years happen. If the other option could give you that, you'd take it.
+THE PIVOT: You know what you want. You don't know which option can give it to you. Could either option let you stop feeling like you're gambling with where the next five years happen? If both can, this isn't what decides it. If only one can, it is.
+Known: “Take the offer in Austin” is stronger on relationships.
+Assumed: “Take the offer in Denver” is stronger on career growth.
+Unknown: Which option is stronger on location.
+The tradeoff: Career growth: Take the offer in Denver · Relationships: Take the offer in Austin. That's the exchange: career growth for relationships.
+Find out this first: Could either option let you stop feeling like you're gambling with where the next five years happen? Ask both sides the same question, in the same words. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I take the offer in Denver or the offer in Austin?","options":["Take the offer in Denver","Take the offer in Austin"]},"desired_outcome":"to stop feeling like I'm gambling with where the next five years happen","still_want":"no","hard":"Neither city is my life right now — I'd be starting over either way, and I keep flip-flopping on which unknown matters more.","factors":[{"name":"Career growth","rank":1,"advantage":"a","status":"assumed","would_flip":true},{"name":"Relationships","rank":2,"advantage":"b","status":"known","would_flip":null},{"name":"Location","rank":3,"advantage":null,"status":"unknown","would_flip":true}],"lean":"torn","candidate_pivots":[{"question":"Could either option let you stop feeling like you're gambling with where the next five years happen?","impact":"high"},{"question":"Is “Take the offer in Denver” really stronger on career growth?","impact":"high"},{"question":"Which option is actually stronger on location?","impact":"high"}],"pivot":{"kind":"hope","question":"Could either option let you stop feeling like you're gambling with where the next five years happen?","factor":null},"find_out":"while","reversibility":"hard","known":["“Take the offer in Austin” is stronger on relationships."],"assumed":["“Take the offer in Denver” is stronger on career growth."],"unknown":["Which option is stronger on location."]}
+
+=== own-factor-relocation ===
+Persona: Priyanka, 37, married with two school-age kids, has been offered an internal promotion to lead a new office that requires relocating to a different state. The money and title are better, but her kids are settled in a school she loves, and that's the cost she actually worries about, not her own career risk.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I take the promotion that requires relocating?   [Take the promotion that requires relocating / Stay where you are]
+Clarity: What's making this hard?
+  You: The job is exactly what I've been working toward, but yanking my kids out of a school where they've finally settled feels like the actual cost, not the job itself.
+Clarity: What are you hoping changes if you take the promotion that requires relocating?
+  You: to stop feeling like I have to choose between my ambition and my kids' stability
+Clarity: You want to take the promotion that requires relocating. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current job gave you what you want, would you still want to take the promotion that requires relocating?
+  You: unsure
+Clarity: You want to take the promotion that requires relocating. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Career growth, Income, My kids' school, Stability
+Clarity: For each one, which is stronger? (Take the promotion that requires relocating / Stay where you are / don't know)
+  Career growth: Take the promotion that requires relocating
+  Income: Take the promotion that requires relocating
+  My kids' school: Stay where you are
+  Stability: don't know
+Clarity: Do you know that, or are you assuming it?
+  Career growth: I know that
+  Income: I know that
+  My kids' school: I know that
+Clarity: Right now, which way are you leaning?
+  You: honestly torn
+Clarity: Could you find that out before deciding?
+  You: soon
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I take the promotion that requires relocating?
+Take the promotion that requires relocating · Stay where you are
+What you're really asking: You want to stop feeling like you have to choose between your ambition and your kids' stability. You're not sure the only way to get it is to take the promotion that requires relocating. That comes before anything else.
+THE PIVOT: The options aren't the uncertainty. Stability is. Which option is actually stronger on stability? That's the question that changes the decision.
+Known: “Take the promotion that requires relocating” is stronger on career growth. “Take the promotion that requires relocating” is stronger on income. “Stay where you are” is stronger on my kids' school.
+Assumed: Nothing you named.
+Unknown: Which option is stronger on stability.
+The tradeoff: Career growth: Take the promotion that requires relocating · Income: Take the promotion that requires relocating · My kids' school: Stay where you are. That's the exchange: career growth for my kids' school.
+Find out this first: Which option is actually stronger on stability? Ask how the last hard year went, and who left. You don't need to decide yet. You need to know this first. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I take the promotion that requires relocating?","options":["Take the promotion that requires relocating","Stay where I am"]},"desired_outcome":"to stop feeling like I have to choose between my ambition and my kids' stability","still_want":"unsure","hard":"The job is exactly what I've been working toward, but yanking my kids out of a school where they've finally settled feels like the actual cost, not the job itself.","factors":[{"name":"Career growth","rank":1,"advantage":"a","status":"known","would_flip":null},{"name":"Income","rank":2,"advantage":"a","status":"known","would_flip":null},{"name":"My kids' school","rank":3,"advantage":"b","status":"known","would_flip":true},{"name":"Stability","rank":4,"advantage":null,"status":"unknown","would_flip":null}],"lean":"torn","candidate_pivots":[{"question":"Can your current job actually let you stop feeling like you have to choose between your ambition and your kids' stability?","impact":"medium"},{"question":"Which option is actually stronger on stability?","impact":"high"}],"pivot":{"kind":"factor","question":"Which option is actually stronger on stability?","factor":"Stability"},"find_out":"soon","reversibility":"hard","known":["“Take the promotion that requires relocating” is stronger on career growth.","“Take the promotion that requires relocating” is stronger on income.","“Stay where you are” is stronger on my kids' school."],"assumed":[],"unknown":["Which option is stronger on stability."]}
+
+=== heavy-marriage-assumed-flip ===
+Persona: Linh, 44, married nineteen years, seriously considering divorce after a long stretch of quiet resentment. She isn't sure counseling would actually change things, and she's assuming her husband wouldn't be willing to do the work — but she's never actually asked him.
+
+--- What the person saw and answered ---
+Clarity: What's on your mind?
+  You: Should I leave my marriage?   [Leave your marriage / Stay]
+Clarity: What's making this hard?
+  You: I've built a case in my head for years, but I've never actually asked him if he'd change. I've just decided he wouldn't.
+Clarity: What are you hoping changes if you leave your marriage?
+  You: to stop feeling alone in a marriage that looks fine from the outside
+Clarity: You want to leave your marriage. What you've described is what you hope it changes. One way to test that:
+Clarity: If this relationship gave you what you want, would you still want to leave your marriage?
+  You: unsure
+Clarity: You want to leave your marriage. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What does this decision come down to? (up to four, most important first)
+  You: Meaning, Stability, Relationships
+Clarity: For each one, which is stronger? (Leave your marriage / Stay / don't know)
+  Meaning: Leave your marriage
+  Stability: Stay
+  Relationships: Leave your marriage
+Clarity: Do you know that, or are you assuming it?
+  Meaning: I know that
+  Stability: I know that
+  Relationships: I'm assuming it
+Clarity: Right now, which way are you leaning?
+  You: Leave your marriage
+Clarity: And if you were wrong? (for each uncertainty: would you still lean the same way?)
+  Relationships: no, that changes it
+Clarity: Could you find that out before deciding?
+  You: while
+Clarity: If it didn't work out, how hard would it be to undo?
+  You: hard
+
+--- The report the person received ---
+Here's what this depends on.
+Should I leave my marriage?
+Leave your marriage · Stay
+What you're really asking: You want to stop feeling alone in a marriage that looks fine from the outside. You're not sure the only way to get it is to leave your marriage. That comes before anything else.
+THE PIVOT: “Leave your marriage” isn't the uncertainty. Relationships is. Is “Leave your marriage” really stronger on relationships? If that's true, “Leave your marriage” has a strong case. If it isn't, the decision changes.
+Known: “Leave your marriage” is stronger on meaning. “Stay” is stronger on stability.
+Assumed: “Leave your marriage” is stronger on relationships.
+Unknown: Nothing you named.
+The tradeoff: Meaning: Leave your marriage · Stability: Stay · Relationships: Leave your marriage. That's the exchange: meaning for stability.
+Find out this first: Is “Leave your marriage” really stronger on relationships? Say it out loud to the person it's about. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
+Now you know what you're deciding.
+
+--- Model (what the engine concluded) ---
+{"decision":{"question":"Should I leave my marriage?","options":["Leave my marriage","Stay"]},"desired_outcome":"to stop feeling alone in a marriage that looks fine from the outside","still_want":"unsure","hard":"I've built a case in my head for years, but I've never actually asked him if he'd change. I've just decided he wouldn't.","factors":[{"name":"Meaning","rank":1,"advantage":"a","status":"known","would_flip":null},{"name":"Stability","rank":2,"advantage":"b","status":"known","would_flip":null},{"name":"Relationships","rank":3,"advantage":"a","status":"assumed","would_flip":true}],"lean":"a","candidate_pivots":[{"question":"Can this relationship actually let you stop feeling alone in a marriage that looks fine from the outside?","impact":"medium"},{"question":"Is “Leave your marriage” really stronger on relationships?","impact":"high"}],"pivot":{"kind":"factor","question":"Is “Leave your marriage” really stronger on relationships?","factor":"Relationships"},"find_out":"while","reversibility":"hard","known":["“Leave your marriage” is stronger on meaning.","“Stay” is stronger on stability."],"assumed":["“Leave your marriage” is stronger on relationships."],"unknown":[]}
+

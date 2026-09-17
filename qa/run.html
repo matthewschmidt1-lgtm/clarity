@@ -29,7 +29,9 @@
     if (e.discovery_contains) chk("voice: discovery line", (Engine.discovery(s) || "").includes(e.discovery_contains), Engine.discovery(s));
     // voice: no quoted label as the subject of the hypothetical, no AI filler
     chk("voice: no AI filler", !/(let's (explore|dive|unpack)|it sounds like|i hear you|great insight|here's something interesting|what you're really saying)/i.test(all + " " + (Engine.tension(s) || "") + " " + Engine.stillWantQuestion(s) + " " + (Engine.discovery(s) || "")), "");
-    chk("voice: hypothetical doesn't quote a label as subject", !/^If “/.test(Engine.stillWantQuestion(s)) || !isStay(s), Engine.stillWantQuestion(s));
+    chk("voice: hypothetical never quotes a label as subject", !/^If “/.test(Engine.stillWantQuestion(s)), Engine.stillWantQuestion(s));
+    chk("voice: hypothetical asks about wanting", /would you still want to/.test(Engine.stillWantQuestion(s)), Engine.stillWantQuestion(s));
+    if (m.pivot.kind === "none") chk("settled: no contradictory test afterwards", !/before you'd feel settled/.test(all), r.wait);
     if ("tradeoff_pairs" in e) chk("tradeoff: pairs", r.pairs.length === e.tradeoff_pairs, r.pairs.length);
     // chain: the next action resolves the Pivot when it can be found out
     if (r.pivot.statement && (s.findOut === "soon" || s.findOut === "while")) chk("chain: next action resolves the Pivot", r.next === r.pivot.question, r.next);

@@ -15,7 +15,7 @@
     lines.push(`=== ${p.id} ===`, `Persona: ${p.persona || ""}`, ``, `--- What the person saw and answered ---`);
     lines.push(`Clarity: What's on your mind?`, `  You: ${s.question}   [${L("a")} / ${L("b")}]`);
     lines.push(`Clarity: What's making this hard?`, `  You: ${s.hard}`);
-    lines.push(`Clarity: What are you hoping changes if you ${Engine.lower(L("a"))}?`, `  You: ${s.hope}`);
+    lines.push(`Clarity: ${Engine.hopeQuestion(s)}`, `  You: ${s.hope}`);
     const tn = Engine.tension(s); if (tn) lines.push(`Clarity: ${tn}`);
     lines.push(`Clarity: ${Engine.stillWantQuestion(s)}`, `  You: ${s.stillWant}`);
     const d = Engine.discovery(s); if (d) lines.push(`Clarity: ${d}`);

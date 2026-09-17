@@ -123,7 +123,7 @@
     ta.addEventListener("input", renderTest);
     renderTest();
     return [
-      who(), prompt(`What are you hoping changes if you <em>${esc(lower(A()))}</em>?`), ta,
+      who(), prompt(esc(E.hopeQuestion(S)).replace(esc(lower(A())), `<em>${esc(lower(A()))}</em>`)), ta,
       test,
       disc,
       actions(() => S.hope.trim().length > 1 && S.stillWant, "Say what you're hoping for, and whether you'd still go.")

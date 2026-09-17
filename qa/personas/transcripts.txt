@@ -9,7 +9,7 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you take the new job at the startup?
   You: to feel challenged again and stop dreading Mondays
 Clarity: You want to take the new job at the startup. What you've described is what you hope it changes. One way to test that:
-Clarity: If your current job gave you what you want, would you still take the new job at the startup?
+Clarity: If your current job gave you what you want, would you still want to take the new job at the startup?
   You: unsure
 Clarity: You want to take the new job at the startup. But you're not sure it's the only way to get what you want. That's worth knowing.
 Clarity: What does this decision come down to? (up to four, most important first)
@@ -38,12 +38,12 @@ Clarity: If it didn't work out, how hard would it be to undo?
 Here's what this depends on.
 Should I take the new job at the startup?
 Take the new job at the startup · Stay where you are
-What you're really asking: You want to feel challenged again and stop dreading Mondays. You're not sure this is the only way to get it. That comes before anything else.
+What you're really asking: You want to feel challenged again and stop dreading Mondays. You're not sure the only way to get it is to take the new job at the startup. That comes before anything else.
 THE PIVOT: “Take the new job at the startup” isn't the uncertainty. Career growth is. Is “Take the new job at the startup” really stronger on career growth? If that's true, “Take the new job at the startup” has a strong case. If it isn't, the decision changes.
 Known: “Stay where you are” is stronger on financial security.
 Assumed: “Take the new job at the startup” is stronger on career growth. “Stay where you are” is stronger on free time.
 Unknown: Which option is stronger on day-to-day environment.
-The tradeoff: Career growth: Take the new job at the startup · Financial security: Stay where you are · Free time: Stay where you are. More career growth against more financial security. That's the exchange.
+The tradeoff: Career growth: Take the new job at the startup · Financial security: Stay where you are · Free time: Stay where you are. That's the exchange: career growth for financial security.
 Find out this first: Is “Take the new job at the startup” really stronger on career growth? Ask two people who joined a year ago what actually changed for them. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
 Now you know what you're deciding.
 
@@ -61,7 +61,7 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you move back home to be near your parents?
   You: to not feel guilty every time my phone rings
 Clarity: You want to move back home to be near your parents. What you've described is what you hope it changes. One way to test that:
-Clarity: If where you live now gave you what you want, would you still move back home to be near your parents?
+Clarity: If where you live now gave you what you want, would you still want to move back home to be near your parents?
   You: no
 Clarity: Maybe the question isn't whether to move back home to be near your parents. It's whether you can get what you want without moving.
 Clarity: What does this decision come down to? (up to four, most important first)
@@ -89,7 +89,7 @@ THE PIVOT: You know what you want. You don't know whether you can get it without
 Known: “Stay here” is stronger on career growth.
 Assumed: “Move back home to be near your parents” is stronger on meaning.
 Unknown: Which option is stronger on relationships.
-The tradeoff: Meaning: Move back home to be near your parents · Career growth: Stay here. More meaning against more career growth. That's the exchange.
+The tradeoff: Meaning: Move back home to be near your parents · Career growth: Stay here. That's the exchange: meaning for career growth.
 Find out this first: Can where you live now actually let you not feel guilty every time your phone rings? Ask for it directly. The answer to a real request is information. You don't need to decide yet. You need to know this first. You don't have to solve everything. Just this.
 Now you know what you're deciding.
 
@@ -107,7 +107,7 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you start the PhD?
   You: to finally be doing the kind of research I actually care about instead of assisting someone else's
 Clarity: You want to start the PhD. What you've described is what you hope it changes. One way to test that:
-Clarity: If where you are now gave you what you want, would you still start the PhD?
+Clarity: If where you are now gave you what you want, would you still want to start the PhD?
   You: no
 Clarity: Maybe the question isn't whether to start the PhD. It's whether you can get what you want where you are.
 Clarity: What does this decision come down to? (up to four, most important first)
@@ -137,7 +137,7 @@ THE PIVOT: You know what you want. You don't know whether you can get it where y
 Known: “Start the PhD” is stronger on meaning. “Stay in your job and look for a raise elsewhere” is stronger on income.
 Assumed: “Stay in your job and look for a raise elsewhere” is stronger on stability.
 Unknown: Which option is stronger on career growth.
-The tradeoff: Meaning: Start the PhD · Income: Stay in your job and look for a raise elsewhere · Stability: Stay in your job and look for a raise elsewhere. More meaning against more income. That's the exchange.
+The tradeoff: Meaning: Start the PhD · Income: Stay in your job and look for a raise elsewhere · Stability: Stay in your job and look for a raise elsewhere. That's the exchange: meaning for income.
 Find out this first: Can where you are now actually let you finally be doing the kind of research you actually care about instead of assisting someone else's? Ask for it directly. The answer to a real request is information. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
 Now you know what you're deciding.
 
@@ -155,7 +155,7 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you leave your relationship?
   You: to feel like myself again, excited about my own life
 Clarity: You want to leave your relationship. What you've described is what you hope it changes. One way to test that:
-Clarity: If this relationship gave you what you want, would you still leave your relationship?
+Clarity: If this relationship gave you what you want, would you still want to leave your relationship?
   You: unsure
 Clarity: You want to leave your relationship. But you're not sure it's the only way to get what you want. That's worth knowing.
 Clarity: What does this decision come down to? (up to four, most important first)
@@ -179,7 +179,7 @@ Clarity: If it didn't work out, how hard would it be to undo?
 Here's what this depends on.
 Should I leave my relationship?
 Leave your relationship · Stay
-What you're really asking: You want to feel like yourself again, excited about your own life. You're not sure this is the only way to get it. That comes before anything else.
+What you're really asking: You want to feel like yourself again, excited about your own life. You're not sure the only way to get it is to leave your relationship. That comes before anything else.
 THE PIVOT: The options aren't the uncertainty. Meaning is. Which option is actually stronger on meaning? That's the question that changes the decision.
 Known: “Stay” is stronger on stability.
 Assumed: “Stay” is stronger on relationships.
@@ -202,7 +202,7 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you buy a house?
   You: to stop feeling like we're behind everyone else our age
 Clarity: You want to buy a house. What you've described is what you hope it changes. One way to test that:
-Clarity: If where you live now gave you what you want, would you still buy a house?
+Clarity: If where you live now gave you what you want, would you still want to buy a house?
   You: no
 Clarity: Maybe the question isn't whether to buy a house. It's whether you can get what you want where you are.
 Clarity: What does this decision come down to? (up to four, most important first)
@@ -233,7 +233,7 @@ THE PIVOT: You know what you want. You don't know whether you can get it where y
 Known: “Keep renting” is stronger on freedom and control.
 Assumed: “Buy a house” is stronger on stability.
 Unknown: Which option is stronger on financial security.
-The tradeoff: Freedom and control: Keep renting · Stability: Buy a house. More stability against more freedom and control. That's the exchange.
+The tradeoff: Freedom and control: Keep renting · Stability: Buy a house. That's the exchange: stability for freedom and control.
 Find out this first: Can where you live now actually let you stop feeling like we're behind everyone else our age? Ask for it directly. The answer to a real request is information. You don't need to decide yet. You need to know this first. You don't have to solve everything. Just this.
 Now you know what you're deciding.
 
@@ -251,7 +251,7 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you quit your job to start your own business?
   You: to build something that's actually mine instead of making someone else rich
 Clarity: You want to quit your job to start your own business. What you've described is what you hope it changes. One way to test that:
-Clarity: If your current job gave you what you want, would you still quit your job to start your own business?
+Clarity: If your current job gave you what you want, would you still want to quit your job to start your own business?
   You: no
 Clarity: Maybe the question isn't whether to quit your job to start your own business. It's whether you can get what you want without leaving.
 Clarity: What does this decision come down to? (up to four, most important first)
@@ -284,7 +284,7 @@ THE PIVOT: You know what you want. You don't know whether you can get it without
 Known: “Stay” is stronger on financial security. “Quit your job to start your own business” is stronger on meaning.
 Assumed: “Stay” is stronger on free time.
 Unknown: Which option is stronger on career growth.
-The tradeoff: Financial security: Stay · Meaning: Quit your job to start your own business · Free time: Stay. More meaning against more financial security. That's the exchange.
+The tradeoff: Financial security: Stay · Meaning: Quit your job to start your own business · Free time: Stay. That's the exchange: meaning for financial security.
 Find out this first: Can your current job actually let you build something that's actually yours instead of making someone else rich? Ask for it directly. The answer to a real request is information. This will take time to learn. Decide whether waiting costs you more than choosing without it, and give yourself a date. You don't have to solve everything. Just this.
 Now you know what you're deciding.
 
@@ -302,9 +302,9 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you accept the early retirement package?
   You: to stop working the floor and get my knees and my weekends back
 Clarity: You want to accept the early retirement package. What you've described is what you hope it changes. One way to test that:
-Clarity: If your current job gave you what you want, would you still accept the early retirement package?
+Clarity: If your current job gave you what you want, would you still want to accept the early retirement package?
   You: yes
-Clarity: Then it's the change you want, not only what it brings.
+Clarity: Then you want the change itself, not only what it brings.
 Clarity: What does this decision come down to? (up to four, most important first)
   You: Financial security, Health and energy, Meaning, Free time
 Clarity: For each one, which is stronger? (Accept the early retirement package / Stay where you are / don't know)
@@ -333,8 +333,8 @@ Where you are: You already know enough. There's no unknown left that would mater
 Known: “Accept the early retirement package” is stronger on financial security. “Accept the early retirement package” is stronger on health and energy. “Stay where you are” is stronger on meaning. “Accept the early retirement package” is stronger on free time.
 Assumed: Nothing you named.
 Unknown: Nothing you named.
-The tradeoff: Financial security: Accept the early retirement package · Health and energy: Accept the early retirement package · Meaning: Stay where you are · Free time: Accept the early retirement package. More financial security against more meaning. That's the exchange.
-What's left: Nothing. You already have what you need. Name the one thing you'd want to be true before you'd feel settled. If you can't, that's your answer.
+The tradeoff: Financial security: Accept the early retirement package · Health and energy: Accept the early retirement package · Meaning: Stay where you are · Free time: Accept the early retirement package. That's the exchange: financial security for meaning.
+What's left: Nothing. You already have what you need. What's left is what you prefer. That's yours to weigh, and it isn't a smaller thing than a fact.
 Now you know what you're deciding.
 
 --- Model (what the engine concluded) ---
@@ -351,7 +351,7 @@ Clarity: What's making this hard?
 Clarity: What are you hoping changes if you take the two-year assignment in Singapore?
   You: to prove to myself I can build a life somewhere on my own
 Clarity: You want to take the two-year assignment in Singapore. What you've described is what you hope it changes. One way to test that:
-Clarity: If your current situation gave you what you want, would you still take the two-year assignment in Singapore?
+Clarity: If your current situation gave you what you want, would you still want to take the two-year assignment in Singapore?
   You: unsure
 Clarity: You want to take the two-year assignment in Singapore. But you're not sure it's the only way to get what you want. That's worth knowing.
 Clarity: What does this decision come down to? (up to four, most important first)
@@ -374,7 +374,7 @@ Clarity: If it didn't work out, how hard would it be to undo?
 Here's what this depends on.
 Should I take the two-year assignment in Singapore?
 Take the two-year assignment in Singapore · Stay where you are
-What you're really asking: You want to prove to yourself you can build a life somewhere on your own. You're not sure this is the only way to get it. That comes before anything else.
+What you're really asking: You want to prove to yourself you can build a life somewhere on your own. You're not sure the only way to get it is to take the two-year assignment in Singapore. That comes before anything else.
 THE PIVOT: The options aren't the uncertainty. Career growth is. Which option is actually stronger on career growth? That's the question that changes the decision.
 Known: Nothing you named.
 Assumed: “Take the two-year assignment in Singapore” is stronger on meaning.

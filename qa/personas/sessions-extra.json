@@ -1,0 +1,58 @@
+[
+  {
+    "id": "denver-austin",
+    "persona": "Sam, 33, has two lateral job offers of equal pay and title, one in Denver and one in Austin. There's no current job to fall back on and compare against — this is a two-sided choice between two futures, not a stay-vs-go question.",
+    "session": {
+      "question": "Should I take the offer in Denver or the offer in Austin?",
+      "options": ["Take the offer in Denver", "Take the offer in Austin"],
+      "hard": "Neither city is my life right now — I'd be starting over either way, and I keep flip-flopping on which unknown matters more.",
+      "hope": "to stop feeling like I'm gambling with where the next five years happen",
+      "stillWant": "no",
+      "factors": [
+        { "id": "growth", "label": "Career growth", "winner": "a", "basis": "assume", "flips": true },
+        { "id": "relationships", "label": "Relationships", "winner": "b", "basis": "know", "flips": null },
+        { "id": "location", "label": "Location", "winner": "unknown", "basis": null, "flips": true }
+      ],
+      "lean": "torn",
+      "findOut": "while",
+      "reversibility": "hard"
+    }
+  },
+  {
+    "id": "own-factor-relocation",
+    "persona": "Priyanka, 37, married with two school-age kids, has been offered an internal promotion to lead a new office that requires relocating to a different state. The money and title are better, but her kids are settled in a school she loves, and that's the cost she actually worries about, not her own career risk.",
+    "session": {
+      "question": "Should I take the promotion that requires relocating?",
+      "hard": "The job is exactly what I've been working toward, but yanking my kids out of a school where they've finally settled feels like the actual cost, not the job itself.",
+      "hope": "to stop feeling like I have to choose between my ambition and my kids' stability",
+      "stillWant": "unsure",
+      "factors": [
+        { "id": "growth", "label": "Career growth", "winner": "a", "basis": "know", "flips": null },
+        { "id": "income", "label": "Income", "winner": "a", "basis": "know", "flips": null },
+        { "id": "own-1", "label": "My kids' school", "winner": "b", "basis": "know", "flips": true },
+        { "id": "stability", "label": "Stability", "winner": "unknown", "basis": null, "flips": null }
+      ],
+      "lean": "torn",
+      "findOut": "soon",
+      "reversibility": "hard"
+    }
+  },
+  {
+    "id": "heavy-marriage-assumed-flip",
+    "persona": "Linh, 44, married nineteen years, seriously considering divorce after a long stretch of quiet resentment. She isn't sure counseling would actually change things, and she's assuming her husband wouldn't be willing to do the work — but she's never actually asked him.",
+    "session": {
+      "question": "Should I leave my marriage?",
+      "hard": "I've built a case in my head for years, but I've never actually asked him if he'd change. I've just decided he wouldn't.",
+      "hope": "to stop feeling alone in a marriage that looks fine from the outside",
+      "stillWant": "unsure",
+      "factors": [
+        { "id": "meaning", "label": "Meaning", "winner": "a", "basis": "know", "flips": null },
+        { "id": "stability", "label": "Stability", "winner": "b", "basis": "know", "flips": null },
+        { "id": "relationships", "label": "Relationships", "winner": "a", "basis": "assume", "flips": true }
+      ],
+      "lean": "a",
+      "findOut": "while",
+      "reversibility": "hard"
+    }
+  }
+]
