@@ -11,7 +11,7 @@
 
   /* Belief-strength parameters, not probabilities. */
   const CONF = { 1: 0.25, 2: 0.5, 3: 0.7, 4: 0.9, 5: 0.98 };
-  const CONF_WORD = { 1: "guessing", 2: "somewhat sure", 3: "fairly sure", 4: "very sure", 5: "known" };
+  const CONF_WORD = { 1: "guessing", 2: "only leaning that way", 3: "fairly sure", 4: "nearly certain", 5: "sure" };
   const PREF_WORD = ["much better", "better", "about the same", "better", "much better"]; // index by pref+2, from the favoured side
 
   const isStatusQuo = l => /^(stay|keep|don't|do not|remain|not |hold|wait|as things are|where i am|current)/i.test((l || "").trim());
@@ -58,7 +58,7 @@
       const hinge = sens * unc * w;
       return { c, w, conf, unc, diff, favours, needed, flippable, sens, hinge, flipDiff: diff - needed };
     });
-    const byHinge = [...rows].sort((a, b) => b.hinge - a.hinge);
+    const byHinge = [...rows].sort((a, b) => (b.hinge - a.hinge) || (b.w - a.w) || (b.unc - a.unc));
     const uncertainRows = rows.filter(r => r.conf < 0.9);
     const stable = margin > 0.08 && !rows.some(r => r.flippable && r.conf < 0.9);
     return { crit, U, EU, leader, runner, margin, rows, byHinge, uncertainRows, stable, allKnown: rows.length > 0 && rows.every(r => r.conf >= 0.9) };
@@ -80,8 +80,10 @@
     const ruled = s.ruledOut || {};
     const cands = a.byHinge.filter(r => r.hinge > 0.005 && r.conf < 0.9 && !ruled[r.c.id]);
     const hope = hopeCandidate(s);
-    if (hope && !ruled.hope) return { kind: "hope", ...hope, next: cands[0] || null };
-    if (cands.length) return { kind: "criterion", r: cands[0], question: pivotQuestion(s, cands[0]), statement: pivotStatement(s, cands[0]), voi: cands };
+    const HOPE_WEIGHT = { high: 0.1, medium: 0.05 };
+    const top = cands[0];
+    if (hope && !ruled.hope && (!top || top.hinge < HOPE_WEIGHT[hope.impact])) return { kind: "hope", ...hope, next: top || null };
+    if (cands.length) return { kind: "criterion", r: top, question: pivotQuestion(s, top), statement: pivotStatement(s, top), voi: cands, hopeAlso: hope && !ruled.hope ? hope : null };
     if (a.allKnown) return { kind: "none" };
     return { kind: "robust", a };
   }
@@ -143,9 +145,11 @@
     const same = a.rows.filter(r => !r.favours && r.conf >= 0.7).map(r => ({ r, text: `The options are about the same on ${r.c.label.toLowerCase()}.` }));
 
     // The tension: the top-weighted criterion favouring each of the top two options.
+    const dominated = s.options.filter(o => o !== a.leader && o !== a.runner).map(o => { const best = byW.find(r => r.favours && r.favours.id === o.id); return best ? `${quote(L(o))} is strongest on ${best.c.label.toLowerCase()} but falls behind on the things you weighed most, so the choice narrows to ${quote(L(a.leader))} and ${quote(L(a.runner))}.` : `${quote(L(o))} isn't strongest on anything you named, so the choice narrows to ${quote(L(a.leader))} and ${quote(L(a.runner))}.`; });
     const forLeader = byW.find(r => r.favours && r.favours.id === a.leader.id);
     const forRunner = byW.find(r => r.favours && r.favours.id === a.runner.id);
-    const tensionLine = forLeader && forRunner ? { a: forLeader.c.label, b: forRunner.c.label, text: `${forLeader.c.label} pulls toward ${quote(L(a.leader))}. ${forRunner.c.label} pulls toward ${quote(L(a.runner))}.` } : forLeader ? { text: `On what you've said, ${quote(L(a.leader))} is stronger on everything you're sure of. The tension is between what you know and what you don't.` } : { text: `You couldn't say which option is stronger on anything that matters. That isn't indecision. It's a decision made too early.` };
+    const dom = dominated.length ? " " + dominated.join(" ") : "";
+    const tensionLine = forLeader && forRunner ? { a: forLeader.c.label, b: forRunner.c.label, text: `${forLeader.c.label} pulls toward ${quote(L(a.leader))}. ${forRunner.c.label} pulls toward ${quote(L(a.runner))}.${dom}` } : forLeader ? { text: `On what you've said, ${quote(L(a.leader))} is stronger on everything you're sure of. The tension is between what you know and what you don't.${dom}` } : { text: `You couldn't say which option is stronger on anything that matters. That isn't indecision. It's a decision made too early.${dom}` };
 
     // What you're really asking (from optional context)
     let reframe = null;
@@ -158,22 +162,28 @@
       observation = `You know what you want. You don't know whether you can get it ${without(s)}.`;
       pivotBlock = pv.question;
       changeMind = `If it can, you don't need to ${changeVerb(s)}.${pv.next ? ` If it can't, the next question is ${pivotStatement(s, pv.next)}.` : ""}`;
-      learn = { text: `Ask for it directly. The answer to a real request is information.`, rest: [] };
+      const d = domain(s.title);
+      learn = { text: d === "relationship" || d === "family" ? "Say it out loud to the person it's about. That's a bigger ask than it sounds, and it comes before anything else." : d === "place" ? "Live a month as if you'd already decided to stay, and notice." : d === "job" ? "Ask for it directly. The answer to a real request is information." : "Name what would have to change where you are, and ask whether it can.", rest: [] };
     } else if (pv.kind === "criterion") {
       const r = pv.r;
-      const flipWord = r.flipDiff <= -0.05 ? `${quote(L(a.runner))} came out better on ${r.c.label.toLowerCase()}` : r.flipDiff < 0.05 ? `the two came out about the same on ${r.c.label.toLowerCase()}` : `${quote(L(a.leader))} came out only a little better on ${r.c.label.toLowerCase()}`;
+      const cl = r.c.label.toLowerCase();
+      const flipSentence = r.diff > 0.05
+        ? `That depends on ${cl} favouring ${quote(L(a.leader))} as much as you think. If it favours ${quote(L(a.leader))} only a little${r.flipDiff <= -0.05 ? ", or not at all" : ""}, ${quote(L(a.runner))} would be the lean instead.`
+        : r.diff < -0.05
+        ? `If ${cl} favours ${quote(L(a.runner))} even more than you think, ${quote(L(a.runner))} would be the lean instead.`
+        : `If ${cl} turns out to favour ${quote(L(a.runner))}, ${quote(L(a.runner))} would be the lean instead.`;
       observation = r.favours ? `${quote(L(r.favours))} isn't the uncertainty. ${r.c.label} is.` : `The options aren't the uncertainty. ${r.c.label} is.`;
       pivotBlock = pv.question;
-      changeMind = `Right now ${quote(L(a.leader))} comes out ahead on what you've said. If ${flipWord}, ${quote(L(a.runner))} would come out ahead instead. Nothing else you're unsure about moves it that far.`;
+      changeMind = `On what you've told me, ${quote(L(a.leader))} is the current lean. ${flipSentence} Nothing else you're unsure about moves it that far.${pv.hopeAlso ? ` And the question above it, whether you can get what you want ${without(s)}, still stands.` : ""}`;
       const how = (window.Content && Content.how[r.c.id]) || "Ask someone who's already there. Ask about specifics, not the vibe.";
-      const rest = pv.voi.slice(1, 3).map(x => x.c.label.toLowerCase());
+      const rest = pv.voi.slice(1, 3).map(x => x.c.label);
       learn = { text: how, rest };
     } else if (pv.kind === "none") {
       settled = { title: "You already know enough.", body: `Everything you named, you're sure of. What's left is what you prefer, and that's yours to weigh.` };
     } else {
       settled = { title: "Nothing you're unsure about would change this.", body: `The result holds however the uncertain parts turn out. You may be more decided than you feel.` };
     }
-    const stability = pv.kind === "hope" ? "This comes before anything else." : a.margin < 0.04 ? "The two options come out very close on what you've told me." : a.stable ? "The result is stable. Changing any one thing you're unsure about wouldn't reorder the options." : `The result is sensitive to ${pv.r ? pv.r.c.label.toLowerCase() : "what you're unsure about"}.`;
+    const stability = pv.kind === "hope" ? "Everything else waits on this." : a.margin < 0.04 ? "The two options come out very close on what you've told me." : a.stable ? "The result is stable. Changing any one thing you're unsure about wouldn't reorder the options." : `The result is sensitive to ${pv.r ? pv.r.c.label.toLowerCase() : "what you're unsure about"}.`;
 
     return { matters, clear, unsure, same, tensionLine, reframe, observation, pivot: pv, pivotBlock, changeMind, learn, settled, stability, leader: a.leader, runner: a.runner, worry: n.worry || null };
   }

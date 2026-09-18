@@ -28,7 +28,7 @@
     lines.push(`What appears clear: ${r.clear.concat(r.same).map(x => x.text).join(" ") || "Nothing here."}`, `What you're less certain about: ${r.unsure.map(x => x.text).join(" ") || "Nothing here."}`, `The tension: ${r.tensionLine.text}`);
     lines.push(r.settled ? `Where you are: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.observation ? r.observation + " " : ""}${r.pivotBlock} ${r.stability}`);
     if (r.changeMind) lines.push(`What could change your mind: ${r.changeMind}`);
-    if (r.learn) lines.push(`What might be worth learning: ${r.learn.text}${r.learn.rest.length ? ` Less important: ${r.learn.rest.join(", ")}.` : ""} You don't need more information about everything. You need better information about this.`);
+    if (r.learn) lines.push(`What might be worth learning: ${r.learn.text}${r.learn.rest.length ? ` ${r.learn.rest.join(" and ")} could matter too, but wouldn't move this as much.` : ""} You don't need more information about everything. You need better information about this.`);
     lines.push(`Now you know what you're deciding.`, ``, `--- Model ---`, JSON.stringify(m), ``);
     out.push(lines.join("\n"));
   }

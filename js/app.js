@@ -231,7 +231,7 @@
         ? h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "Where you are"), h("p", { class: "v", style: "margin-bottom:6px" }, "Based on what you've told me:"), h("span", { class: "v big" }, r.settled.title), h("p", { class: "v", style: "margin-top:6px" }, r.settled.body))
         : h("div", { class: "row pivot-row" }, h("span", { class: "k" }, "The Pivot"), r.observation ? h("p", { class: "v", style: "margin-bottom:6px" }, r.observation) : null, h("span", { class: "v big" }, r.pivotBlock), h("p", { class: "v", style: "margin-top:6px" }, r.stability)),
       r.changeMind ? row("What could change your mind", h("span", { class: "v" }, r.changeMind)) : null,
-      r.learn ? row("What might be worth learning", h("span", { class: "v big" }, r.learn.text), r.learn.rest.length ? h("p", { class: "v quiet", style: "margin-top:8px" }, `Less important: ${r.learn.rest.join(", ")}.`) : null, h("p", { class: "v", style: "margin-top:8px" }, "You don't need more information about everything. You need better information about this.")) : null,
+      r.learn ? row("What might be worth learning", h("span", { class: "v big" }, r.learn.text), r.learn.rest.length ? h("p", { class: "v quiet", style: "margin-top:8px" }, `${r.learn.rest.join(" and ")} could matter too, but wouldn't move this as much.`) : null, h("p", { class: "v", style: "margin-top:8px" }, "You don't need more information about everything. You need better information about this.")) : null,
       r.worry ? row("In your words", h("span", { class: "v quiet" }, `“${r.worry.trim()}”`)) : null,
       h("p", { class: "closing" }, "Now you know what you're deciding.")
     );
@@ -261,7 +261,7 @@
       `The tension: ${r.tensionLine.text}`, ``,
       r.settled ? `Based on what you've told me: ${r.settled.title} ${r.settled.body}` : `THE PIVOT: ${r.observation ? r.observation + " " : ""}${r.pivotBlock} ${r.stability}`, ``,
       r.changeMind ? `What could change your mind: ${r.changeMind}` : null,
-      r.learn ? `What might be worth learning: ${r.learn.text}${r.learn.rest.length ? ` Less important: ${r.learn.rest.join(", ")}.` : ""} You don't need more information about everything. You need better information about this.` : null,
+      r.learn ? `What might be worth learning: ${r.learn.text}${r.learn.rest.length ? ` ${r.learn.rest.join(" and ")} could matter too, but wouldn't move this as much.` : ""} You don't need more information about everything. You need better information about this.` : null,
       ``, `Now you know what you're deciding.`].filter(x => x !== null).join("\n");
     return [
       who(), prompt("Here's what this depends on."),

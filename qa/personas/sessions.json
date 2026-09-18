@@ -1,58 +1,276 @@
 [
   {
-    "id": "smoke",
-    "persona": "smoke test",
+    "id": "job-change",
+    "persona": "Priya, 29, a product manager who has an offer from a startup and has been circling the same argument with herself for weeks. Half of her wants the excitement, half suspects she's just bored, not stuck.",
     "session": {
-      "title": "move to Austin",
-      "options": [
-        "Move to Austin",
-        "Stay here"
-      ],
+      "title": "take the offer at the startup",
+      "options": ["Take the offer at the startup", "Stay in my job"],
       "criteria": [
-        [
-          "growth",
-          "Career growth",
-          5
-        ],
-        [
-          "security",
-          "Financial security",
-          4
-        ],
-        [
-          "friends",
-          "Friends",
-          3
-        ],
-        [
-          "adventure",
-          "Adventure",
-          2
-        ]
+        ["growth", "Career growth", 5],
+        ["stress", "Stress", 4],
+        ["security", "Financial security", 3],
+        ["time", "Time", 2]
       ],
       "evals": {
-        "growth": {
-          "pref": 2,
-          "conf": 1
-        },
-        "security": {
-          "pref": -1,
-          "conf": 4
-        },
-        "friends": {
-          "pref": -2,
-          "conf": 5
-        },
-        "adventure": {
-          "pref": 1,
-          "conf": 3
-        }
+        "growth": { "pref": 2, "conf": 1 },
+        "stress": { "pref": 1, "conf": 3 },
+        "security": { "pref": -1, "conf": 4 },
+        "time": { "pref": -1, "conf": 4 }
       },
       "notes": {
-        "hope": "to feel like my life is actually moving",
+        "hope": "to feel excited about work again, not dread Mondays",
+        "stillWant": "unsure",
+        "worry": "That the startup's growth is just noise, not real, and I'm about to trade security for hype."
+      },
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "move-home",
+    "persona": "Daniel, 34, whose parents are aging two states away. Every call from home lands like an accusation, and he's treating 'move back' as the only responsible answer without examining it.",
+    "session": {
+      "title": "move back home to be near my parents",
+      "options": ["Move back home", "Stay where I am"],
+      "criteria": [
+        ["family", "Family", 5],
+        ["growth", "Career growth", 4],
+        ["stress", "Stress", 4],
+        ["income", "Income", 2]
+      ],
+      "evals": {
+        "family": { "pref": 2, "conf": 4 },
+        "growth": { "pref": -2, "conf": 4 },
+        "stress": { "pref": 1, "conf": 1 },
+        "income": { "pref": -1, "conf": 5 }
+      },
+      "notes": {
+        "hope": "to stop feeling guilty every time my phone rings",
         "stillWant": "no",
-        "worry": "That I'm running from something rather than toward it."
-      }
+        "worry": "That moving won't actually fix the guilt, and I'll have given up my career for nothing."
+      },
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "grad-school",
+    "persona": "Marisol, 27, deciding between a fully-funded PhD and staying in a job she's outgrown. She's tired of people telling her 'it's just five years' as if that settles anything.",
+    "session": {
+      "title": "start the PhD",
+      "options": ["Start the PhD", "Stay in my job and look for a raise elsewhere"],
+      "criteria": [
+        ["meaning", "Meaning", 5],
+        ["income", "Income", 4],
+        ["growth", "Career growth", 3],
+        ["stability", "Stability", 3]
+      ],
+      "evals": {
+        "meaning": { "pref": 2, "conf": 5 },
+        "income": { "pref": -2, "conf": 5 },
+        "growth": { "pref": 1, "conf": 1 },
+        "stability": { "pref": -1, "conf": 4 }
+      },
+      "notes": {
+        "hope": "to be doing research that actually matters instead of assisting someone else's",
+        "stillWant": "no",
+        "worry": "That five years from now I'll have a PhD and still no job in academia."
+      },
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "heavy-hearted-relationship",
+    "persona": "Aisha, 31, six years into a relationship, crying on both sides of the question with no single reason she can point to. She can't tell if she's looking for a way out or just scared of staying.",
+    "session": {
+      "title": "leave my relationship",
+      "options": ["Leave", "Stay"],
+      "criteria": [
+        ["meaning", "Meaning", 5],
+        ["stability", "Stability", 4],
+        ["partner", "Partner", 3],
+        ["stress", "Stress", 3]
+      ],
+      "evals": {
+        "meaning": { "pref": 1, "conf": 1 },
+        "stability": { "pref": -2, "conf": 5 },
+        "partner": { "pref": -1, "conf": 4 },
+        "stress": { "pref": -1, "conf": 3 }
+      },
+      "notes": {
+        "hope": "to stop feeling numb around him",
+        "stillWant": "unsure",
+        "worry": "That I'm looking for a reason to leave instead of actually knowing if I want to."
+      },
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "buy-vs-rent",
+    "persona": "Ken, 36, married with one kid, anxious that renting means 'throwing money away' mostly because everyone around him says so. He and his wife have never actually run the numbers.",
+    "session": {
+      "title": "buy a house",
+      "options": ["Buy", "Keep renting"],
+      "criteria": [
+        ["security", "Financial security", 5],
+        ["stability", "Stability", 3],
+        ["flexibility", "Flexibility", 3],
+        ["cost", "Cost", 4]
+      ],
+      "evals": {
+        "security": { "pref": 1, "conf": 1 },
+        "stability": { "pref": 2, "conf": 5 },
+        "flexibility": { "pref": -2, "conf": 5 },
+        "cost": { "pref": -1, "conf": 4 }
+      },
+      "notes": {
+        "hope": "to stop feeling like we're behind everyone else our age",
+        "stillWant": "no",
+        "worry": "That we buy at the wrong time and end up house-poor."
+      },
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "start-business",
+    "persona": "Ola, 41, three kids and a mortgage, quietly guilty for even wanting to quit a stable job to start her own business. She treats 'responsible' and 'quit' as opposites.",
+    "session": {
+      "title": "quit my job to start my own business",
+      "options": ["Start the business", "Stay in my job"],
+      "criteria": [
+        ["meaning", "Meaning", 5],
+        ["security", "Financial security", 4],
+        ["growth", "Career growth", 3],
+        ["stress", "Stress", 3]
+      ],
+      "evals": {
+        "meaning": { "pref": 2, "conf": 5 },
+        "security": { "pref": -2, "conf": 5 },
+        "growth": { "pref": 1, "conf": 1 },
+        "stress": { "pref": -1, "conf": 3 }
+      },
+      "notes": {},
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "already-knows",
+    "persona": "Tom, 58, has been running retirement numbers for months. He isn't conflicted about the decision, just scared to finally say it out loud.",
+    "session": {
+      "title": "retire now",
+      "options": ["Retire now", "Keep working"],
+      "criteria": [
+        ["freedom", "Freedom", 5],
+        ["income", "Income", 4],
+        ["health", "Health and energy", 4],
+        ["meaning", "Meaning", 2]
+      ],
+      "evals": {
+        "freedom": { "pref": 2, "conf": 5 },
+        "income": { "pref": -2, "conf": 5 },
+        "health": { "pref": 2, "conf": 5 },
+        "meaning": { "pref": 1, "conf": 5 }
+      },
+      "notes": {},
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "torn-many-unknowns",
+    "persona": "Jae, 33, offered a two-year expat assignment. Excited and scared in roughly equal measure, and aware he's deciding on almost no real information.",
+    "session": {
+      "title": "take the two-year assignment in Singapore",
+      "options": ["Take the assignment", "Stay in my current role"],
+      "criteria": [
+        ["growth", "Career growth", 5],
+        ["partner", "Partner", 4],
+        ["stability", "Stability", 3],
+        ["meaning", "Meaning", 2]
+      ],
+      "evals": {
+        "growth": { "pref": 1, "conf": 1 },
+        "partner": { "pref": -1, "conf": 2 },
+        "stability": { "pref": -2, "conf": 4 },
+        "meaning": { "pref": 1, "conf": 2 }
+      },
+      "notes": {
+        "hope": "to prove to myself I can do something big",
+        "stillWant": "unsure",
+        "worry": "That I'll resent giving this up if I don't take it, but also that it wrecks my relationship."
+      },
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "denver-austin",
+    "persona": "Sam, 30, single, remote-eligible, flip-flopping between two unfamiliar cities and a third option nobody's mentioned out loud: just staying put in Chicago.",
+    "session": {
+      "title": "move to Denver, move to Austin, or stay in Chicago",
+      "options": ["Move to Denver", "Stay in Chicago", "Move to Austin"],
+      "criteria": [
+        ["growth", "Career growth", 5],
+        ["cost", "Cost", 4],
+        ["friends", "Friends", 4],
+        ["adventure", "Adventure", 3]
+      ],
+      "evals": {
+        "growth": { "ratings": { "Move to Denver": 4, "Stay in Chicago": 2, "Move to Austin": 5 }, "conf": 2 },
+        "cost": { "ratings": { "Move to Denver": 4, "Stay in Chicago": 2, "Move to Austin": 3 }, "conf": 4 },
+        "friends": { "ratings": { "Move to Denver": 2, "Stay in Chicago": 5, "Move to Austin": 1 }, "conf": 5 },
+        "adventure": { "ratings": { "Move to Denver": 4, "Stay in Chicago": 1, "Move to Austin": 4 }, "conf": 3 }
+      },
+      "notes": {},
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "own-factor-relocation",
+    "persona": "Priyanka, 38, offered a promotion that requires relocating. Torn between her own ambition and her kids' stability, which no criterion on a standard list quite captures.",
+    "session": {
+      "title": "take the relocation for the promotion",
+      "options": ["Take the relocation", "Stay where we are"],
+      "criteria": [
+        ["growth", "Career growth", 5],
+        ["own-1", "My kids' school", 4],
+        ["stability", "Stability", 3],
+        ["income", "Income", 2]
+      ],
+      "evals": {
+        "growth": { "pref": 2, "conf": 5 },
+        "own-1": { "pref": -2, "conf": 5 },
+        "stability": { "pref": -1, "conf": 1 },
+        "income": { "pref": 1, "conf": 4 }
+      },
+      "notes": {
+        "hope": "to prove I can do this without sacrificing my kids",
+        "stillWant": "unsure",
+        "worry": "That the move works for my career and ruins things for them."
+      },
+      "ruledOut": {}
+    }
+  },
+  {
+    "id": "heavy-marriage",
+    "persona": "Linh, 44, nineteen years married, quietly building a case against her husband in her head for months without ever actually testing whether he'd change.",
+    "session": {
+      "title": "leave my marriage",
+      "options": ["Leave", "Stay"],
+      "criteria": [
+        ["meaning", "Meaning", 5],
+        ["partner", "Partner", 4],
+        ["stability", "Stability", 3],
+        ["family", "Family", 3]
+      ],
+      "evals": {
+        "meaning": { "pref": 1, "conf": 1 },
+        "partner": { "pref": -1, "conf": 1 },
+        "stability": { "pref": -2, "conf": 5 },
+        "family": { "pref": -2, "conf": 4 }
+      },
+      "notes": {
+        "hope": "to feel like myself again, not disappearing into this marriage",
+        "stillWant": "unsure",
+        "worry": "That I've already decided and I'm just building the case."
+      },
+      "ruledOut": {}
     }
   }
 ]

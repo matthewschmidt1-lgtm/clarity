@@ -5,7 +5,7 @@
 (async () => {
   const data = await (await fetch("scenarios.json")).json();
   const mk = sc => {
-    const s = { title: sc.title, options: sc.options.map((l, i) => ({ id: "o" + i, label: l })), criteria: sc.criteria.map(([id, label, importance]) => ({ id, label, importance })), evals: {}, notes: sc.notes || {}, ruledOut: sc.ruledOut || {} };
+    const s = { title: sc.title, options: sc.options.map((l, i) => ({ id: "o" + i, label: l })), criteria: sc.criteria.map(([id, label, importance]) => ({ id, label, importance })), evals: {}, notes: JSON.parse(JSON.stringify(sc.notes || {})), ruledOut: JSON.parse(JSON.stringify(sc.ruledOut || {})) };
     for (const id in sc.evals) { const e = sc.evals[id]; s.evals[id] = { pref: e.pref, conf: e.conf, ratings: {} }; if (e.ratings) s.options.forEach(o => { s.evals[id].ratings[o.id] = e.ratings[o.label]; }); }
     return s;
   };
@@ -29,6 +29,9 @@
     if (e.flippable) e.flippable.forEach(n => chk(`sensitivity: ${n} can flip`, m.criteria.find(c => c.name === n).flippable, ""));
     if (e.not_flippable) e.not_flippable.forEach(n => chk(`sensitivity: ${n} cannot flip`, !m.criteria.find(c => c.name === n).flippable, ""));
     if ("reframe" in e) chk("intent: reframe present", !!r.reframe === e.reframe, r.reframe ? r.reframe[0] : null);
+    if (e.text_contains) chk(`writing: says "${e.text_contains}"`, all.includes(e.text_contains), "");
+    chk("writing: no 'comes out ahead'", !/comes out ahead/.test(all), "");
+    chk("writing: no 'Less important:'", !/Less important:/.test(all), "");
     if (e.options_count) chk("model: options", m.decision.options.length === e.options_count, m.decision.options.length);
     // invariants, every scenario
     chk("no score shown: report text has no digits or percent", !/[0-9%]/.test(all), (all.match(/[0-9%]/g) || []).slice(0, 3).join(""));
@@ -53,6 +56,7 @@
     else if (mu.expect === "pivot_same") ok = m0.pivot.question === m1.pivot.question;
     else if (mu.expect === "leader_changes") ok = m0.leader !== m1.leader;
     else if (mu.expect.startsWith("pivot_kind:")) ok = m1.pivot.kind === mu.expect.split(":")[1];
+    else if (mu.expect === "reframe_present") ok = !!Engine.report(s1).reframe;
     muts.push({ id: mu.id, note: mu.note, ok: !!ok, before: m0.pivot.question || m0.pivot.kind, after: m1.pivot.question || m1.pivot.kind });
   }
   document.getElementById("out").textContent = JSON.stringify({ results, muts }, null, 2);

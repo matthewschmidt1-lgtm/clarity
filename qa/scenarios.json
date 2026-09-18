@@ -2,7 +2,7 @@
   "scenarios": [
     {
       "id": "austin-hope",
-      "note": "Status quo exists; person would stay if it gave them what they want. Pivot is the hope.",
+      "note": "Status quo exists and the person would stay if it gave them what they want, but career growth is a large hinge; the hinge wins and the hope stays in 'what you're really asking'.",
       "session": {
         "title": "move to Austin",
         "options": [
@@ -55,10 +55,10 @@
         }
       },
       "expect": {
-        "pivot_kind": "hope",
-        "pivot_contains": "Can where you live now actually let you feel like your life is actually moving?",
-        "next_criterion": "Career growth",
-        "reframe": true
+        "pivot_kind": "criterion",
+        "pivot_criterion": "Career growth",
+        "reframe": true,
+        "text_contains": "still stands"
       }
     },
     {
@@ -371,8 +371,8 @@
         }
       },
       "expect": {
-        "pivot_kind": "hope",
-        "pivot_contains": "Can this relationship actually let you feel like yourself again?",
+        "pivot_kind": "criterion",
+        "pivot_criterion": "Peace of mind",
         "reframe": true
       }
     },
@@ -419,6 +419,154 @@
         "pivot_kind": "criterion",
         "pivot_criterion": "Career growth"
       }
+    },
+    {
+      "id": "hope-beats-small-hinge",
+      "note": "A firm 'no' on the still-want test outranks a small hinge.",
+      "session": {
+        "title": "move back home to be near my parents",
+        "options": [
+          "Move back home",
+          "Stay here"
+        ],
+        "criteria": [
+          [
+            "family",
+            "Family",
+            5
+          ],
+          [
+            "growth",
+            "Career growth",
+            2
+          ],
+          [
+            "friends",
+            "Friends",
+            4
+          ]
+        ],
+        "evals": {
+          "family": {
+            "pref": 2,
+            "conf": 5
+          },
+          "growth": {
+            "pref": -1,
+            "conf": 2
+          },
+          "friends": {
+            "pref": -2,
+            "conf": 5
+          }
+        },
+        "notes": {
+          "hope": "to stop feeling guilty every time my phone rings",
+          "stillWant": "no"
+        }
+      },
+      "expect": {
+        "pivot_kind": "hope",
+        "pivot_contains": "Can where you live now actually let you stop feeling guilty",
+        "text_contains": "Live a month as if"
+      }
+    },
+    {
+      "id": "three-options-dominated",
+      "note": "The third option is strongest on one criterion but falls out; the report says so.",
+      "session": {
+        "title": "which city to move to",
+        "options": [
+          "Denver",
+          "Austin",
+          "Stay in Chicago"
+        ],
+        "criteria": [
+          [
+            "growth",
+            "Career growth",
+            5
+          ],
+          [
+            "friends",
+            "Friends",
+            4
+          ],
+          [
+            "cost",
+            "Cost",
+            3
+          ]
+        ],
+        "evals": {
+          "growth": {
+            "ratings": {
+              "Denver": 4,
+              "Austin": 5,
+              "Stay in Chicago": 2
+            },
+            "conf": 2
+          },
+          "friends": {
+            "ratings": {
+              "Denver": 2,
+              "Austin": 1,
+              "Stay in Chicago": 5
+            },
+            "conf": 5
+          },
+          "cost": {
+            "ratings": {
+              "Denver": 3,
+              "Austin": 3,
+              "Stay in Chicago": 2
+            },
+            "conf": 3
+          }
+        },
+        "notes": {}
+      },
+      "expect": {
+        "text_contains": "so the choice narrows to"
+      }
+    },
+    {
+      "id": "hinge-tie-breaks-on-importance",
+      "note": "Two equal hinges: the more important criterion is the Pivot, never list order.",
+      "session": {
+        "title": "take the job abroad",
+        "options": [
+          "Go",
+          "Stay"
+        ],
+        "criteria": [
+          [
+            "partner",
+            "Partner",
+            4
+          ],
+          [
+            "growth",
+            "Career growth",
+            5
+          ]
+        ],
+        "evals": {
+          "partner": {
+            "pref": -1,
+            "conf": 2
+          },
+          "growth": {
+            "pref": 1,
+            "conf": 1
+          }
+        },
+        "notes": {}
+      },
+      "expect": {
+        "pivot_kind": "criterion",
+        "pivot_criterion": "Career growth"
+      }
     }
   ],
   "mutations": [
@@ -459,23 +607,23 @@
       "note": "The person says knowing growth wouldn't change their mind; the next uncertainty takes over."
     },
     {
-      "id": "stillwant-no-promotes-hope",
+      "id": "stillwant-no-adds-the-reframe",
       "base": "austin-growth",
       "set": {
         "notes.hope": "a bigger life",
         "notes.stillWant": "no"
       },
-      "expect": "pivot_kind:hope",
-      "note": "The still-want test outranks a criterion."
+      "expect": "reframe_present",
+      "note": "A firm 'no' always produces the reframe even when the hinge keeps the Pivot."
     },
     {
       "id": "irrelevant-change-keeps-pivot",
       "base": "austin-growth",
       "set": {
-        "evals.adventure.pref": -1
+        "evals.adventure.conf": 4
       },
       "expect": "pivot_same",
-      "note": "A low-weight, moderately sure criterion moving a notch shouldn't move the Pivot."
+      "note": "Becoming a little surer about a low-weight criterion shouldn't move the Pivot."
     }
   ]
 }

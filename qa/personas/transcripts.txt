@@ -1,0 +1,486 @@
+=== job-change ===
+Persona: Priya, 29, a product manager who has an offer from a startup and has been circling the same argument with herself for weeks. Half of her wants the excitement, half suspects she's just bored, not stuck.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to take the offer at the startup
+Clarity: Name the ways this could go.
+  You: Take the offer at the startup / Stay in your job
+Clarity: What could matter here? (pick everything that matters)
+  You: Career growth, Stress, Financial security, Time
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Career growth: Critical
+  Stress: Very important
+  Financial security: Important
+  Time: A little
+Clarity: For each one: which is better, and how sure are you?
+  Career growth: Take the offer at the startup, clearly · Guessing
+  Stress: Take the offer at the startup · Fairly sure
+  Financial security: Stay in your job · Nearly certain
+  Time: Stay in your job · Nearly certain
+Clarity: What are you hoping changes?
+  You: to feel excited about work again, not dread Mondays
+Clarity: You want to take the offer at the startup. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current job gave you what you want, would you still want to take the offer at the startup?
+  You: unsure
+Clarity: You want to take the offer at the startup. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What are you most worried about?
+  You: That the startup's growth is just noise, not real, and I'm about to trade security for hype.
+Clarity: If you knew the answer to this, could it change your decision? "Is “Take the offer at the startup” really stronger on career growth?"
+  You: yes
+
+--- What this depends on (the report) ---
+take the offer at the startup
+Take the offer at the startup · Stay in your job
+What matters most: Career growth · Stress · Financial security
+What you're really asking: You want to feel excited about work again, not dread Mondays. You're not sure the only way to get it is to take the offer at the startup. That comes before anything else.
+What appears clear: “Take the offer at the startup” is stronger on stress. “Stay in your job” is stronger on financial security. “Stay in your job” is stronger on time.
+What you're less certain about: You expect “Take the offer at the startup” to be stronger on career growth, but you're guessing.
+The tension: Career growth pulls toward “Take the offer at the startup”. Financial security pulls toward “Stay in your job”.
+THE PIVOT: “Take the offer at the startup” isn't the uncertainty. Career growth is. Is “Take the offer at the startup” really stronger on career growth? The result is sensitive to career growth.
+What could change your mind: On what you've told me, “Take the offer at the startup” is the current lean. That depends on career growth favouring “Take the offer at the startup” as much as you think. If it favours “Take the offer at the startup” only a little, “Stay in your job” would be the lean instead. Nothing else you're unsure about moves it that far. And the question above it, whether you can get what you want without leaving, still stands.
+What might be worth learning: Ask two people who joined a year ago what actually changed for them. Stress could matter too, but wouldn't move this as much. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"take the offer at the startup","options":["Take the offer at the startup","Stay in my job"]},"criteria":[{"name":"Career growth","importance":5,"confidence":0.25,"favours":"Take the offer at the startup","flippable":true,"sensitivity":0.55,"hinge":0.1473},{"name":"Stress","importance":4,"confidence":0.7,"favours":"Take the offer at the startup","flippable":true,"sensitivity":0.25,"hinge":0.0214},{"name":"Financial security","importance":3,"confidence":0.9,"favours":"Stay in my job","flippable":false,"sensitivity":0,"hinge":0},{"name":"Time","importance":2,"confidence":0.9,"favours":"Stay in my job","flippable":false,"sensitivity":0,"hinge":0}],"leader":"Take the offer at the startup","margin":0.257,"stable":false,"all_known":false,"notes":{"hope":"to feel excited about work again, not dread Mondays","stillWant":"unsure","worry":"That the startup's growth is just noise, not real, and I'm about to trade security for hype."},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Take the offer at the startup” really stronger on career growth?","criterion":"Career growth"},"voi":[{"criterion":"Career growth","hinge":0.1473},{"criterion":"Stress","hinge":0.0214}]}
+
+=== move-home ===
+Persona: Daniel, 34, whose parents are aging two states away. Every call from home lands like an accusation, and he's treating 'move back' as the only responsible answer without examining it.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to move back home to be near my parents
+Clarity: Name the ways this could go.
+  You: Move back home / Stay where you are
+Clarity: What could matter here? (pick everything that matters)
+  You: Family, Career growth, Stress, Income
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Family: Critical
+  Career growth: Very important
+  Stress: Very important
+  Income: A little
+Clarity: For each one: which is better, and how sure are you?
+  Family: Move back home, clearly · Nearly certain
+  Career growth: Stay where you are, clearly · Nearly certain
+  Stress: Move back home · Guessing
+  Income: Stay where you are · I know this
+Clarity: What are you hoping changes?
+  You: to stop feeling guilty every time my phone rings
+Clarity: You want to move back home. What you've described is what you hope it changes. One way to test that:
+Clarity: If where you live now gave you what you want, would you still want to move back home?
+  You: no
+Clarity: Maybe the question isn't whether to move back home. It's whether you can get what you want without moving.
+Clarity: What are you most worried about?
+  You: That moving won't actually fix the guilt, and I'll have given up my career for nothing.
+Clarity: If you knew the answer to this, could it change your decision? "Is “Move back home” really stronger on stress?"
+  You: yes
+
+--- What this depends on (the report) ---
+move back home to be near my parents
+Move back home · Stay where you are
+What matters most: Family · Career growth · Stress
+What you're really asking: You don't just want to move back home. You want to stop feeling guilty every time your phone rings. If where you live now could give you that, you'd stay.
+What appears clear: “Move back home” is stronger on family. “Stay where you are” is stronger on career growth. “Stay where you are” is stronger on income.
+What you're less certain about: You expect “Move back home” to be stronger on stress, but you're guessing.
+The tension: Family pulls toward “Move back home”. Career growth pulls toward “Stay where you are”.
+THE PIVOT: “Move back home” isn't the uncertainty. Stress is. Is “Move back home” really stronger on stress? The result is sensitive to stress.
+What could change your mind: On what you've told me, “Move back home” is the current lean. That depends on stress favouring “Move back home” as much as you think. If it favours “Move back home” only a little, “Stay where you are” would be the lean instead. Nothing else you're unsure about moves it that far. And the question above it, whether you can get what you want without moving, still stands.
+What might be worth learning: Name the last three things that kept you up. Would they still exist? You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"move back home to be near my parents","options":["Move back home","Stay where I am"]},"criteria":[{"name":"Family","importance":5,"confidence":0.9,"favours":"Move back home","flippable":true,"sensitivity":0.8,"hinge":0.0267},{"name":"Career growth","importance":4,"confidence":0.9,"favours":"Stay where I am","flippable":false,"sensitivity":0,"hinge":0},{"name":"Stress","importance":4,"confidence":0.25,"favours":"Move back home","flippable":true,"sensitivity":0.667,"hinge":0.1333},{"name":"Income","importance":2,"confidence":0.98,"favours":"Stay where I am","flippable":false,"sensitivity":0,"hinge":0}],"leader":"Move back home","margin":0.107,"stable":false,"all_known":false,"notes":{"hope":"to stop feeling guilty every time my phone rings","stillWant":"no","worry":"That moving won't actually fix the guilt, and I'll have given up my career for nothing."},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Move back home” really stronger on stress?","criterion":"Stress"},"voi":[{"criterion":"Stress","hinge":0.1333}]}
+
+=== grad-school ===
+Persona: Marisol, 27, deciding between a fully-funded PhD and staying in a job she's outgrown. She's tired of people telling her 'it's just five years' as if that settles anything.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to start the PhD
+Clarity: Name the ways this could go.
+  You: Start the PhD / Stay in your job and look for a raise elsewhere
+Clarity: What could matter here? (pick everything that matters)
+  You: Meaning, Income, Career growth, Stability
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Meaning: Critical
+  Income: Very important
+  Career growth: Important
+  Stability: Important
+Clarity: For each one: which is better, and how sure are you?
+  Meaning: Start the PhD, clearly · I know this
+  Income: Stay in your job and look for a raise elsewhere, clearly · I know this
+  Career growth: Start the PhD · Guessing
+  Stability: Stay in your job and look for a raise elsewhere · Nearly certain
+Clarity: What are you hoping changes?
+  You: to be doing research that actually matters instead of assisting someone else's
+Clarity: You want to start the PhD. What you've described is what you hope it changes. One way to test that:
+Clarity: If where you are now gave you what you want, would you still want to start the PhD?
+  You: no
+Clarity: Maybe the question isn't whether to start the PhD. It's whether you can get what you want where you are.
+Clarity: What are you most worried about?
+  You: That five years from now I'll have a PhD and still no job in academia.
+Clarity: If you knew the answer to this, could it change your decision? "Is “Start the PhD” really stronger on career growth?"
+  You: yes
+
+--- What this depends on (the report) ---
+start the PhD
+Start the PhD · Stay in your job and look for a raise elsewhere
+What matters most: Meaning · Income · Career growth
+What you're really asking: You don't just want to start the PhD. You want to be doing research that actually matters instead of assisting someone else's. If where you are now could give you that, you'd stay.
+What appears clear: “Start the PhD” is stronger on meaning. “Stay in your job and look for a raise elsewhere” is stronger on income. “Stay in your job and look for a raise elsewhere” is stronger on stability.
+What you're less certain about: You expect “Start the PhD” to be stronger on career growth, but you're guessing.
+The tension: Meaning pulls toward “Start the PhD”. Income pulls toward “Stay in your job and look for a raise elsewhere”.
+THE PIVOT: “Start the PhD” isn't the uncertainty. Career growth is. Is “Start the PhD” really stronger on career growth? The result is sensitive to career growth.
+What could change your mind: On what you've told me, “Start the PhD” is the current lean. That depends on career growth favouring “Start the PhD” as much as you think. If it favours “Start the PhD” only a little, “Stay in your job and look for a raise elsewhere” would be the lean instead. Nothing else you're unsure about moves it that far. And the question above it, whether you can get what you want where you are, still stands.
+What might be worth learning: Ask two people who joined a year ago what actually changed for them. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"start the PhD","options":["Start the PhD","Stay in my job and look for a raise elsewhere"]},"criteria":[{"name":"Meaning","importance":5,"confidence":0.98,"favours":"Start the PhD","flippable":true,"sensitivity":0.9,"hinge":0.006},{"name":"Income","importance":4,"confidence":0.98,"favours":"Stay in my job and look for a raise elsewhere","flippable":false,"sensitivity":0,"hinge":0},{"name":"Career growth","importance":3,"confidence":0.25,"favours":"Start the PhD","flippable":true,"sensitivity":0.778,"hinge":0.1167},{"name":"Stability","importance":3,"confidence":0.9,"favours":"Stay in my job and look for a raise elsewhere","flippable":true,"sensitivity":0.333,"hinge":0.0067}],"leader":"Start the PhD","margin":0.053,"stable":false,"all_known":false,"notes":{"hope":"to be doing research that actually matters instead of assisting someone else's","stillWant":"no","worry":"That five years from now I'll have a PhD and still no job in academia."},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Start the PhD” really stronger on career growth?","criterion":"Career growth"},"voi":[{"criterion":"Career growth","hinge":0.1167}]}
+
+=== heavy-hearted-relationship ===
+Persona: Aisha, 31, six years into a relationship, crying on both sides of the question with no single reason she can point to. She can't tell if she's looking for a way out or just scared of staying.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to leave my relationship
+Clarity: Name the ways this could go.
+  You: Leave / Stay
+Clarity: What could matter here? (pick everything that matters)
+  You: Meaning, Stability, Partner, Stress
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Meaning: Critical
+  Stability: Very important
+  Partner: Important
+  Stress: Important
+Clarity: For each one: which is better, and how sure are you?
+  Meaning: Leave · Guessing
+  Stability: Stay, clearly · I know this
+  Partner: Stay · Nearly certain
+  Stress: Stay · Fairly sure
+Clarity: What are you hoping changes?
+  You: to stop feeling numb around him
+Clarity: You want to leave. What you've described is what you hope it changes. One way to test that:
+Clarity: If this relationship gave you what you want, would you still want to leave?
+  You: unsure
+Clarity: You want to leave. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What are you most worried about?
+  You: That I'm looking for a reason to leave instead of actually knowing if I want to.
+Clarity: If you knew the answer to this, could it change your decision? "Can this relationship actually let you stop feeling numb around him?"
+  You: yes
+
+--- What this depends on (the report) ---
+leave my relationship
+Leave · Stay
+What matters most: Meaning · Stability · Partner
+What you're really asking: You want to stop feeling numb around him. You're not sure the only way to get it is to leave. That comes before anything else.
+What appears clear: “Stay” is stronger on stability. “Stay” is stronger on partner. “Stay” is stronger on stress.
+What you're less certain about: You expect “Leave” to be stronger on meaning, but you're guessing.
+The tension: Stability pulls toward “Stay”. Meaning pulls toward “Leave”.
+THE PIVOT: You know what you want. You don't know whether you can get it without leaving. Can this relationship actually let you stop feeling numb around him? Everything else waits on this.
+What could change your mind: If it can, you don't need to leave.
+What might be worth learning: Say it out loud to the person it's about. That's a bigger ask than it sounds, and it comes before anything else. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"leave my relationship","options":["Leave","Stay"]},"criteria":[{"name":"Meaning","importance":5,"confidence":0.25,"favours":"Leave","flippable":false,"sensitivity":0,"hinge":0},{"name":"Stability","importance":4,"confidence":0.98,"favours":"Stay","flippable":true,"sensitivity":0.438,"hinge":0.0023},{"name":"Partner","importance":3,"confidence":0.9,"favours":"Stay","flippable":true,"sensitivity":0,"hinge":0},{"name":"Stress","importance":3,"confidence":0.7,"favours":"Stay","flippable":true,"sensitivity":0,"hinge":0}],"leader":"Stay","margin":0.24,"stable":false,"all_known":false,"notes":{"hope":"to stop feeling numb around him","stillWant":"unsure","worry":"That I'm looking for a reason to leave instead of actually knowing if I want to."},"ruled_out":{},"pivot":{"kind":"hope","question":"Can this relationship actually let you stop feeling numb around him?","criterion":null},"voi":[]}
+
+=== buy-vs-rent ===
+Persona: Ken, 36, married with one kid, anxious that renting means 'throwing money away' mostly because everyone around him says so. He and his wife have never actually run the numbers.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to buy a house
+Clarity: Name the ways this could go.
+  You: Buy / Keep renting
+Clarity: What could matter here? (pick everything that matters)
+  You: Financial security, Stability, Flexibility, Cost
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Financial security: Critical
+  Stability: Important
+  Flexibility: Important
+  Cost: Very important
+Clarity: For each one: which is better, and how sure are you?
+  Financial security: Buy · Guessing
+  Stability: Buy, clearly · I know this
+  Flexibility: Keep renting, clearly · I know this
+  Cost: Keep renting · Nearly certain
+Clarity: What are you hoping changes?
+  You: to stop feeling like we're behind everyone else our age
+Clarity: You want to buy. What you've described is what you hope it changes. One way to test that:
+Clarity: If where you live now gave you what you want, would you still want to buy?
+  You: no
+Clarity: Maybe the question isn't whether to buy. It's whether you can get what you want where you are.
+Clarity: What are you most worried about?
+  You: That we buy at the wrong time and end up house-poor.
+Clarity: If you knew the answer to this, could it change your decision? "Is “Buy” really stronger on financial security?"
+  You: yes
+
+--- What this depends on (the report) ---
+buy a house
+Buy · Keep renting
+What matters most: Financial security · Cost · Stability
+What you're really asking: You don't just want to buy. You want to stop feeling like we're behind everyone else our age. If where you live now could give you that, you'd stay.
+What appears clear: “Buy” is stronger on stability. “Keep renting” is stronger on flexibility. “Keep renting” is stronger on cost.
+What you're less certain about: You expect “Buy” to be stronger on financial security, but you're guessing.
+The tension: Financial security pulls toward “Buy”. Cost pulls toward “Keep renting”.
+THE PIVOT: “Buy” isn't the uncertainty. Financial security is. Is “Buy” really stronger on financial security? The two options come out very close on what you've told me.
+What could change your mind: On what you've told me, “Buy” is the current lean. That depends on financial security favouring “Buy” as much as you think. If it favours “Buy” only a little, “Keep renting” would be the lean instead. Nothing else you're unsure about moves it that far. And the question above it, whether you can get what you want where you are, still stands.
+What might be worth learning: Run the numbers for the worst realistic month, not the average one. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"buy a house","options":["Buy","Keep renting"]},"criteria":[{"name":"Financial security","importance":5,"confidence":0.25,"favours":"Buy","flippable":true,"sensitivity":0.933,"hinge":0.2333},{"name":"Stability","importance":3,"confidence":0.98,"favours":"Buy","flippable":true,"sensitivity":0.917,"hinge":0.0037},{"name":"Flexibility","importance":3,"confidence":0.98,"favours":"Keep renting","flippable":false,"sensitivity":0,"hinge":0},{"name":"Cost","importance":4,"confidence":0.9,"favours":"Keep renting","flippable":true,"sensitivity":0.75,"hinge":0.02}],"leader":"Buy","margin":0.027,"stable":false,"all_known":false,"notes":{"hope":"to stop feeling like we're behind everyone else our age","stillWant":"no","worry":"That we buy at the wrong time and end up house-poor."},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Buy” really stronger on financial security?","criterion":"Financial security"},"voi":[{"criterion":"Financial security","hinge":0.2333}]}
+
+=== start-business ===
+Persona: Ola, 41, three kids and a mortgage, quietly guilty for even wanting to quit a stable job to start her own business. She treats 'responsible' and 'quit' as opposites.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to quit my job to start my own business
+Clarity: Name the ways this could go.
+  You: Start the business / Stay in your job
+Clarity: What could matter here? (pick everything that matters)
+  You: Meaning, Financial security, Career growth, Stress
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Meaning: Critical
+  Financial security: Very important
+  Career growth: Important
+  Stress: Important
+Clarity: For each one: which is better, and how sure are you?
+  Meaning: Start the business, clearly · I know this
+  Financial security: Stay in your job, clearly · I know this
+  Career growth: Start the business · Guessing
+  Stress: Stay in your job · Fairly sure
+Clarity: If you knew the answer to this, could it change your decision? "Is “Start the business” really stronger on career growth?"
+  You: yes
+
+--- What this depends on (the report) ---
+quit my job to start my own business
+Start the business · Stay in your job
+What matters most: Meaning · Financial security · Career growth
+What appears clear: “Start the business” is stronger on meaning. “Stay in your job” is stronger on financial security. “Stay in your job” is stronger on stress.
+What you're less certain about: You expect “Start the business” to be stronger on career growth, but you're guessing.
+The tension: Meaning pulls toward “Start the business”. Financial security pulls toward “Stay in your job”.
+THE PIVOT: “Start the business” isn't the uncertainty. Career growth is. Is “Start the business” really stronger on career growth? The result is sensitive to career growth.
+What could change your mind: On what you've told me, “Start the business” is the current lean. That depends on career growth favouring “Start the business” as much as you think. If it favours “Start the business” only a little, “Stay in your job” would be the lean instead. Nothing else you're unsure about moves it that far.
+What might be worth learning: Ask two people who joined a year ago what actually changed for them. Stress could matter too, but wouldn't move this as much. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"quit my job to start my own business","options":["Start the business","Stay in my job"]},"criteria":[{"name":"Meaning","importance":5,"confidence":0.98,"favours":"Start the business","flippable":true,"sensitivity":0.9,"hinge":0.006},{"name":"Financial security","importance":4,"confidence":0.98,"favours":"Stay in my job","flippable":false,"sensitivity":0,"hinge":0},{"name":"Career growth","importance":3,"confidence":0.25,"favours":"Start the business","flippable":true,"sensitivity":0.778,"hinge":0.1167},{"name":"Stress","importance":3,"confidence":0.7,"favours":"Stay in my job","flippable":true,"sensitivity":0.333,"hinge":0.02}],"leader":"Start the business","margin":0.053,"stable":false,"all_known":false,"notes":{},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Start the business” really stronger on career growth?","criterion":"Career growth"},"voi":[{"criterion":"Career growth","hinge":0.1167},{"criterion":"Stress","hinge":0.02}]}
+
+=== already-knows ===
+Persona: Tom, 58, has been running retirement numbers for months. He isn't conflicted about the decision, just scared to finally say it out loud.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to retire now
+Clarity: Name the ways this could go.
+  You: Retire now / Keep working
+Clarity: What could matter here? (pick everything that matters)
+  You: Freedom, Income, Health and energy, Meaning
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Freedom: Critical
+  Income: Very important
+  Health and energy: Very important
+  Meaning: A little
+Clarity: For each one: which is better, and how sure are you?
+  Freedom: Retire now, clearly · I know this
+  Income: Keep working, clearly · I know this
+  Health and energy: Retire now, clearly · I know this
+  Meaning: Retire now · I know this
+
+--- What this depends on (the report) ---
+retire now
+Retire now · Keep working
+What matters most: Freedom · Income · Health and energy
+What appears clear: “Retire now” is stronger on freedom. “Keep working” is stronger on income. “Retire now” is stronger on health and energy. “Retire now” is stronger on meaning.
+What you're less certain about: Nothing here.
+The tension: Freedom pulls toward “Retire now”. Income pulls toward “Keep working”.
+Where you are: You already know enough. Everything you named, you're sure of. What's left is what you prefer, and that's yours to weigh.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"retire now","options":["Retire now","Keep working"]},"criteria":[{"name":"Freedom","importance":5,"confidence":0.98,"favours":"Retire now","flippable":true,"sensitivity":0.4,"hinge":0.0027},{"name":"Income","importance":4,"confidence":0.98,"favours":"Keep working","flippable":false,"sensitivity":0,"hinge":0},{"name":"Health and energy","importance":4,"confidence":0.98,"favours":"Retire now","flippable":true,"sensitivity":0.25,"hinge":0.0013},{"name":"Meaning","importance":2,"confidence":0.98,"favours":"Retire now","flippable":false,"sensitivity":0,"hinge":0}],"leader":"Retire now","margin":0.32,"stable":true,"all_known":true,"notes":{},"ruled_out":{},"pivot":{"kind":"none","question":null,"criterion":null},"voi":[]}
+
+=== torn-many-unknowns ===
+Persona: Jae, 33, offered a two-year expat assignment. Excited and scared in roughly equal measure, and aware he's deciding on almost no real information.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to take the two-year assignment in Singapore
+Clarity: Name the ways this could go.
+  You: Take the assignment / Stay in your current role
+Clarity: What could matter here? (pick everything that matters)
+  You: Career growth, Partner, Stability, Meaning
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Career growth: Critical
+  Partner: Very important
+  Stability: Important
+  Meaning: A little
+Clarity: For each one: which is better, and how sure are you?
+  Career growth: Take the assignment · Guessing
+  Partner: Stay in your current role · Leaning
+  Stability: Stay in your current role, clearly · Nearly certain
+  Meaning: Take the assignment · Leaning
+Clarity: What are you hoping changes?
+  You: to prove to myself I can do something big
+Clarity: You want to take the assignment. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current situation gave you what you want, would you still want to take the assignment?
+  You: unsure
+Clarity: You want to take the assignment. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What are you most worried about?
+  You: That I'll resent giving this up if I don't take it, but also that it wrecks my relationship.
+Clarity: If you knew the answer to this, could it change your decision? "Is “Take the assignment” really stronger on career growth?"
+  You: yes
+
+--- What this depends on (the report) ---
+take the two-year assignment in Singapore
+Take the assignment · Stay in your current role
+What matters most: Career growth · Partner · Stability
+What you're really asking: You want to prove to yourself you can do something big. You're not sure the only way to get it is to take the assignment. That comes before anything else.
+What appears clear: “Stay in your current role” is stronger on stability.
+What you're less certain about: You expect “Take the assignment” to be stronger on career growth, but you're guessing. You expect “Stay in your current role” to be stronger on partner, but you're only leaning that way. You expect “Take the assignment” to be stronger on meaning, but you're only leaning that way.
+The tension: Partner pulls toward “Stay in your current role”. Career growth pulls toward “Take the assignment”.
+THE PIVOT: “Take the assignment” isn't the uncertainty. Career growth is. Is “Take the assignment” really stronger on career growth? The result is sensitive to career growth.
+What could change your mind: On what you've told me, “Stay in your current role” is the current lean. If career growth favours “Take the assignment” even more than you think, “Take the assignment” would be the lean instead. Nothing else you're unsure about moves it that far. And the question above it, whether you can get what you want where you are, still stands.
+What might be worth learning: Ask two people who joined a year ago what actually changed for them. Partner could matter too, but wouldn't move this as much. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"take the two-year assignment in Singapore","options":["Take the assignment","Stay in my current role"]},"criteria":[{"name":"Career growth","importance":5,"confidence":0.25,"favours":"Take the assignment","flippable":true,"sensitivity":0.4,"hinge":0.1071},{"name":"Partner","importance":4,"confidence":0.5,"favours":"Stay in my current role","flippable":true,"sensitivity":0.75,"hinge":0.1071},{"name":"Stability","importance":3,"confidence":0.9,"favours":"Stay in my current role","flippable":true,"sensitivity":0.75,"hinge":0.0161},{"name":"Meaning","importance":2,"confidence":0.5,"favours":"Take the assignment","flippable":false,"sensitivity":0,"hinge":0}],"leader":"Stay in my current role","margin":0.086,"stable":false,"all_known":false,"notes":{"hope":"to prove to myself I can do something big","stillWant":"unsure","worry":"That I'll resent giving this up if I don't take it, but also that it wrecks my relationship."},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Take the assignment” really stronger on career growth?","criterion":"Career growth"},"voi":[{"criterion":"Career growth","hinge":0.1071},{"criterion":"Partner","hinge":0.1071}]}
+
+=== denver-austin ===
+Persona: Sam, 30, single, remote-eligible, flip-flopping between two unfamiliar cities and a third option nobody's mentioned out loud: just staying put in Chicago.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to move to Denver, move to Austin, or stay in Chicago
+Clarity: Name the ways this could go.
+  You: Move to Denver / Stay in Chicago / Move to Austin
+Clarity: What could matter here? (pick everything that matters)
+  You: Career growth, Cost, Friends, Adventure
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Career growth: Critical
+  Cost: Very important
+  Friends: Very important
+  Adventure: Important
+Clarity: For each one: which is better, and how sure are you?
+  Career growth: Move to Denver good, Stay in Chicago weak, Move to Austin strong · Leaning
+  Cost: Move to Denver good, Stay in Chicago weak, Move to Austin okay · Nearly certain
+  Friends: Move to Denver weak, Stay in Chicago strong, Move to Austin poor · I know this
+  Adventure: Move to Denver good, Stay in Chicago poor, Move to Austin good · Fairly sure
+Clarity: If you knew the answer to this, could it change your decision? "Is “Move to Austin” really stronger on career growth?"
+  You: yes
+
+--- What this depends on (the report) ---
+move to Denver, move to Austin, or stay in Chicago
+Move to Denver · Stay in Chicago · Move to Austin
+What matters most: Career growth · Cost · Friends
+What appears clear: “Move to Denver” is stronger on cost. “Stay in Chicago” is stronger on friends. The options are about the same on adventure.
+What you're less certain about: You expect “Move to Austin” to be stronger on career growth, but you're only leaning that way.
+The tension: Cost pulls toward “Move to Denver”. Career growth pulls toward “Move to Austin”. “Stay in Chicago” is strongest on friends but falls behind on the things you weighed most, so the choice narrows to “Move to Denver” and “Move to Austin”.
+THE PIVOT: “Move to Austin” isn't the uncertainty. Career growth is. Is “Move to Austin” really stronger on career growth? The two options come out very close on what you've told me.
+What could change your mind: On what you've told me, “Move to Denver” is the current lean. If career growth favours “Move to Austin” even more than you think, “Move to Austin” would be the lean instead. Nothing else you're unsure about moves it that far.
+What might be worth learning: Ask two people who joined a year ago what actually changed for them. Adventure could matter too, but wouldn't move this as much. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"move to Denver, move to Austin, or stay in Chicago","options":["Move to Denver","Stay in Chicago","Move to Austin"]},"criteria":[{"name":"Career growth","importance":5,"confidence":0.5,"favours":"Move to Austin","flippable":true,"sensitivity":0.8,"hinge":0.125},{"name":"Cost","importance":4,"confidence":0.9,"favours":"Move to Denver","flippable":true,"sensitivity":0.85,"hinge":0.0212},{"name":"Friends","importance":4,"confidence":0.98,"favours":"Stay in Chicago","flippable":true,"sensitivity":0.85,"hinge":0.0043},{"name":"Adventure","importance":3,"confidence":0.7,"favours":null,"flippable":true,"sensitivity":0.75,"hinge":0.0422}],"leader":"Move to Denver","margin":0.038,"stable":false,"all_known":false,"notes":{},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Move to Austin” really stronger on career growth?","criterion":"Career growth"},"voi":[{"criterion":"Career growth","hinge":0.125},{"criterion":"Adventure","hinge":0.0422}]}
+
+=== own-factor-relocation ===
+Persona: Priyanka, 38, offered a promotion that requires relocating. Torn between her own ambition and her kids' stability, which no criterion on a standard list quite captures.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to take the relocation for the promotion
+Clarity: Name the ways this could go.
+  You: Take the relocation / Stay where we are
+Clarity: What could matter here? (pick everything that matters)
+  You: Career growth, My kids' school, Stability, Income
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Career growth: Critical
+  My kids' school: Very important
+  Stability: Important
+  Income: A little
+Clarity: For each one: which is better, and how sure are you?
+  Career growth: Take the relocation, clearly · I know this
+  My kids' school: Stay where we are, clearly · I know this
+  Stability: Stay where we are · Guessing
+  Income: Take the relocation · Nearly certain
+Clarity: What are you hoping changes?
+  You: to prove I can do this without sacrificing my kids
+Clarity: You want to take the relocation. What you've described is what you hope it changes. One way to test that:
+Clarity: If your current job gave you what you want, would you still want to take the relocation?
+  You: unsure
+Clarity: You want to take the relocation. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What are you most worried about?
+  You: That the move works for my career and ruins things for them.
+Clarity: If you knew the answer to this, could it change your decision? "Is “Stay where we are” really stronger on stability?"
+  You: yes
+
+--- What this depends on (the report) ---
+take the relocation for the promotion
+Take the relocation · Stay where we are
+What matters most: Career growth · My kids' school · Stability
+What you're really asking: You want to prove you can do this without sacrificing your kids. You're not sure the only way to get it is to take the relocation. That comes before anything else.
+What appears clear: “Take the relocation” is stronger on career growth. “Stay where we are” is stronger on my kids' school. “Take the relocation” is stronger on income.
+What you're less certain about: You expect “Stay where we are” to be stronger on stability, but you're guessing.
+The tension: Career growth pulls toward “Take the relocation”. My kids' school pulls toward “Stay where we are”.
+THE PIVOT: “Stay where we are” isn't the uncertainty. Stability is. Is “Stay where we are” really stronger on stability? The two options come out very close on what you've told me.
+What could change your mind: On what you've told me, “Take the relocation” is the current lean. If stability favours “Stay where we are” even more than you think, “Stay where we are” would be the lean instead. Nothing else you're unsure about moves it that far. And the question above it, whether you can get what you want without leaving, still stands.
+What might be worth learning: Ask how the last hard year went, and who left. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"take the relocation for the promotion","options":["Take the relocation","Stay where we are"]},"criteria":[{"name":"Career growth","importance":5,"confidence":0.98,"favours":"Take the relocation","flippable":true,"sensitivity":0.95,"hinge":0.0068},{"name":"My kids' school","importance":4,"confidence":0.98,"favours":"Stay where we are","flippable":false,"sensitivity":0,"hinge":0},{"name":"Stability","importance":3,"confidence":0.25,"favours":"Stay where we are","flippable":true,"sensitivity":0.667,"hinge":0.1071},{"name":"Income","importance":2,"confidence":0.9,"favours":"Take the relocation","flippable":true,"sensitivity":0.833,"hinge":0.0119}],"leader":"Take the relocation","margin":0.029,"stable":false,"all_known":false,"notes":{"hope":"to prove I can do this without sacrificing my kids","stillWant":"unsure","worry":"That the move works for my career and ruins things for them."},"ruled_out":{},"pivot":{"kind":"criterion","question":"Is “Stay where we are” really stronger on stability?","criterion":"Stability"},"voi":[{"criterion":"Stability","hinge":0.1071}]}
+
+=== heavy-marriage ===
+Persona: Linh, 44, nineteen years married, quietly building a case against her husband in her head for months without ever actually testing whether he'd change.
+
+--- What the person saw and answered ---
+Clarity: What are you deciding?
+  You: I'm deciding whether to leave my marriage
+Clarity: Name the ways this could go.
+  You: Leave / Stay
+Clarity: What could matter here? (pick everything that matters)
+  You: Meaning, Partner, Stability, Family
+Clarity: If you couldn't have everything, what would you protect? (how much does each matter)
+  Meaning: Critical
+  Partner: Very important
+  Stability: Important
+  Family: Important
+Clarity: For each one: which is better, and how sure are you?
+  Meaning: Leave · Guessing
+  Partner: Stay · Guessing
+  Stability: Stay, clearly · I know this
+  Family: Stay, clearly · Nearly certain
+Clarity: What are you hoping changes?
+  You: to feel like myself again, not disappearing into this marriage
+Clarity: You want to leave. What you've described is what you hope it changes. One way to test that:
+Clarity: If this relationship gave you what you want, would you still want to leave?
+  You: unsure
+Clarity: You want to leave. But you're not sure it's the only way to get what you want. That's worth knowing.
+Clarity: What are you most worried about?
+  You: That I've already decided and I'm just building the case.
+Clarity: If you knew the answer to this, could it change your decision? "Can this relationship actually let you feel like yourself again, not disappearing into this marriage?"
+  You: yes
+
+--- What this depends on (the report) ---
+leave my marriage
+Leave · Stay
+What matters most: Meaning · Partner · Stability
+What you're really asking: You want to feel like yourself again, not disappearing into this marriage. You're not sure the only way to get it is to leave. That comes before anything else.
+What appears clear: “Stay” is stronger on stability. “Stay” is stronger on family.
+What you're less certain about: You expect “Leave” to be stronger on meaning, but you're guessing. You expect “Stay” to be stronger on partner, but you're guessing.
+The tension: Partner pulls toward “Stay”. Meaning pulls toward “Leave”.
+THE PIVOT: You know what you want. You don't know whether you can get it without leaving. Can this relationship actually let you feel like yourself again, not disappearing into this marriage? Everything else waits on this.
+What could change your mind: If it can, you don't need to leave. If it can't, the next question is whether “Stay” really is stronger on partner.
+What might be worth learning: Say it out loud to the person it's about. That's a bigger ask than it sounds, and it comes before anything else. You don't need more information about everything. You need better information about this.
+Now you know what you're deciding.
+
+--- Model ---
+{"decision":{"title":"leave my marriage","options":["Leave","Stay"]},"criteria":[{"name":"Meaning","importance":5,"confidence":0.25,"favours":"Leave","flippable":false,"sensitivity":0,"hinge":0},{"name":"Partner","importance":4,"confidence":0.25,"favours":"Stay","flippable":true,"sensitivity":0.083,"hinge":0.0167},{"name":"Stability","importance":3,"confidence":0.98,"favours":"Stay","flippable":true,"sensitivity":0.083,"hinge":0.0003},{"name":"Family","importance":3,"confidence":0.9,"favours":"Stay","flippable":true,"sensitivity":0.083,"hinge":0.0017}],"leader":"Stay","margin":0.293,"stable":false,"all_known":false,"notes":{"hope":"to feel like myself again, not disappearing into this marriage","stillWant":"unsure","worry":"That I've already decided and I'm just building the case."},"ruled_out":{},"pivot":{"kind":"hope","question":"Can this relationship actually let you feel like yourself again, not disappearing into this marriage?","criterion":null},"voi":[]}
+

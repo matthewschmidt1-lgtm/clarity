@@ -61,8 +61,8 @@ window.Content = {
     growing: "Ask which version you'd be prouder of, regardless of how it turned out."
   },
 
-  importance: [[1, "Not much"], [2, "Somewhat"], [3, "Important"], [4, "Very important"], [5, "Critical"]],
-  confidence: [[1, "Guessing"], [2, "Somewhat sure"], [3, "Fairly sure"], [4, "Very sure"], [5, "I know this"]],
+  importance: [[1, "Not much"], [2, "A little"], [3, "Important"], [4, "Very important"], [5, "Critical"]],
+  confidence: [[1, "Guessing"], [2, "Leaning"], [3, "Fairly sure"], [4, "Nearly certain"], [5, "I know this"]],
 
   /* Emotional intensity changes the interaction, never the engine. */
   tone(q) {
