@@ -60,8 +60,8 @@
       canvas.width = w * dpr; canvas.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       pts = Array.from({ length: N }, (_, i) => {
         const u = i / N;
-        // resolved position: a soft horizontal line with one bright point
-        const rx = w * (0.12 + 0.76 * u), ry = h * 0.52 + Math.sin(u * Math.PI) * -h * 0.06;
+        // resolved position: a soft line low in the viewport, with one bright point
+        const rx = w * (0.08 + 0.84 * u), ry = h * 0.9 + Math.sin(u * Math.PI) * -h * 0.05;
         return { sx: rnd(0, w), sy: rnd(0, h), rx, ry, r: rnd(0.8, 2.2), a: rnd(0.25, 0.8), ph: rnd(0, 6.28), sp: rnd(0.3, 1) };
       });
     }
@@ -81,13 +81,14 @@
         ctx.fillStyle = c.ink; ctx.globalAlpha = q.a * (0.55 + 0.45 * (1 - e)) * (opts.alpha || 1);
         ctx.fill();
       }
-      if (e > 0.05) {
-        ctx.globalAlpha = e * 0.55; ctx.strokeStyle = c.moss; ctx.beginPath();
+      if (e > 0.85) {
+        const k2 = (e - 0.85) / 0.15;
+        ctx.globalAlpha = k2 * 0.55; ctx.strokeStyle = c.moss; ctx.beginPath();
         pts.forEach((q, i) => i ? ctx.lineTo(q.x, q.y) : ctx.moveTo(q.x, q.y)); ctx.stroke();
         // the one point that matters
         const k = pts[Math.floor(pts.length * 0.62)];
-        ctx.globalAlpha = e; ctx.fillStyle = c.gold; ctx.beginPath(); ctx.arc(k.x, k.y, 5 + 3 * e, 0, 6.283); ctx.fill();
-        ctx.globalAlpha = e * 0.25; ctx.beginPath(); ctx.arc(k.x, k.y, 18 + 10 * Math.sin(t * 0.002), 0, 6.283); ctx.fill();
+        ctx.globalAlpha = k2; ctx.fillStyle = c.gold; ctx.beginPath(); ctx.arc(k.x, k.y, 5 + 3 * k2, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = k2 * 0.25; ctx.beginPath(); ctx.arc(k.x, k.y, 18 + 10 * Math.sin(t * 0.002), 0, 6.283); ctx.fill();
       }
       ctx.globalAlpha = 1;
       if (visible) raf = requestAnimationFrame(draw);
@@ -103,7 +104,8 @@
   const fld = field($("#field"), { count: 320 });
   function scrollFields() {
     const vh = window.innerHeight || 1;
-    if (lens) lens.set(window.scrollY / (vh * 0.9));
+    const total = Math.max(1, document.documentElement.scrollHeight - vh);
+    if (lens) lens.set(window.scrollY / (total * 0.62));
     if (fld) {
       const r = $("#field").getBoundingClientRect();
       const v = 1 - (r.top - vh * 0.2) / (vh * 0.55);

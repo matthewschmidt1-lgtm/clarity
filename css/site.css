@@ -229,7 +229,9 @@ body::before {
   padding-top: clamp(120px, 18vh, 200px); padding-bottom: clamp(80px, 10vh, 140px);
   position: relative; isolation: isolate;
 }
-#lens { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; opacity: .9; }
+#lens { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; opacity: .85; pointer-events: none; }
+main, .footer { position: relative; z-index: 1; }
+.section { background: transparent; }
 .hero-grid { display: grid; gap: 40px; align-items: end; }
 @media (min-width: 960px) { .hero-grid { grid-template-columns: 7fr 5fr; } }
 .hero .h1 { max-width: 12ch; }
@@ -385,7 +387,7 @@ body::before {
 
 /* ---------- narrow ---------- */
 @media (max-width: 720px) {
-  #lens { display: none; }
+  #lens { opacity: .55; }
   .desk { display: none !important; }
   .h2 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .lede { font-size: 1.1rem; }
