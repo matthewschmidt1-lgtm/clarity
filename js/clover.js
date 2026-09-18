@@ -66,7 +66,7 @@
       if (REDUCED) { finish(); return Promise.resolve(); }
       return new Promise(resolve => {
         const t0 = performance.now();
-        const GROW = 900, HOLD = 500, FALL = 1500, SETTLE = 900;
+        const GROW = 900, HOLD = 800, FALL = 1500, SETTLE = 900;
         const fallStart = GROW + HOLD, settleStart = fallStart + 350;
         const total = settleStart + SETTLE + 100;
         const f = leaves[FALL_INDEX];

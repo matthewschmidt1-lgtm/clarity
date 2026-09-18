@@ -23,7 +23,7 @@
     try { seen = sessionStorage.getItem("clarity-seen") === "1"; } catch (e) {}
     const finishLoader = () => {
       loader.classList.add("word-in");
-      setTimeout(() => { loader.classList.add("done"); document.body.classList.add("ready"); heroClover && heroClover.play(); }, seen ? 250 : 700);
+      setTimeout(() => { loader.classList.add("done"); document.body.classList.add("ready"); heroClover && heroClover.play(); }, seen ? 250 : 1900);
       try { sessionStorage.setItem("clarity-seen", "1"); } catch (e) {}
     };
     if (seen || REDUCED) { mark.finish(); finishLoader(); }
