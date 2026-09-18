@@ -229,7 +229,7 @@ body::before {
   padding-top: clamp(120px, 18vh, 200px); padding-bottom: clamp(80px, 10vh, 140px);
   position: relative; isolation: isolate;
 }
-#lens { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; opacity: .85; pointer-events: none; }
+#lens { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; opacity: 1; pointer-events: none; }
 main, .footer { position: relative; z-index: 1; }
 .section { background: transparent; }
 .hero-grid { display: grid; gap: 40px; align-items: end; }
@@ -387,7 +387,7 @@ main, .footer { position: relative; z-index: 1; }
 
 /* ---------- narrow ---------- */
 @media (max-width: 720px) {
-  #lens { opacity: .55; }
+  #lens { opacity: .7; }
   .desk { display: none !important; }
   .h2 { font-size: clamp(1.9rem, 8vw, 2.6rem); }
   .lede { font-size: 1.1rem; }

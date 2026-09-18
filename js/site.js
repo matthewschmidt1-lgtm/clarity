@@ -62,7 +62,7 @@
         const u = i / N;
         // resolved position: a soft line low in the viewport, with one bright point
         const rx = w * (0.08 + 0.84 * u), ry = h * 0.9 + Math.sin(u * Math.PI) * -h * 0.05;
-        return { sx: rnd(0, w), sy: rnd(0, h), rx, ry, r: rnd(0.8, 2.2), a: rnd(0.25, 0.8), ph: rnd(0, 6.28), sp: rnd(0.3, 1) };
+        return { sx: rnd(0, w), sy: rnd(0, h), rx, ry, r: rnd(1.0, 2.6), a: rnd(0.45, 0.95), ph: rnd(0, 6.28), sp: rnd(0.3, 1) };
       });
     }
     function draw(t) {
@@ -78,7 +78,7 @@
         const x = q.sx + (q.rx - q.sx) * e + drift, y = q.sy + (q.ry - q.sy) * e + drift * 0.6;
         q.x = x; q.y = y;
         ctx.beginPath(); ctx.arc(x, y, q.r * (1 - e * 0.45), 0, 6.283);
-        ctx.fillStyle = c.ink; ctx.globalAlpha = q.a * (0.55 + 0.45 * (1 - e)) * (opts.alpha || 1);
+        ctx.fillStyle = e > 0.5 ? c.moss : c.ink; ctx.globalAlpha = q.a * (0.65 + 0.35 * (1 - e)) * (opts.alpha || 1);
         ctx.fill();
       }
       if (e > 0.85) {
@@ -99,13 +99,13 @@
   }
 
   // hero: resolves as the user scrolls the first screen
-  const lens = field($("#lens"), { count: 220, alpha: 0.7 });
+  const lens = field($("#lens"), { count: 220, alpha: 0.9 });
   // enemy section: resolves as the section reaches center
   const fld = field($("#field"), { count: 320 });
   function scrollFields() {
     const vh = window.innerHeight || 1;
     const total = Math.max(1, document.documentElement.scrollHeight - vh);
-    if (lens) lens.set(window.scrollY / (total * 0.62));
+    if (lens) { const frac = window.scrollY / total; lens.set((frac - 0.45) / 0.4); }
     if (fld) {
       const r = $("#field").getBoundingClientRect();
       const v = 1 - (r.top - vh * 0.2) / (vh * 0.55);
