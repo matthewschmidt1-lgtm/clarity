@@ -111,11 +111,27 @@
   // 2 · Criteria
   steps.push(() => {
     const picked = () => new Set(S.criteria.map(c => c.id));
-    const groups = C.criteria.map(g => h("div", { class: "group" }, h("p", { class: "eyebrow-plain" }, g.cat),
-      h("div", { class: "choices" }, g.items.map(([id, label]) => h("button", { class: "choice small", type: "button", "data-id": id, "aria-pressed": String(picked().has(id)), onclick: e => {
-        if (picked().has(id)) S.criteria = S.criteria.filter(c => c.id !== id); else S.criteria.push({ id, label, importance: null });
-        e.currentTarget.setAttribute("aria-pressed", String(picked().has(id))); save(); tally();
-      } }, label)))));
+    const chip = ([id, label]) => h("button", { class: "choice small", type: "button", "data-id": id, "aria-pressed": String(picked().has(id)), onclick: e => {
+      if (picked().has(id)) S.criteria = S.criteria.filter(c => c.id !== id); else S.criteria.push({ id, label, importance: null });
+      e.currentTarget.setAttribute("aria-pressed", String(picked().has(id))); save(); tally();
+      document.querySelectorAll(`.choice[data-id="${id}"]`).forEach(b => b.setAttribute("aria-pressed", String(picked().has(id))));
+    } }, label);
+    const suggested = C.suggestFor(S.title, S.pattern);
+    const allGroups = C.criteria.map(g => h("div", { class: "group" }, h("p", { class: "eyebrow-plain" }, g.cat), h("div", { class: "choices" }, g.items.map(chip))));
+    const groups = h("div", { class: "library" });
+    function renderGroups() {
+      groups.innerHTML = "";
+      if (suggested && !S.showAll) {
+        const items = suggested.map(id => [id, C.label(id)]).filter(x => x[1]);
+        const extra = S.criteria.filter(c => !suggested.includes(c.id) && !c.id.startsWith("own-")).map(c => [c.id, c.label]);
+        groups.appendChild(h("div", { class: "group" }, h("p", { class: "eyebrow-plain" }, "Likely to matter here"), h("div", { class: "choices" }, items.concat(extra).map(chip))));
+        groups.appendChild(h("button", { class: "link-btn", type: "button", onclick: () => { S.showAll = true; save(); renderGroups(); } }, "Show everything"));
+      } else {
+        allGroups.forEach(g => groups.appendChild(g));
+        if (suggested) groups.appendChild(h("button", { class: "link-btn", type: "button", onclick: () => { S.showAll = false; save(); renderGroups(); } }, "Show only what's likely to matter"));
+      }
+    }
+    renderGroups();
     const own = h("input", { class: "input", type: "text", placeholder: "Something else…", maxlength: 40, "aria-label": "Add your own" });
     const ownForm = h("form", { class: "add", onsubmit: e => { e.preventDefault(); const t = own.value.trim(); if (!t) return; S.criteria.push({ id: "own-" + uid(), label: t.charAt(0).toUpperCase() + t.slice(1), importance: null }); own.value = ""; save(); tally(); } }, own, h("button", { class: "btn btn-ghost", type: "submit" }, "Add"));
     const count = h("p", { class: "hint" });
@@ -123,7 +139,7 @@
     tally();
     return [
       who(), prompt("What could matter here?"),
-      hint("Pick everything that matters. Don't rank yet."),
+      hint(suggested && !S.showAll ? "Pick everything that matters. Don't rank yet. Anything not here is one tap below." : "Pick everything that matters. Don't rank yet."),
       groups, ownForm, count,
       actions(() => S.criteria.length >= 2, "Pick at least two things that matter.")
     ];

@@ -16,14 +16,38 @@ window.Content = {
 
   /* What could matter. Grouped so a person can find their own words. */
   criteria: [
-    { cat: "Money", items: [["income", "Income"], ["security", "Financial security"], ["cost", "Cost"], ["debt", "Debt"], ["savings", "Savings"]] },
+    { cat: "Money", items: [["income", "Income"], ["security", "Financial security"], ["cost", "Cost"], ["debt", "Debt"], ["savings", "Savings"], ["equity", "Building equity"], ["upkeep", "Upkeep and repairs"]] },
     { cat: "Work", items: [["growth", "Career growth"], ["learning", "Learning"], ["opportunity", "Opportunity"], ["reputation", "Reputation"], ["autonomy", "Autonomy"], ["manager", "Manager and team"]] },
-    { cat: "Life", items: [["time", "Time"], ["flexibility", "Flexibility"], ["location", "Location"], ["home", "Home"], ["health", "Health and energy"], ["stress", "Stress"]] },
+    { cat: "Life", items: [["time", "Time"], ["flexibility", "Flexibility"], ["location", "Location"], ["home", "Home"], ["space", "Space"], ["commute", "Commute"], ["schools", "Schools"], ["health", "Health and energy"], ["stress", "Stress"]] },
     { cat: "People", items: [["family", "Family"], ["partner", "Partner"], ["friends", "Friends"], ["community", "Community"], ["culture", "Culture"]] },
-    { cat: "Risk", items: [["stability", "Stability"], ["uncertainty", "Uncertainty"], ["reversibility", "Reversibility"], ["safety", "Safety"]] },
+    { cat: "Risk", items: [["stability", "Stability"], ["uncertainty", "Uncertainty"], ["reversibility", "Reversibility"], ["safety", "Safety"], ["landlord", "Landlord risk"]] },
     { cat: "Self", items: [["meaning", "Meaning"], ["identity", "Identity"], ["freedom", "Freedom"], ["adventure", "Adventure"], ["peace", "Peace of mind"], ["growing", "Growing as a person"]] }
   ],
   label(id) { for (const g of this.criteria) for (const [k, l] of g.items) if (k === id) return l; return null; },
+
+  /* What is likely to matter, by the shape of the decision. The full library is always one tap away. */
+  suggest: {
+    job: ["income", "security", "growth", "learning", "opportunity", "autonomy", "manager", "culture", "time", "flexibility", "commute", "stress", "stability", "meaning"],
+    relationship: ["partner", "family", "friends", "home", "peace", "identity", "meaning", "stability", "health", "stress", "freedom", "growing", "safety", "reversibility"],
+    move: ["location", "home", "commute", "cost", "income", "opportunity", "family", "friends", "community", "adventure", "flexibility", "reversibility", "schools", "growth"],
+    buyrent: ["cost", "security", "savings", "debt", "equity", "upkeep", "home", "space", "location", "flexibility", "reversibility", "landlord", "uncertainty", "peace"],
+    path: ["learning", "growth", "opportunity", "income", "debt", "cost", "savings", "time", "meaning", "identity", "stability", "reversibility"],
+    work: ["income", "security", "savings", "debt", "freedom", "autonomy", "stress", "time", "uncertainty", "reversibility", "meaning", "opportunity", "family", "health"],
+    health: ["health", "stress", "time", "cost", "safety", "peace", "family", "identity", "reversibility", "uncertainty"],
+    family: ["family", "partner", "time", "cost", "security", "home", "space", "health", "stress", "meaning", "identity", "schools", "flexibility"]
+  },
+  suggestFor(title, pattern) {
+    const q = (title || "").toLowerCase();
+    if (pattern === "buy-rent" || /\b(buy|rent|mortgage|house|apartment|condo)\b/.test(q)) return this.suggest.buyrent;
+    if (pattern === "move-stay" || /move|relocat|city|country|abroad/.test(q)) return this.suggest.move;
+    if (/child|kid|baby|adopt|parent|family/.test(q)) return this.suggest.family;
+    if (/health|surgery|treatment|doctor|therap|diet|sober/.test(q)) return this.suggest.health;
+    if (/relationship|partner|marriage|marry|divorce|spouse|boyfriend|girlfriend|break ?up|husband|wife|dating/.test(q)) return this.suggest.relationship;
+    if (/school|degree|study|program|course|mba|phd|university|college|train/.test(q)) return this.suggest.path;
+    if (/business|launch|freelance|found|product|invest|save|money|loan/.test(q)) return this.suggest.work;
+    if (/job|work|career|role|offer|company|boss|promotion|startup|quit|resign|retire|hire/.test(q)) return this.suggest.job;
+    return null;
+  },
 
   /* One concrete way to find each criterion out. */
   how: {
@@ -32,6 +56,12 @@ window.Content = {
     cost: "Add up a full year, including the things that only happen once.",
     debt: "Write down the balance, the rate, and the month it would be gone.",
     savings: "Look at the account, not the plan.",
+    equity: "Ask what you'd own after five years, after fees and interest, against what you'd have saved renting.",
+    upkeep: "Ask a recent buyer what the first year actually cost them beyond the mortgage.",
+    space: "Walk through an ordinary week and count where things and people go.",
+    commute: "Do it once at the real hour, both ways.",
+    schools: "Visit one. Ask a parent at the gate, not the website.",
+    landlord: "Ask how the rent has moved over the last three years, and what the lease says about renewal.",
     growth: "Ask two people who joined a year ago what actually changed for them.",
     learning: "Ask what you'd know in a year that you don't know now.",
     opportunity: "Ask what the last three people in this position went on to do.",

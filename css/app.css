@@ -172,3 +172,5 @@ input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px va
 .subrow { display: grid; gap: 6px; padding: 8px 0; border-top: 1px solid var(--line-soft); }
 .subrow .sub { font-weight: 500; color: var(--ink); }
 .qrow .sub { color: var(--fog); font-size: .92rem; }
+.library { display: grid; gap: 6px; }
+.library .link-btn { justify-self: start; margin: 4px 0 10px; }

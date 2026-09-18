@@ -40,7 +40,7 @@ The person builds the decision model in constrained steps; decision theory does 
 
 1. **Framing.** "I'm deciding whether to…" plus a pattern (stay or leave, buy or rent, move or stay, start now or wait, take it or turn it down, commit or hold off, A or B, something else).
 2. **Options.** Two or more, editable, add another.
-3. **What could matter.** A library grouped by money, work, life, people, risk and self, plus custom. Pick everything; don't rank yet.
+3. **What could matter.** A library grouped by money, work, life, people, risk and self, plus custom. The decision's shape (from the pattern and the title) picks a "likely to matter" subset to show first, with "Show everything" one tap below; nothing is ever removed from the library. Pick everything; don't rank yet.
 4. **How much.** Not much · Somewhat · Important · Very important · Critical (stored 1–5).
 5. **Each option.** Which is better on each criterion (a five-point comparison for two options, a five-point rating per option for three or more) and how sure you are (Guessing · Somewhat sure · Fairly sure · Very sure · I know this, stored as belief strengths 0.25 to 0.98). Preference and belief are kept apart.
 6. **Context, optional.** What you hope changes; if a status quo option exists, the test "if it gave you what you want, would you still want to…?"; what you're most worried about. Kept in the person's words.
