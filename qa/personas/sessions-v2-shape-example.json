@@ -1,0 +1,58 @@
+[
+  {
+    "id": "smoke",
+    "persona": "smoke test",
+    "session": {
+      "title": "move to Austin",
+      "options": [
+        "Move to Austin",
+        "Stay here"
+      ],
+      "criteria": [
+        [
+          "growth",
+          "Career growth",
+          5
+        ],
+        [
+          "security",
+          "Financial security",
+          4
+        ],
+        [
+          "friends",
+          "Friends",
+          3
+        ],
+        [
+          "adventure",
+          "Adventure",
+          2
+        ]
+      ],
+      "evals": {
+        "growth": {
+          "pref": 2,
+          "conf": 1
+        },
+        "security": {
+          "pref": -1,
+          "conf": 4
+        },
+        "friends": {
+          "pref": -2,
+          "conf": 5
+        },
+        "adventure": {
+          "pref": 1,
+          "conf": 3
+        }
+      },
+      "notes": {
+        "hope": "to feel like my life is actually moving",
+        "stillWant": "no",
+        "worry": "That I'm running from something rather than toward it."
+      }
+    }
+  }
+]
