@@ -47,7 +47,7 @@
   function field(canvas, opts) {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    let w = 0, h = 0, dpr = 1, pts = [], progress = 0, target = 0, visible = true, raf = 0;
+    let w = 0, h = 0, dpr = 1, pts = [], progress = 0, target = 0, swirl = 0, swirlTarget = 0, visible = true, raf = 0;
     const N = Math.round((opts.count || 260) * (window.innerWidth < 720 ? 0.4 : 1));
     const rnd = (a, b) => a + Math.random() * (b - a);
     function css() {
@@ -72,10 +72,18 @@
       const p = progress, e = p * p * (3 - 2 * p);
       // faint threads between neighbors when resolved
       ctx.lineWidth = 1;
+      swirl += (swirlTarget - swirl) * 0.08;
+      const cx = w / 2, cy = h / 2, maxD = Math.hypot(cx, cy);
       for (let i = 0; i < pts.length; i++) {
         const q = pts[i];
         const drift = REDUCED ? 0 : Math.sin(t * 0.0004 * q.sp + q.ph) * 10 * (1 - e) * (1 - e);
-        const x = q.sx + (q.rx - q.sx) * e + drift, y = q.sy + (q.ry - q.sy) * e + drift * 0.6;
+        // the swirl: each dot orbits the centre as the page scrolls; inner dots turn faster
+        const dx = q.sx - cx, dy = q.sy - cy, d = Math.hypot(dx, dy);
+        const ang = swirl * (0.5 + 1.1 * (1 - d / maxD)) * (1 - e);
+        const rad = d * (1 - 0.12 * Math.min(1, swirl / 3));
+        const ca = Math.cos(ang), sa = Math.sin(ang);
+        const bx = cx + (dx * ca - dy * sa) * (rad / (d || 1)), by = cy + (dx * sa + dy * ca) * (rad / (d || 1));
+        const x = bx + (q.rx - bx) * e + drift, y = by + (q.ry - by) * e + drift * 0.6;
         q.x = x; q.y = y;
         ctx.beginPath(); ctx.arc(x, y, q.r * (1 - e * 0.45), 0, 6.283);
         ctx.fillStyle = e > 0.5 ? c.moss : c.ink; ctx.globalAlpha = q.a * (0.65 + 0.35 * (1 - e)) * (opts.alpha || 1);
@@ -95,7 +103,7 @@
     }
     size(); window.addEventListener("resize", size);
     new IntersectionObserver(en => { visible = en[0].isIntersecting; if (visible) { cancelAnimationFrame(raf); raf = requestAnimationFrame(draw); } }).observe(canvas);
-    return { set(v) { if (Number.isFinite(v)) target = Math.max(0, Math.min(1, v)); } };
+    return { set(v) { if (Number.isFinite(v)) target = Math.max(0, Math.min(1, v)); }, swirl(v) { if (Number.isFinite(v)) swirlTarget = v; } };
   }
 
   // hero: resolves as the user scrolls the first screen
@@ -105,7 +113,7 @@
   function scrollFields() {
     const vh = window.innerHeight || 1;
     const total = Math.max(1, document.documentElement.scrollHeight - vh);
-    if (lens) { const frac = window.scrollY / total; lens.set((frac - 0.45) / 0.4); }
+    if (lens) { const frac = window.scrollY / total; lens.set((frac - 0.45) / 0.4); lens.swirl(REDUCED ? 0 : window.scrollY / 900); }
     if (fld) {
       const r = $("#field").getBoundingClientRect();
       const v = 1 - (r.top - vh * 0.2) / (vh * 0.55);
